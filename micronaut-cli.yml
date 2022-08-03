@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: africa.jopen
+testFramework: junit
+sourceLanguage: java
+buildTool: maven
+features: [annotation-api, app-name, graalvm, hibernate-validator, http-client, jackson-databind, java, java-application, junit, lombok, maven, netty-server, openapi, problem-json, properties, readme, security-annotations, security-jwt, security-session, shade, slf4j-simple, swagger-ui]
