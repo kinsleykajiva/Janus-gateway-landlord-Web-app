@@ -1,4 +1,4 @@
-package africa.jopen;
+package africa.jopen.controllers;
 
 import io.micronaut.http.annotation.*;
 

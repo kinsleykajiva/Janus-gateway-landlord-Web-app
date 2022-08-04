@@ -1,5 +1,5 @@
 ## Janus-gateway-landlord-Web-app
-
+# version 0.1
 
 This is a Web app that seeks to make it very easy to use Janus Gateway.The app handles installation , setting up/ Updating configurations from just a single install of this .
 
@@ -32,12 +32,21 @@ You can pull the repository, make a build , navigate to target folder .
 
 
 
-
+This service is heavy dependent on this https://github.com/RSATom/janus-gateway-snap/tree/stable-0.11 as an installation mechanism 
 
 
 
 ## Contributions are very welcome! Make a pull Request
 
 
+## So what you do with this web app ?
+- can install/uninstall Janus Gateway Server
+- can update Sip details/Configurations
+- can update janus Core configs
+- can update HTTP configs
+- can update websockets configs
+- can restart Janus Gateway Server
 
+
+Remember to always run the app as Admin!
 
