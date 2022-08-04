@@ -2,7 +2,7 @@ package africa.jopen;
 
 import io.micronaut.http.annotation.*;
 
-@Controller("/janusGatewayLandlordWebApp")
+@Controller("/home")
 public class JanusGatewayLandlordWebAppController {
 
     @Get(uri="/", produces="text/plain")

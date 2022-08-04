@@ -80,16 +80,16 @@
       <artifactId>micronaut-problem-json</artifactId>
       <scope>compile</scope>
     </dependency>
-    <dependency>
+   <!-- <dependency>
       <groupId>io.micronaut.security</groupId>
       <artifactId>micronaut-security-jwt</artifactId>
       <scope>compile</scope>
-    </dependency>
-    <dependency>
+    </dependency>-->
+   <!-- <dependency>
       <groupId>io.micronaut.security</groupId>
       <artifactId>micronaut-security-session</artifactId>
       <scope>compile</scope>
-    </dependency>
+    </dependency>-->
     <dependency>
       <groupId>io.swagger.core.v3</groupId>
       <artifactId>swagger-annotations</artifactId>
@@ -110,6 +110,22 @@
       <artifactId>lombok</artifactId>
       <scope>provided</scope>
     </dependency>
+
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.9.1</version>
+    </dependency>
+
+
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.13.3</version>
+    </dependency>
+
+
+
   </dependencies>
 
   <build>
@@ -145,6 +161,11 @@
             <path>
               <groupId>io.micronaut</groupId>
               <artifactId>micronaut-http-validation</artifactId>
+              <version>${micronaut.version}</version>
+            </path>
+            <path>
+              <groupId>io.micronaut</groupId>
+              <artifactId>micronaut-graal</artifactId>
               <version>${micronaut.version}</version>
             </path>
             <path>

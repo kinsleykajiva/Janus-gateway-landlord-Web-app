@@ -1,0 +1,29 @@
+<configuration>
+
+    <appender
+            name="httpAccessLogAppender"
+            class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <append>true</append>
+        <file>log/http-access.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>log/http-access-%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%msg%n</pattern>
+        </encoder>
+        <immediateFlush>true</immediateFlush>
+    </appender>
+
+    <logger name="HTTP_ACCESS_LOGGER" additivity="false" level="info">
+        <appender-ref ref="httpAccessLogAppender" />
+    </logger>
+
+    <root level="info">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>

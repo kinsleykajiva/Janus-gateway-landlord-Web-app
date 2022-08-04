@@ -1,0 +1,483 @@
+{
+  "general": {
+    "configs_folder": {
+      "required": true,
+      "commented": false,
+      "comment": "Configuration files folder",
+      "lineValue": "/opt/janus/etc/janus"
+    },
+    "plugins_folder": {
+      "required": true,
+      "commented": false,
+      "comment": "Plugins folder",
+      "lineValue": "/opt/janus/lib/janus/plugins"
+    },
+    "transports_folder": {
+      "required": true,
+      "commented": false,
+      "comment": "Transports folder",
+      "lineValue": "/opt/janus/lib/janus/transports"
+    },
+    "events_folder": {
+      "required": true,
+      "commented": false,
+      "comment": "Event handlers folder",
+      "lineValue": "/opt/janus/lib/janus/events"
+    },
+    "loggers_folder": {
+      "required": true,
+      "commented": false,
+      "comment": "External loggers folder",
+      "lineValue": "/opt/janus/lib/janus/loggers"
+    },
+    "log_to_stdout": {
+      "required": false,
+      "commented": true,
+      "comment": "Whether the Janus output should be written to stdout or not (default=true)",
+      "lineValue": "false"
+    },
+    "log_to_file": {
+      "required": false,
+      "commented": true,
+      "comment": "Whether to use a log file or not",
+      "lineValue": "/path/to/janus.log"
+    },
+    "debug_level": {
+      "required": true,
+      "commented": false,
+      "comment": "Debug/logging level, valid values are 0-7",
+      "lineValue": "4"
+    },
+    "debug_timestamps": {
+      "required": true,
+      "commented": false,
+      "comment": "Whether to show a timestamp for each log line",
+      "lineValue": "true"
+    },
+    "debug_locks": {
+      "required": false,
+      "commented": true,
+      "comment": "Whether to enable debugging of locks (very verbose!)",
+      "lineValue": "true"
+    },
+    "log_prefix": {
+      "required": false,
+      "commented": true,
+      "comment": "In case you want log lines to be prefixed by some , custom text, you can use the 'log_prefix' property. It supports terminal colors, meaning something like \"[\\x1b[32mjanus\\x1b[0m] \" would show a green \"janus\" string in square brackets (assuming debug_colors=true).",
+      "lineValue": "[janus]"
+    },
+    "daemonize": {
+      "required": false,
+      "commented": true,
+      "comment": "Whether Janus should run as a daemon  or not (default=run in foreground)",
+      "lineValue": "true"
+    },
+    "pid_file": {
+      "required": false,
+      "commented": true,
+      "comment": "PID file to create when Janus has been started, and to destroy at shutdown",
+      "lineValue": "/path/to/janus.pid"
+    },
+    "api_secret": {
+      "required": false,
+      "commented": false,
+      "comment": "String that all Janus requests must contain to be accepted/authorized by the Janus core. Useful if you're wrapping all Janus API requests in your servers (that is, not in the browser",
+      "lineValue": "janusrocks"
+    },
+    "token_auth": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "true"
+    },
+    "token_auth_secret": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "janus"
+    },
+    "admin_secret": {
+      "required": true,
+      "commented": false,
+      "comment": "--",
+      "lineValue": "janusoverlord"
+    },
+    "interface": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "1.2.3.4"
+    },
+    "server_name": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "MyJanusInstance"
+    },
+    "session_timeout": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "60"
+    },
+    "candidates_timeout": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "45"
+    },
+    "reclaim_session_timeout": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "0"
+    },
+    "recordings_tmp_ext": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "tmp"
+    },
+    "event_loops": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "8"
+    },
+    "opaqueid_in_api": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "8"
+    },
+    "hide_dependencies": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "true"
+    },
+    "no_webrtc_encryption": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "true"
+    },
+    "protected_folders": {
+      "required": true,
+      "commented": false,
+      "comment": "--",
+      "lineValue": [
+        "/bin",
+        "/boot",
+        "/dev",
+        "/etc",
+        "/initrd",
+        "/lib",
+        "/lib32",
+        "/lib64",
+        "/proc",
+        "/sbin",
+        "/sys",
+        "/usr",
+        "/var",
+        "/opt/janus/bin",
+        "/opt/janus/etc",
+        "/opt/janus/include",
+        "/opt/janus/lib",
+        "/opt/janus/lib32",
+        "/opt/janus/lib64",
+        "/opt/janus/sbin"
+      ]
+    }
+  },
+  "certificates": {
+    "cert_pem": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "/path/to/certificate.pem"
+    },
+    "cert_key": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "/path/to/key.pem"
+    },
+    "cert_pwd": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "secretpassphrase"
+    },
+    "dtls_accept_selfsigned": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "false"
+    },
+    "dtls_ciphers": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "your-desired-openssl-ciphers"
+    },
+    "rsa_private_key": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "false"
+    }
+  },
+  "media": {
+    "ipv6": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "true"
+    },
+    "ipv6_linklocal": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "true"
+    },
+    "min_nack_queue": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "500"
+    },
+    "rtp_port_range": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "20000-40000"
+    },
+    "dtls_mtu": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "1200"
+    },
+    "no_media_timer": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "1"
+    },
+    "slowlink_threshold": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "4"
+    },
+    "twcc_period": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "100"
+    },
+    "dtls_timeout": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "500"
+    },
+    "nack_optimizations": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "true"
+    },
+    "dscp": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "46"
+    }
+  },
+  "nat": {
+    "stun_server": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "stun.voip.eutelia.it"
+    },
+    "stun_port": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "3478"
+    },
+    "nice_debug": {
+      "required": true,
+      "commented": false,
+      "comment": "--",
+      "lineValue": "false"
+    },
+    "full_trickle": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "true"
+    },
+    "ice_nomination": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "regular"
+    },
+    "ice_keepalive_conncheck": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "true"
+    },
+    "ice_lite": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "true"
+    },
+    "ice_tcp": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "true"
+    },
+    "ignore_mdns": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "true"
+    },
+    "nat_1_1_mapping": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "1.2.3.4"
+    },
+    "keep_private_host": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "true"
+    },
+    "turn_server": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "myturnserver.com"
+    },
+    "turn_port": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "3478"
+    },
+    "turn_type": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "udp"
+    },
+    "turn_user": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "myuser"
+    },
+    "turn_pwd": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "mypassword"
+    },
+    "turn_rest_api": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "http://yourbackend.com/path/to/api"
+    },
+    "turn_rest_api_key": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "anyapikeyyoumayhaveset"
+    },
+    "turn_rest_api_method": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "GET"
+    },
+    "allow_force_relay": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "true"
+    },
+    "ice_enforce_list": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "eth0"
+    },
+    "ice_ignore_list": {
+      "required": false,
+      "commented": false,
+      "comment": "--",
+      "lineValue": "vmnet"
+    },
+    "ignore_unreachable_ice_server": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "true"
+    }
+  },
+  "loggers": {
+    "disable": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "libjanus_jsonlog.so"
+    }
+  },
+  "plugins": {
+    "disable": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "libjanus_voicemail.so,libjanus_recordplay.so"
+    }
+  },
+  "transports": {
+    "disable": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "libjanus_rabbitmq.so"
+    }
+  },
+  "events": {
+    "broadcast": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "true"
+    },
+    "disable": {
+      "required": true,
+      "commented": false,
+      "comment": "--",
+      "lineValue": "libjanus_sampleevh.so"
+    },
+    "stats_period": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "5"
+    }
+  }
+}
