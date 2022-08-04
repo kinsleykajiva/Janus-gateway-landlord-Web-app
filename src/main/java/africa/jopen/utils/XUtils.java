@@ -11,9 +11,85 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.DecimalFormatSymbols;
+import java.util.Arrays;
+
+import static africa.jopen.utils.AdministratorChecker.IS_RUNNING_AS_ADMINISTRATOR;
 
 public class XUtils {
     private static final Logger logger = LoggerFactory.getLogger(XUtils.class);
+    public static String ROOT_FOLDER = "";
+    public static String CONFIG_FOLDER = "";
+    private final static String[] configFileNames = new String[] {
+            "janus.jcfg",
+            "janus.plugin.sip.jcfg",
+            "janus.transport.http.jcfg",
+            "janus.transport.websockets.jcfg"
+    };
+
+
+
+    public static void createSystemFolders(){
+        String path = System.getProperty("user.home") + File.separator ;
+        path += File.separator + ".janus-landlord";
+        File customDir = new File(path);
+        File configs = new File(path+File.separator +"configs");
+
+        if (customDir.exists()) {
+            logger.info(customDir + " already exists");
+        } else if (customDir.mkdirs()) {
+            logger.info(customDir + " was created");
+        } else {
+            logger.info(customDir + " was not created");
+        }
+
+        if (configs.exists()) {
+            logger.info(configs + " already exists");
+        } else if (configs.mkdirs()) {
+            logger.info(configs + " was created");
+        } else {
+            logger.info(configs + " was not created");
+        }
+        ROOT_FOLDER = customDir.getAbsolutePath();
+        CONFIG_FOLDER = configs.getAbsolutePath();
+        logger.info(ROOT_FOLDER + " :: ROOT_FOLDER");
+
+            Arrays.stream(configFileNames).toList().forEach(file->{
+                try {
+                    if(!new File((CONFIG_FOLDER+File.separator + file)).exists()){
+                        Writer fileWriter = new FileWriter(CONFIG_FOLDER+File.separator + file, false);
+                        fileWriter.close();
+                    }
+
+                } catch (IOException e) {
+                   logger.error(e.getMessage());
+                }
+            });
+
+
+    }
+
+    /**This is restarting the Janus instance server .
+     * This operation is blocking .
+     * */
+    public static synchronized void restartJanus(){
+        executeBashCommand("sudo snap restart janus-gateway");
+    }
+
+    /**This is remove the Janus instance server .
+     * This needs to be run from the terminal is the app was wwith out Admin previledge
+     * */
+    public static synchronized void unInstallJanus(){
+        executeBashCommand("sudo snap remove janus-gateway");
+    }
+
+ public static synchronized void installJanus(){
+     if(IS_RUNNING_AS_ADMINISTRATOR){
+         XUtils.executeBashCommand("sudo snap install janus-gateway ");
+
+     }
+    }
+
+
 
     public static String readFileFromResources(String filename) throws URISyntaxException, IOException {
 

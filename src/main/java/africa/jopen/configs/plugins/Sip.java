@@ -10,13 +10,17 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static africa.jopen.utils.XUtils.CONFIG_FOLDER;
 import static africa.jopen.utils.XUtils.testIfToQoute;
 
 public class Sip {
@@ -30,7 +34,7 @@ public class Sip {
     final String FileNameJson = FileName + ".json";
     private africa.jopen.json.sip.Root janusConfigs;
     private String jsonJanus;
-
+    private String CONFIG="";
     public Sip() {
         try {
             // loads the default data
@@ -43,6 +47,15 @@ public class Sip {
         } catch (URISyntaxException | IOException e) {
             logger.error(e.getMessage());
             e.printStackTrace();
+        }
+    }
+    public void saveFromDefaults(){
+        try {
+            Writer fileWriter = new FileWriter(CONFIG_FOLDER + File.separator + FileName, false);
+            fileWriter.write(CONFIG);
+            fileWriter.close();
+        } catch (IOException e) {
+            logger.error(e.getMessage());
         }
     }
 
@@ -74,6 +87,7 @@ public class Sip {
 
         // Replace
         var bul = sub.replace(templateString);
+        CONFIG = bul;
         logger.info(bul);
 
     }

@@ -11,13 +11,17 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 import static africa.jopen.configs.utils.Utils.getStringJsonFactory;
+import static africa.jopen.utils.XUtils.CONFIG_FOLDER;
 import static africa.jopen.utils.XUtils.testIfToQoute;
 
 public class Http {
@@ -27,6 +31,7 @@ public class Http {
     final String FileNameJson = FileName + ".json";
     private africa.jopen.json.http.Root janusConfigs;
     private String jsonJanus;
+    private String CONFIG="";
 
     public Http() {
         try {
@@ -42,7 +47,15 @@ public class Http {
             e.printStackTrace();
         }
     }
-
+    public void saveFromDefaults(){
+        try {
+            Writer fileWriter = new FileWriter(CONFIG_FOLDER + File.separator + FileName, false);
+            fileWriter.write(CONFIG);
+            fileWriter.close();
+        } catch (IOException e) {
+            logger.error(e.getMessage());
+        }
+    }
     private void buildGeneral() {
         Map<String, String> valuesMap = new HashMap<>();
         JSONObject obj = new JSONObject(jsonJanus);
@@ -52,7 +65,7 @@ public class Http {
         resolvedString += getStringJsonFactory(valuesMap, obj.getJSONObject("cors"), "cors");
         resolvedString += getStringJsonFactory(valuesMap, obj.getJSONObject("certificates"), "certificates");
 
-
+        CONFIG = resolvedString;
         logger.info(resolvedString);
 
     }

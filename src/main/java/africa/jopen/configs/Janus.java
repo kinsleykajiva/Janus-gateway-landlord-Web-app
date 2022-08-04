@@ -5,7 +5,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 //import org.apache.commons.text.StringSubstitutor;
 import africa.jopen.json.janus.JanusObject;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.net.URISyntaxException;
 import java.util.*;
 
@@ -18,6 +21,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static africa.jopen.utils.XUtils.CONFIG_FOLDER;
 import static africa.jopen.utils.XUtils.testIfToQoute;
 
 
@@ -30,6 +34,7 @@ public class Janus {
     boolean isFileFound = false;
     private JanusObject janusConfigs;
     private String jsonJanus;
+    private String CONFIG="";
 
 
     public Janus() {
@@ -48,6 +53,15 @@ public class Janus {
 
         buildGeneral();
     }
+    public void saveFromDefaults(){
+        try {
+            Writer fileWriter = new FileWriter(CONFIG_FOLDER + File.separator + FileName, false);
+            fileWriter.write(CONFIG);
+            fileWriter.close();
+        } catch (IOException e) {
+            logger.error(e.getMessage());
+        }
+    }
 
 
 
@@ -64,7 +78,7 @@ public class Janus {
         resolvedString += getStringJsonFactory(valuesMap, obj.getJSONObject("plugins"), "plugins");
         resolvedString += getStringJsonFactory(valuesMap, obj.getJSONObject("transports"), "transports");
         resolvedString += getStringJsonFactory(valuesMap, obj.getJSONObject("events"), "events");
-
+        CONFIG = resolvedString;
         logger.info(resolvedString);
     }
 
