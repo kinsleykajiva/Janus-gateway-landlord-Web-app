@@ -23,6 +23,8 @@ You can pull the repository, make a build , navigate to target folder .
 # Janus Configurations
 - Has support for Janus
 - Added support for Sip plugin
+- Added support for Http transport
+- Added support for WebSockets transport
 
 
 
