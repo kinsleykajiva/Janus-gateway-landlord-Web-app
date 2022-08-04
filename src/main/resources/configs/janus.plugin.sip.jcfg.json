@@ -1,0 +1,64 @@
+{
+  "general": {
+    "local_ip": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "172.31.47.192"
+    },
+    "sdp_ip": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "3.72.250.70"
+    },
+    "keepalive_interval": {
+      "required": false,
+      "commented": false,
+      "comment": "--",
+      "lineValue": "120"
+    },
+    "behind_nat": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "true"
+    },
+    "user_agent": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "Cool WebRTC Gateway"
+    },
+    "register_ttl": {
+      "required": false,
+      "commented": false,
+      "comment": "--",
+      "lineValue": "3600"
+    },
+    "rtp_port_range": {
+      "required": true,
+      "commented": false,
+      "comment": "--",
+      "lineValue": "10000-60000"
+    },
+    "events": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "false"
+    },
+    "dscp_audio_rtp": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "46"
+    },
+    "dscp_video_rtp": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "26"
+    }
+  }
+}

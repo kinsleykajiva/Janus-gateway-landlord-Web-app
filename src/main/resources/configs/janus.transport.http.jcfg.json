@@ -1,0 +1,190 @@
+{
+  "general": {
+    "events": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "true"
+    },
+    "json": {
+      "required": true,
+      "commented": false,
+      "comment": "--",
+      "lineValue": "indented"
+    },
+    "base_path": {
+      "required": true,
+      "commented": false,
+      "comment": "--",
+      "lineValue": "/janus"
+    },
+    "http": {
+      "required": true,
+      "commented": false,
+      "comment": "--",
+      "lineValue": "true"
+    },
+    "port": {
+      "required": true,
+      "commented": false,
+      "comment": "--",
+      "lineValue": "8088"
+    },
+    "interface": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "eth0"
+    },
+    "ip": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "192.168.0.1"
+    },
+    "https": {
+      "required": true,
+      "commented": false,
+      "comment": "--",
+      "lineValue": "false"
+    },
+    "secure_port": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "8089"
+    },
+    "secure_interface": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "eth0"
+    },
+    "secure_ip": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "192.168.0.1"
+    },
+    "acl": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "127.,192.168.0."
+    },
+    "mhd_connection_limit": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "1020"
+    },
+    "mhd_debug": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "false"
+    }
+  },
+  "admin": {
+    "admin_base_path": {
+      "required": true,
+      "commented": false,
+      "comment": "--",
+      "lineValue": "/admin"
+    },
+    "admin_http": {
+      "required": true,
+      "commented": false,
+      "comment": "--",
+      "lineValue": "true"
+    },
+    "admin_port": {
+      "required": true,
+      "commented": false,
+      "comment": "--",
+      "lineValue": "7088"
+    },
+    "admin_interface": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "eth0"
+    },
+    "admin_ip": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "192.168.0.1"
+    },
+    "admin_https": {
+      "required": true,
+      "commented": false,
+      "comment": "--",
+      "lineValue": "false"
+    },
+    "admin_secure_port": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "7889"
+    },
+    "admin_secure_interface": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "eth0"
+    },
+    "admin_secure_ip": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "192.168.0.1"
+    },
+    "admin_acl": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "127.,192.168.0."
+    }
+  },
+  "cors": {
+    "allow_origin": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "http://foo.example"
+    },
+    "enforce_cors": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "true"
+    }
+  },
+  "certificates": {
+    "cert_pem": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "/path/to/cert.pem"
+    },
+    "cert_key": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "/path/to/key.pem"
+    },
+    "cert_pwd": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "secretpassphrase"
+    },
+    "ciphers": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "PFS:-VERS-TLS1.0:-VERS-TLS1.1:-3DES-CBC:-ARCFOUR-128"
+    }
+  }
+}

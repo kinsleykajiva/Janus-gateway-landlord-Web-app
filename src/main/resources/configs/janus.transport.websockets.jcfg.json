@@ -1,0 +1,160 @@
+{
+  "general": {
+    "events": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "true"
+    },
+    "json": {
+      "required": true,
+      "commented": false,
+      "comment": "--",
+      "lineValue": "indented"
+    },
+    "pingpong_trigger": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "30"
+    },
+    "pingpong_timeout": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "10"
+    },
+    "ws": {
+      "required": true,
+      "commented": false,
+      "comment": "--",
+      "lineValue": "true"
+    },
+    "ws_port": {
+      "required": true,
+      "commented": false,
+      "comment": "--",
+      "lineValue": "8188"
+    },
+    "ws_interface": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "eth0"
+    },
+    "ws_ip": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "0.0.0.1"
+    },
+    "wss": {
+      "required": true,
+      "commented": false,
+      "comment": "--",
+      "lineValue": "false"
+    },
+    "wss_port": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "8989"
+    },
+    "wss_interface": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "eth0"
+    },
+    "wss_ip": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "0.0.0.0"
+    },
+    "ws_logging": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "err,warn"
+    },
+    "ws_acl": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "127.,192.168.0."
+    }
+  },
+  "admin": {
+    "admin_ws": {
+      "required": true,
+      "commented": false,
+      "comment": "--",
+      "lineValue": "false"
+    },
+    "admin_ws_port": {
+      "required": true,
+      "commented": false,
+      "comment": "--",
+      "lineValue": "7188"
+    },
+    "admin_ws_interface": {
+      "required": true,
+      "commented": false,
+      "comment": "--",
+      "lineValue": "eth0"
+    },
+    "admin_ws_ip": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "192.0.0.1"
+    },
+    "admin_ws_acl": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "192.0.0.1"
+    }
+  },
+  "cors": {
+    "allow_origin": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "http://foo.example"
+    },
+    "enforce_cors": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "true"
+    }
+  },
+  "certificates": {
+    "cert_pem": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "/path/to/cert.pem"
+    },
+    "cert_key": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "/path/to/key.pem"
+    },
+    "cert_pwd": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "secretpassphrase"
+    },
+    "ciphers": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256"
+    }
+  }
+}

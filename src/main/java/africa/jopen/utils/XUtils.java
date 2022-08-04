@@ -1,14 +1,19 @@
 package africa.jopen.utils;
 
 import africa.jopen.Application;
+import africa.jopen.configs.Janus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.DecimalFormatSymbols;
 
 public class XUtils {
+    private static final Logger logger = LoggerFactory.getLogger(XUtils.class);
 
     public static String readFileFromResources(String filename) throws URISyntaxException, IOException {
 
@@ -16,15 +21,15 @@ public class XUtils {
             URL resource = Application.class.getClassLoader().getResource(filename);
             byte[] bytes = Files.readAllBytes(Paths.get(resource.toURI()));
             return new String(bytes);
-        } catch (IOException | URISyntaxException|java.nio.file.FileSystemNotFoundException e) {
+        } catch (IOException | URISyntaxException | java.nio.file.FileSystemNotFoundException e) {
             e.printStackTrace();
-            System.err.println("Access Error Occurred,its alright access from native image module perspective !");
+            logger.error("Access Error Occurred,its alright access from native image module perspective !");
             String moduleName = "java.base";
             String resourcePath = "/" + filename;
             Module resource1 = ModuleLayer.boot().findModule(moduleName).get();
             InputStream ins = resource1.getResourceAsStream(resourcePath);
             if (ins == null) {
-                System.out.println(" now trying to load from Class");
+                logger.info(" now trying to load from Class");
                 ins = Application.class.getResourceAsStream(resourcePath);
             }
             if (ins != null) {
@@ -32,11 +37,16 @@ public class XUtils {
                 for (int ch; (ch = ins.read()) != -1; ) {
                     sb.append((char) ch);
                 }
-                System.out.println(" sb"+sb);
                 return sb.toString();
             }
         }
         return null;
+    }
+
+    public static String testIfToQoute(String value) {
+        return value.equals("true") || value.equals("false") || XUtils.isNumeric(value) ?
+                (value) :
+                "".concat("\"").concat(value).concat("\"");
     }
 
     private static String readFileFromResourcesLargeFiles(String fileName) {
@@ -69,6 +79,35 @@ public class XUtils {
         return fileContent.toString();
     }
 
+    public static boolean isNumeric(final String input) {
+        //Check for null or blank string
+        if (input == null || input.isBlank()) return false;
+
+        //Retrieve the minus sign and decimal separator characters from the current Locale
+        final var localeMinusSign = DecimalFormatSymbols.getInstance().getMinusSign();
+        final var localeDecimalSeparator = DecimalFormatSymbols.getInstance().getDecimalSeparator();
+
+        //Check if first character is a minus sign
+        final var isNegative = input.charAt(0) == localeMinusSign;
+        //Check if string is not just a minus sign
+        if (isNegative && input.length() == 1) return false;
+
+        var isDecimalSeparatorFound = false;
+
+        //If the string has a minus sign ignore the first character
+        final var startCharIndex = isNegative ? 1 : 0;
+
+        //Check if each character is a number or a decimal separator
+        //and make sure string only has a maximum of one decimal separator
+        for (var i = startCharIndex; i < input.length(); i++) {
+            if (!Character.isDigit(input.charAt(i))) {
+                if (input.charAt(i) == localeDecimalSeparator && !isDecimalSeparatorFound) {
+                    isDecimalSeparatorFound = true;
+                } else return false;
+            }
+        }
+        return true;
+    }
 
     /**
      * Execute a bash command. We can handle complex bash commands including
@@ -80,7 +119,7 @@ public class XUtils {
      */
     public static boolean executeBashCommand(String command) {
         boolean success = false;
-        System.out.println("Executing BASH command:\n   " + command);
+        logger.info("Executing BASH command:\n   " + command);
         Runtime r = Runtime.getRuntime();
         // Use bash -c so we can handle things like multi commands separated by ; and
         // things like quotes, $, |, and \. My tests show that command comes as
@@ -102,7 +141,7 @@ public class XUtils {
             b.close();
             success = true;
         } catch (Exception e) {
-            System.err.println("Failed to execute bash with command: " + command);
+            logger.error("Failed to execute bash with command: " + command);
             e.printStackTrace();
         }
         return success;

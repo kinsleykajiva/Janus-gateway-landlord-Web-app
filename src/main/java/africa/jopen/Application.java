@@ -1,6 +1,9 @@
 package africa.jopen;
 
 import africa.jopen.configs.Janus;
+import africa.jopen.configs.plugins.Sip;
+import africa.jopen.configs.transports.Http;
+import africa.jopen.configs.transports.Websockets;
 import africa.jopen.utils.XUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.micronaut.logging.LoggingSystem;
@@ -8,6 +11,8 @@ import io.micronaut.runtime.Micronaut;
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.info.*;
 import jakarta.inject.Inject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,10 +25,11 @@ import java.io.InputStreamReader;
     )
 )
 public class Application {
-
+    private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
     // snap remove janus-gateway
     public static void main(String[] args) {
+
 
        /* String[] cmd = {"/bin/bash","-c","sudo snap list"};
         Process pb = Runtime.getRuntime().exec(cmd);
@@ -36,18 +42,17 @@ public class Application {
         input.close();
 */
 
-        System.out.println("Started applicationX");
+        logger.info("Started applicationX");
 
         //  XUtils.executeBashCommand("sudo snap install janus-gateway ");
 //        XUtils.executeBashCommand("ls");
-        try {
-            new Janus();
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage());
-        }
+          new Janus();
+          new Http();
+          new Websockets();
+        new Sip();
+            new Websockets();
 
 
-       // Micronaut.run(Application.class, args);
+        // Micronaut.run(Application.class, args);
     }
 }
