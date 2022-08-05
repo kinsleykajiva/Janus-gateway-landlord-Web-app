@@ -1,36 +1,40 @@
 package africa.jopen.configs.transports;
 
+import africa.jopen.json.http.JanusHttp;
+import africa.jopen.json.websockets.JanusWebSockets;
 import africa.jopen.utils.XUtils;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.net.URISyntaxException;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import static africa.jopen.configs.utils.Utils.getStringJsonFactory;
 import static africa.jopen.utils.XUtils.CONFIG_FOLDER;
+import static java.util.logging.Logger.getLogger;
 
 public class Websockets {
 
 
-    private final Logger logger = LoggerFactory.getLogger(Websockets.class);
+    private final Logger logger = getLogger(Websockets.class.getSimpleName());
 
     final String FileName = "janus.transport.websockets.jcfg";
     final String FileNameJson = FileName + ".json";
 
 
-    private africa.jopen.json.websockets.Root janusConfigs;
+    private JanusWebSockets janusConfigs;
     private String jsonJanus;
-    private String CONFIG="";
+    private String CONFIG = "";
 
     public Websockets() {
         try {
@@ -42,19 +46,38 @@ public class Websockets {
             });
             buildGeneral();
         } catch (URISyntaxException | IOException e) {
-            logger.error(e.getMessage());
+            logger.severe(e.getMessage());
             e.printStackTrace();
         }
     }
-    public  synchronized void saveFromDefaults(){
+
+    public JanusWebSockets loadCurrentSettings(){
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
+        try {
+            JanusWebSockets janusWebSockets  = mapper.readValue(Paths.get(CONFIG_FOLDER + File.separator + FileNameJson).toFile(), JanusWebSockets.class);
+            return janusWebSockets;
+        } catch (IOException e) {
+            logger.severe(e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public synchronized void saveFromDefaults() {
         try {
             Writer fileWriter = new FileWriter(CONFIG_FOLDER + File.separator + FileName, false);
             fileWriter.write(CONFIG);
             fileWriter.close();
+
+            Writer fileWriterJSON = new FileWriter(CONFIG_FOLDER + File.separator + FileNameJson, false);
+            fileWriterJSON.write(jsonJanus);
+            fileWriterJSON.close();
         } catch (IOException e) {
-            logger.error(e.getMessage());
+            logger.severe(e.getMessage());
         }
     }
+
     private void buildGeneral() {
         Map<String, String> valuesMap = new HashMap<>();
         JSONObject obj = new JSONObject(jsonJanus);

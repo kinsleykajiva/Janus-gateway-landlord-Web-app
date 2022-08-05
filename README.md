@@ -7,9 +7,10 @@ Motivation: As a developer I got tired of always opening the console to see logs
 
 
 # Requirements
+- Linux (For now Debian Based OS,please me to change this ) . 
 - JDK 17+ to run . 
 - Better with GraalVM
-- make sure you have snap installed.
+- make sure you have snap installed for more review https://snapcraft.io/install/ubuntu-package-status/ubuntu.
 - This so far has been built and tested on Ubuntu,please try to make changes to suite your OS.
 
 

@@ -1,14 +1,17 @@
 package africa.jopen.configs.utils;
 
+import africa.jopen.configs.transports.Websockets;
 import org.apache.commons.text.StringSubstitutor;
 import org.json.JSONObject;
 
 import java.util.Map;
+import java.util.logging.Logger;
 
 import static africa.jopen.utils.XUtils.testIfToQoute;
+import static java.util.logging.Logger.getLogger;
 
 public class Utils {
-
+    private final Logger logger = getLogger(Utils.class.getSimpleName());
     public static String getStringJsonFactory(Map<String, String> valuesMap, JSONObject general, String level) {
         StringBuilder layers = new StringBuilder();
         for (String target : general.keySet()) {

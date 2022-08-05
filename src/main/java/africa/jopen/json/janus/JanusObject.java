@@ -1,6 +1,7 @@
 package africa.jopen.json.janus;
 
 
+import africa.jopen.utils.XResponse;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.micronaut.core.annotation.ReflectiveAccess;
@@ -14,7 +15,7 @@ import lombok.extern.jackson.Jacksonized;
 @Data
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class JanusObject {
+public class JanusObject extends XResponse {
 
     General general;
     Certificates certificates;

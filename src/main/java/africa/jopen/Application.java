@@ -4,22 +4,28 @@ import africa.jopen.configs.Janus;
 import africa.jopen.configs.plugins.Sip;
 import africa.jopen.configs.transports.Http;
 import africa.jopen.configs.transports.Websockets;
+import africa.jopen.json.janus.JanusObject;
 import africa.jopen.utils.AdministratorChecker;
+import africa.jopen.utils.JanusUtils;
 import africa.jopen.utils.XUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.micronaut.logging.LoggingSystem;
 import io.micronaut.runtime.Micronaut;
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.info.*;
 import jakarta.inject.Inject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Paths;
+import java.util.Map;
+import java.util.logging.Logger;
 
 import static africa.jopen.utils.AdministratorChecker.IS_RUNNING_AS_ADMINISTRATOR;
+import static africa.jopen.utils.XUtils.logInfo;
 
 
 @OpenAPIDefinition(
@@ -29,23 +35,46 @@ import static africa.jopen.utils.AdministratorChecker.IS_RUNNING_AS_ADMINISTRATO
         )
 )
 public class Application {
-    private static final Logger logger = LoggerFactory.getLogger(Application.class);
+    final static Logger logger = Logger.getLogger(Application.class.getSimpleName());
+
+
 
     public static void main(String[] args) {
         logger.info("Started application ");
-
         logger.info("Running as Admin " + IS_RUNNING_AS_ADMINISTRATOR);
-
+        logInfo("Running as Admin " + IS_RUNNING_AS_ADMINISTRATOR);
+        logger.info("Started application ");
         XUtils.createSystemFolders();
+        JanusUtils.makeFoldersAccessible();
 
 
-        new Janus().saveFromDefaults();
+
+
+       /* try {
+            // create object mapper instance
+            ObjectMapper mapper = new ObjectMapper();
+
+            // convert JSON string to Book object
+            JanusObject janusConfigs  = mapper.readValue(Paths.get("/home/variable-k/.janus-landlord/configs/janus.jcfg.json").toFile(), JanusObject.class);
+            String jsonStr = mapper.writeValueAsString(janusConfigs);
+
+            // Displaying JSON String on console
+            System.out.println("xxx->>"+jsonStr);
+            // print book
+            System.out.println("====xxx="+janusConfigs);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }*/
+
+
+      /*
+       new Janus().saveFromDefaults();
         new Http();
         new Websockets();
         new Sip();
-        new Websockets();
+        new Websockets();*/
 
-
-        // Micronaut.run(Application.class, args);
+         Micronaut.run(Application.class, args);
     }
 }

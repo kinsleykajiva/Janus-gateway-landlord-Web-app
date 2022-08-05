@@ -1,35 +1,35 @@
 package africa.jopen.configs.transports;
 
-import africa.jopen.configs.Janus;
-import africa.jopen.json.janus.JanusObject;
+import africa.jopen.configs.plugins.Sip;
+import africa.jopen.json.http.JanusHttp;
+import africa.jopen.json.sip.JanusSip;
 import africa.jopen.utils.XUtils;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import org.apache.commons.text.StringSubstitutor;
 import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.net.URISyntaxException;
-import java.util.Arrays;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import static africa.jopen.configs.utils.Utils.getStringJsonFactory;
 import static africa.jopen.utils.XUtils.CONFIG_FOLDER;
-import static africa.jopen.utils.XUtils.testIfToQoute;
+import static java.util.logging.Logger.*;
 
 public class Http {
-    private final Logger logger = LoggerFactory.getLogger(Http.class);
+    private final Logger logger = getLogger(Http.class.getSimpleName());
 
     final String FileName = "janus.transport.http.jcfg";
     final String FileNameJson = FileName + ".json";
-    private africa.jopen.json.http.Root janusConfigs;
+    private JanusHttp janusConfigs;
     private String jsonJanus;
     private String CONFIG="";
 
@@ -43,17 +43,34 @@ public class Http {
             });
             buildGeneral();
         } catch (URISyntaxException | IOException e) {
-            logger.error(e.getMessage());
+            logger.severe(e.getMessage());
             e.printStackTrace();
         }
     }
+    public JanusHttp loadCurrentSettings(){
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
+        try {
+            JanusHttp janusHttp  = mapper.readValue(Paths.get(CONFIG_FOLDER + File.separator + FileNameJson).toFile(), JanusHttp.class);
+            return janusHttp;
+        } catch (IOException e) {
+            logger.severe(e.getMessage());
+            e.printStackTrace();
+        }
+        return  null;
+    }
+
     public void saveFromDefaults(){
         try {
             Writer fileWriter = new FileWriter(CONFIG_FOLDER + File.separator + FileName, false);
             fileWriter.write(CONFIG);
             fileWriter.close();
+
+            Writer fileWriterJSON = new FileWriter(CONFIG_FOLDER + File.separator + FileNameJson, false);
+            fileWriterJSON.write(jsonJanus);
+            fileWriterJSON.close();
         } catch (IOException e) {
-            logger.error(e.getMessage());
+            logger.severe(e.getMessage());
         }
     }
     private void buildGeneral() {

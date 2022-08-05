@@ -23,23 +23,36 @@ public class XUtils {
             "janus.jcfg",
             "janus.plugin.sip.jcfg",
             "janus.transport.http.jcfg",
-            "janus.transport.websockets.jcfg"
-    };
+            "janus.transport.websockets.jcfg",
+/*the following is just load or make a reference but this can be done better or saved elsewhere*/
+            "janus.jcfg.json",
+            "janus.plugin.sip.jcfg.json",
+            "janus.transport.http.jcfg.json",
+            "janus.transport.websockets.jcfg.json",
 
+
+    };
+    // Warning: JAVA_HOME=/home/variable-k/.jdks/graalvm-ce-17/bin
+//sudo ./mvnw mn:run
 
     public static void createSystemFolders() {
-        String path = System.getProperty("user.home") + File.separator;
+
+        String path = "/opt";
         path += File.separator + ".janus-landlord";
         File customDir = new File(path);
         File configs = new File(path + File.separator + "configs");
 
         if (customDir.exists()) {
-            logger.info(customDir + " already exists");
+            logger.info(customDir + " already exists" );
+            logInfo(customDir + " already exists");
         } else if (customDir.mkdirs()) {
             logger.info(customDir + " was created");
+            logInfo(customDir + " was created");
         } else {
             logger.info(customDir + " was not created");
+            logInfo(customDir + " was not created");
         }
+
 
         if (configs.exists()) {
             logger.info(configs + " already exists");
@@ -67,7 +80,12 @@ public class XUtils {
 
     }
 
-
+    public static void logInfo(String message) {
+        System.out.println(message);
+    }
+    public static void logError(String message) {
+        System.err.println(message);
+    }
 
     public static String readFileFromResources(String filename) throws URISyntaxException, IOException {
 
@@ -163,6 +181,12 @@ public class XUtils {
         return true;
     }
 
+    private static StringBuilder lastExecuteBashCommandResponses = new StringBuilder();
+
+    public static StringBuilder getLastExecuteBashCommandResponses() {
+        return lastExecuteBashCommandResponses;
+    }
+
     /**
      * Execute a bash command. We can handle complex bash commands including
      * multiple executions (; | && ||), quotes, expansions ($), escapes (\), e.g.:
@@ -172,6 +196,7 @@ public class XUtils {
      * @return true if bash got started, but your command may have failed.
      */
     public static boolean executeBashCommand(String command) {
+        lastExecuteBashCommandResponses.delete(0 , lastExecuteBashCommandResponses.length());
         boolean success = false;
         logger.info("Executing BASH command:\n   " + command);
         Runtime r = Runtime.getRuntime();
@@ -189,13 +214,15 @@ public class XUtils {
             String line = "";
 
             while ((line = b.readLine()) != null) {
+                lastExecuteBashCommandResponses.append(line).append(System.lineSeparator());
+                logger.info(line);
                 System.out.println(line);
             }
 
             b.close();
             success = true;
         } catch (Exception e) {
-            logger.error("Failed to execute bash with command: " + command);
+        //    logger.error("Failed to execute bash with command: " + command);
             e.printStackTrace();
         }
         return success;

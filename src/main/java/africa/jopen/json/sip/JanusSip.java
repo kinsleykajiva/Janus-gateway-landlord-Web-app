@@ -7,7 +7,7 @@ import io.micronaut.core.annotation.ReflectiveAccess;
 @ReflectiveAccess
 
 
-public class Root{
+public class JanusSip {
     @JsonProperty("general")
     public General getGeneral() {
         return this.general; }

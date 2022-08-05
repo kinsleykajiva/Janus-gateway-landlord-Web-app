@@ -10,7 +10,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.net.URISyntaxException;
+import java.nio.file.Paths;
 import java.util.*;
+import java.util.logging.Logger;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper; // version 2.11.1
@@ -18,23 +20,23 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import io.micronaut.core.annotation.ReflectiveAccess;
 import org.apache.commons.text.StringSubstitutor;
 import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import static africa.jopen.utils.XUtils.CONFIG_FOLDER;
-import static africa.jopen.utils.XUtils.testIfToQoute;
+
+import static africa.jopen.utils.XUtils.*;
+import static java.util.logging.Logger.getLogger;
 
 
 @ReflectiveAccess
 public class Janus {
-    private final Logger logger = LoggerFactory.getLogger(Janus.class);
+    private final Logger logger = getLogger(Janus.class.getSimpleName());
 
-    final String FileName = "janus.jcfg";
+
+    public static final String FileName = "janus.jcfg";
     final String FileNameJson = FileName + ".json";
     boolean isFileFound = false;
     private JanusObject janusConfigs;
     private String jsonJanus;
-    private String CONFIG="";
+    private String CONFIG = "";
 
 
     public Janus() {
@@ -47,24 +49,66 @@ public class Janus {
             });
 
         } catch (URISyntaxException | IOException e) {
-            logger.error(e.getMessage());
+            logger.severe(e.getMessage());
             e.printStackTrace();
         }
 
         buildGeneral();
     }
-    public void saveFromDefaults(){
+
+    public JanusObject loadCurrentSettings() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
         try {
+            JanusObject janusObject = mapper.readValue(Paths.get(CONFIG_FOLDER + File.separator + FileNameJson).toFile(), JanusObject.class);
+            return janusObject;
+        } catch (IOException e) {
+            logger.severe(e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void saveToLocalBackCopy() {
+        try {
+            logger.info("saveFromDefaults ->  ");
             Writer fileWriter = new FileWriter(CONFIG_FOLDER + File.separator + FileName, false);
             fileWriter.write(CONFIG);
             fileWriter.close();
+
+            Writer fileWriterJSON = new FileWriter(CONFIG_FOLDER + File.separator + FileNameJson, false);
+            fileWriterJSON.write(jsonJanus);
+            fileWriterJSON.close();
+
         } catch (IOException e) {
-            logger.error(e.getMessage());
+            logger.severe(e.getMessage());
         }
     }
 
+    /**To update the local configs waiting to be copied to janus folders
+     * @param json the whole json to be loaded as  a object and to be saved to the json file
+     * @return bool , if true configs have been saved to local , if false then the file has failed to save to local configs folder can not proceed to set as janus config .
+     * */
+    public boolean updateToBuild(String json){
+        jsonJanus = json;
+
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
+            janusConfigs = mapper.readValue(jsonJanus, new TypeReference<>() {
+            });
+            buildGeneral();
+            saveToLocalBackCopy();
+            return true;
+        } catch (JsonProcessingException e) {
+            logger.severe(e.getMessage());
+        }
+        return false;
+    }
 
 
+/** to be the builder of the settings to make a string to be saved to the jcfg files
+ * */
     private void buildGeneral() {
 
         Map<String, String> valuesMap = new HashMap<>();
@@ -79,7 +123,7 @@ public class Janus {
         resolvedString += getStringJsonFactory(valuesMap, obj.getJSONObject("transports"), "transports");
         resolvedString += getStringJsonFactory(valuesMap, obj.getJSONObject("events"), "events");
         CONFIG = resolvedString;
-        logger.info(resolvedString);
+       // logger.info(resolvedString);
     }
 
     private String getStringJsonFactory(Map<String, String> valuesMap, JSONObject general, String level) {

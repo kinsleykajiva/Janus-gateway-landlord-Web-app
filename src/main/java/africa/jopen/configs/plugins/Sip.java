@@ -1,24 +1,26 @@
 package africa.jopen.configs.plugins;
 
-import africa.jopen.configs.transports.Http;
+import africa.jopen.Application;
+import africa.jopen.json.janus.JanusObject;
+import africa.jopen.json.sip.JanusSip;
 import africa.jopen.utils.XUtils;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.apache.commons.text.StringSubstitutor;
 import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.net.URISyntaxException;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import static africa.jopen.utils.XUtils.CONFIG_FOLDER;
 import static africa.jopen.utils.XUtils.testIfToQoute;
@@ -28,11 +30,11 @@ public class Sip {
 
 
 
-    private final Logger logger = LoggerFactory.getLogger(Sip.class);
+    private final Logger logger =  Logger.getLogger(Sip.class.getSimpleName());
 
     final String FileName = "janus.plugin.sip.jcfg";
     final String FileNameJson = FileName + ".json";
-    private africa.jopen.json.sip.Root janusConfigs;
+    private JanusSip janusConfigs;
     private String jsonJanus;
     private String CONFIG="";
     public Sip() {
@@ -45,17 +47,33 @@ public class Sip {
             });
             buildGeneral();
         } catch (URISyntaxException | IOException e) {
-            logger.error(e.getMessage());
+            logger.severe(e.getMessage());
             e.printStackTrace();
         }
+    }
+    public JanusSip loadCurrentSettings(){
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
+        try {
+            JanusSip sip  = mapper.readValue(Paths.get(CONFIG_FOLDER + File.separator + FileNameJson).toFile(), JanusSip.class);
+            return sip;
+        } catch (IOException e) {
+            logger.severe(e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
     }
     public void saveFromDefaults(){
         try {
             Writer fileWriter = new FileWriter(CONFIG_FOLDER + File.separator + FileName, false);
             fileWriter.write(CONFIG);
             fileWriter.close();
+
+            Writer fileWriterJSON = new FileWriter(CONFIG_FOLDER + File.separator + FileNameJson, false);
+            fileWriterJSON.write(jsonJanus);
+            fileWriterJSON.close();
         } catch (IOException e) {
-            logger.error(e.getMessage());
+            logger.severe(e.getMessage());
         }
     }
 

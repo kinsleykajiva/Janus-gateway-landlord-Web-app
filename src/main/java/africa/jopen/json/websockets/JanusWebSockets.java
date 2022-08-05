@@ -1,12 +1,10 @@
-package africa.jopen.json.http;
-
-
+package africa.jopen.json.websockets;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.micronaut.core.annotation.ReflectiveAccess;
 
 @ReflectiveAccess
 
-public class Root{
+public class JanusWebSockets {
     @JsonProperty("general")
     public General getGeneral() {
         return this.general; }
