@@ -1,0 +1,156 @@
+{
+	"info": {
+		"_postman_id": "6e8105fd-d3c4-40ec-abe5-3f8e75966e04",
+		"name": "janus-gateway-landlord",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7379650"
+	},
+	"item": [
+		{
+			"name": "configs",
+			"item": [
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"general\": {\n    \"configs_folder\": {\n      \"required\": true,\n      \"commented\": false,\n      \"comment\": \"Configuration files folder\",\n      \"lineValue\": \"/opt/janus/etc/janus\"\n    },\n    \"plugins_folder\": {\n      \"required\": true,\n      \"commented\": false,\n      \"comment\": \"Plugins folder\",\n      \"lineValue\": \"/opt/janus/lib/janus/plugins\"\n    },\n    \"transports_folder\": {\n      \"required\": true,\n      \"commented\": false,\n      \"comment\": \"Transports folder\",\n      \"lineValue\": \"/opt/janus/lib/janus/transports\"\n    },\n    \"events_folder\": {\n      \"required\": true,\n      \"commented\": false,\n      \"comment\": \"Event handlers folder\",\n      \"lineValue\": \"/opt/janus/lib/janus/events\"\n    },\n    \"loggers_folder\": {\n      \"required\": true,\n      \"commented\": false,\n      \"comment\": \"External loggers folder\",\n      \"lineValue\": \"/opt/janus/lib/janus/loggers\"\n    },\n    \"log_to_stdout\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"Whether the Janus output should be written to stdout or not (default=true)\",\n      \"lineValue\": \"false\"\n    },\n    \"log_to_file\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"Whether to use a log file or not\",\n      \"lineValue\": \"/path/to/janus.log\"\n    },\n    \"debug_level\": {\n      \"required\": true,\n      \"commented\": false,\n      \"comment\": \"Debug/logging level, valid values are 0-7\",\n      \"lineValue\": \"4\"\n    },\n    \"debug_timestamps\": {\n      \"required\": true,\n      \"commented\": false,\n      \"comment\": \"Whether to show a timestamp for each log line\",\n      \"lineValue\": \"true\"\n    },\n    \"debug_locks\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"Whether to enable debugging of locks (very verbose!)\",\n      \"lineValue\": \"true\"\n    },\n    \"log_prefix\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"In case you want log lines to be prefixed by some , custom text, you can use the 'log_prefix' property. It supports terminal colors, meaning something like \\\"[\\\\x1b[32mjanus\\\\x1b[0m] \\\" would show a green \\\"janus\\\" string in square brackets (assuming debug_colors=true).\",\n      \"lineValue\": \"[janus]\"\n    },\n    \"daemonize\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"Whether Janus should run as a daemon  or not (default=run in foreground)\",\n      \"lineValue\": \"true\"\n    },\n    \"pid_file\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"PID file to create when Janus has been started, and to destroy at shutdown\",\n      \"lineValue\": \"/path/to/janus.pid\"\n    },\n    \"api_secret\": {\n      \"required\": false,\n      \"commented\": false,\n      \"comment\": \"String that all Janus requests must contain to be accepted/authorized by the Janus core. Useful if you're wrapping all Janus API requests in your servers (that is, not in the browser\",\n      \"lineValue\": \"janusrocks\"\n    },\n    \"token_auth\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"true\"\n    },\n    \"token_auth_secret\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"janus\"\n    },\n    \"admin_secret\": {\n      \"required\": true,\n      \"commented\": false,\n      \"comment\": \"--\",\n      \"lineValue\": \"janusoverlord\"\n    },\n    \"interface\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"1.2.3.4\"\n    },\n    \"server_name\": {\n      \"required\": false,\n      \"commented\": false,\n      \"comment\": \"--\",\n      \"lineValue\": \"localJanusx\"\n    },\n    \"session_timeout\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"60\"\n    },\n    \"candidates_timeout\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"45\"\n    },\n    \"reclaim_session_timeout\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"0\"\n    },\n    \"recordings_tmp_ext\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"tmp\"\n    },\n    \"event_loops\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"8\"\n    },\n    \"opaqueid_in_api\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"8\"\n    },\n    \"hide_dependencies\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"true\"\n    },\n    \"no_webrtc_encryption\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"true\"\n    },\n    \"protected_folders\": {\n      \"required\": true,\n      \"commented\": false,\n      \"comment\": \"--\",\n      \"lineValue\": [\n        \"/bin\",\n        \"/boot\",\n        \"/dev\",\n        \"/etc\",\n        \"/initrd\",\n        \"/lib\",\n        \"/lib32\",\n        \"/lib64\",\n        \"/proc\",\n        \"/sbin\",\n        \"/sys\",\n        \"/usr\",\n        \"/var\",\n        \"/opt/janus/bin\",\n        \"/opt/janus/etc\",\n        \"/opt/janus/include\",\n        \"/opt/janus/lib\",\n        \"/opt/janus/lib32\",\n        \"/opt/janus/lib64\",\n        \"/opt/janus/sbin\"\n      ]\n    }\n  },\n  \"certificates\": {\n    \"cert_pem\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"/path/to/certificate.pem\"\n    },\n    \"cert_key\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"/path/to/key.pem\"\n    },\n    \"cert_pwd\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"secretpassphrase\"\n    },\n    \"dtls_accept_selfsigned\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"false\"\n    },\n    \"dtls_ciphers\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"your-desired-openssl-ciphers\"\n    },\n    \"rsa_private_key\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"false\"\n    }\n  },\n  \"media\": {\n    \"ipv6\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"true\"\n    },\n    \"ipv6_linklocal\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"true\"\n    },\n    \"min_nack_queue\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"500\"\n    },\n    \"rtp_port_range\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"20000-40000\"\n    },\n    \"dtls_mtu\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"1200\"\n    },\n    \"no_media_timer\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"1\"\n    },\n    \"slowlink_threshold\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"4\"\n    },\n    \"twcc_period\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"100\"\n    },\n    \"dtls_timeout\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"500\"\n    },\n    \"nack_optimizations\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"true\"\n    },\n    \"dscp\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"46\"\n    }\n  },\n  \"nat\": {\n    \"stun_server\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"stun.voip.eutelia.it\"\n    },\n    \"stun_port\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"3478\"\n    },\n    \"nice_debug\": {\n      \"required\": true,\n      \"commented\": false,\n      \"comment\": \"--\",\n      \"lineValue\": \"false\"\n    },\n    \"full_trickle\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"true\"\n    },\n    \"ice_nomination\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"regular\"\n    },\n    \"ice_keepalive_conncheck\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"true\"\n    },\n    \"ice_lite\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"true\"\n    },\n    \"ice_tcp\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"true\"\n    },\n    \"ignore_mdns\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"true\"\n    },\n    \"nat_1_1_mapping\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"1.2.3.4\"\n    },\n    \"keep_private_host\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"true\"\n    },\n    \"turn_server\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"myturnserver.com\"\n    },\n    \"turn_port\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"3478\"\n    },\n    \"turn_type\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"udp\"\n    },\n    \"turn_user\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"myuser\"\n    },\n    \"turn_pwd\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"mypassword\"\n    },\n    \"turn_rest_api\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"http://yourbackend.com/path/to/api\"\n    },\n    \"turn_rest_api_key\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"anyapikeyyoumayhaveset\"\n    },\n    \"turn_rest_api_method\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"GET\"\n    },\n    \"allow_force_relay\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"true\"\n    },\n    \"ice_enforce_list\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"eth0\"\n    },\n    \"ice_ignore_list\": {\n      \"required\": false,\n      \"commented\": false,\n      \"comment\": \"--\",\n      \"lineValue\": \"vmnet\"\n    },\n    \"ignore_unreachable_ice_server\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"true\"\n    }\n  },\n  \"loggers\": {\n    \"disable\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"libjanus_jsonlog.so\"\n    }\n  },\n  \"plugins\": {\n    \"disable\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"libjanus_voicemail.so,libjanus_recordplay.so\"\n    }\n  },\n  \"transports\": {\n    \"disable\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"libjanus_rabbitmq.so\"\n    }\n  },\n  \"events\": {\n    \"broadcast\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"true\"\n    },\n    \"disable\": {\n      \"required\": true,\n      \"commented\": false,\n      \"comment\": \"--\",\n      \"lineValue\": \"libjanus_sampleevh.so\"\n    },\n    \"stats_period\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"5\"\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/access/janus/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"access",
+								"janus",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Current Janus Settings",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/access/janus/current-ssettings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"access",
+								"janus",
+								"current-ssettings"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "reset-janus",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/access/janus/reset",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"access",
+						"janus",
+						"reset"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "checkif-janus-install on system",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/access/janus/check-if-janus-installed",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"access",
+						"janus",
+						"check-if-janus-installed"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "install janus server",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/access/janus/install-janus-server",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"access",
+						"janus",
+						"install-janus-server"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "restart Janus Server",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/access/janus/restart-janus-server",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"access",
+						"janus",
+						"restart-janus-server"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
