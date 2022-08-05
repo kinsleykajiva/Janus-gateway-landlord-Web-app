@@ -51,3 +51,5 @@ This service is heavy dependent on this https://github.com/RSATom/janus-gateway-
 
 Remember to always run the app as Admin!
 
+PostMan - Endpoints - https://github.com/kinsleykajiva/Janus-gateway-landlord-Web-app/blob/master/janus-gateway-landlord.postman_collection.json
+
