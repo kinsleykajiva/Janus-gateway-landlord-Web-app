@@ -10,7 +10,7 @@
 			"name": "configs",
 			"item": [
 				{
-					"name": "update",
+					"name": "update Janus Config",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -41,6 +41,99 @@
 					"response": []
 				},
 				{
+					"name": "update Janus Sip Config",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"general\": {\n    \"local_ip\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"0.0.0.1\"\n    },\n    \"sdp_ip\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"0.0.0.0\"\n    },\n    \"keepalive_interval\": {\n      \"required\": false,\n      \"commented\": false,\n      \"comment\": \"--\",\n      \"lineValue\": \"120\"\n    },\n    \"behind_nat\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"true\"\n    },\n    \"user_agent\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"Cool WebRTC Gateway\"\n    },\n    \"register_ttl\": {\n      \"required\": false,\n      \"commented\": false,\n      \"comment\": \"--\",\n      \"lineValue\": \"3600\"\n    },\n    \"rtp_port_range\": {\n      \"required\": true,\n      \"commented\": false,\n      \"comment\": \"--\",\n      \"lineValue\": \"10000-60000\"\n    },\n    \"events\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"false\"\n    },\n    \"dscp_audio_rtp\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"46\"\n    },\n    \"dscp_video_rtp\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"26\"\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/access/sip/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"access",
+								"sip",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Janus Http Transport Config",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"general\": {\n    \"events\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"true\"\n    },\n    \"json\": {\n      \"required\": true,\n      \"commented\": false,\n      \"comment\": \"--\",\n      \"lineValue\": \"indented\"\n    },\n    \"base_path\": {\n      \"required\": true,\n      \"commented\": false,\n      \"comment\": \"--\",\n      \"lineValue\": \"/janus\"\n    },\n    \"http\": {\n      \"required\": true,\n      \"commented\": false,\n      \"comment\": \"--\",\n      \"lineValue\": \"true\"\n    },\n    \"port\": {\n      \"required\": true,\n      \"commented\": false,\n      \"comment\": \"--\",\n      \"lineValue\": \"8088\"\n    },\n    \"interface\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"eth0\"\n    },\n    \"ip\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"192.168.0.1\"\n    },\n    \"https\": {\n      \"required\": true,\n      \"commented\": false,\n      \"comment\": \"--\",\n      \"lineValue\": \"false\"\n    },\n    \"secure_port\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"8089\"\n    },\n    \"secure_interface\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"eth0\"\n    },\n    \"secure_ip\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"192.168.0.1\"\n    },\n    \"acl\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"127.,192.168.0.\"\n    },\n    \"mhd_connection_limit\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"1020\"\n    },\n    \"mhd_debug\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"false\"\n    }\n  },\n  \"admin\": {\n    \"admin_base_path\": {\n      \"required\": true,\n      \"commented\": false,\n      \"comment\": \"--\",\n      \"lineValue\": \"/admin\"\n    },\n    \"admin_http\": {\n      \"required\": true,\n      \"commented\": false,\n      \"comment\": \"--\",\n      \"lineValue\": \"true\"\n    },\n    \"admin_port\": {\n      \"required\": true,\n      \"commented\": false,\n      \"comment\": \"--\",\n      \"lineValue\": \"7088\"\n    },\n    \"admin_interface\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"eth0\"\n    },\n    \"admin_ip\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"192.168.0.1\"\n    },\n    \"admin_https\": {\n      \"required\": true,\n      \"commented\": false,\n      \"comment\": \"--\",\n      \"lineValue\": \"false\"\n    },\n    \"admin_secure_port\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"7889\"\n    },\n    \"admin_secure_interface\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"eth0\"\n    },\n    \"admin_secure_ip\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"192.168.0.1\"\n    },\n    \"admin_acl\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"127.,192.168.0.\"\n    }\n  },\n  \"cors\": {\n    \"allow_origin\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"http://foo.example\"\n    },\n    \"enforce_cors\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"true\"\n    }\n  },\n  \"certificates\": {\n    \"cert_pem\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"/path/to/cert.pem\"\n    },\n    \"cert_key\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"/path/to/key.pem\"\n    },\n    \"cert_pwd\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"secretpassphrase\"\n    },\n    \"ciphers\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"PFS:-VERS-TLS1.0:-VERS-TLS1.1:-3DES-CBC:-ARCFOUR-128\"\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/access/http/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"access",
+								"http",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Janus Websockets Transport Config",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"general\": {\n    \"events\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"true\"\n    },\n    \"json\": {\n      \"required\": true,\n      \"commented\": false,\n      \"comment\": \"--\",\n      \"lineValue\": \"indented\"\n    },\n    \"pingpong_trigger\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"30\"\n    },\n    \"pingpong_timeout\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"10\"\n    },\n    \"ws\": {\n      \"required\": true,\n      \"commented\": false,\n      \"comment\": \"--\",\n      \"lineValue\": \"true\"\n    },\n    \"ws_port\": {\n      \"required\": true,\n      \"commented\": false,\n      \"comment\": \"--\",\n      \"lineValue\": \"8188\"\n    },\n    \"ws_interface\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"eth0\"\n    },\n    \"ws_ip\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"0.0.0.1\"\n    },\n    \"wss\": {\n      \"required\": true,\n      \"commented\": false,\n      \"comment\": \"--\",\n      \"lineValue\": \"false\"\n    },\n    \"wss_port\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"8989\"\n    },\n    \"wss_interface\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"eth0\"\n    },\n    \"wss_ip\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"0.0.0.0\"\n    },\n    \"ws_logging\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"err,warn\"\n    },\n    \"ws_acl\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"127.,192.168.0.\"\n    }\n  },\n  \"admin\": {\n    \"admin_ws\": {\n      \"required\": true,\n      \"commented\": false,\n      \"comment\": \"--\",\n      \"lineValue\": \"false\"\n    },\n    \"admin_ws_port\": {\n      \"required\": true,\n      \"commented\": false,\n      \"comment\": \"--\",\n      \"lineValue\": \"7188\"\n    },\n    \"admin_ws_interface\": {\n      \"required\": true,\n      \"commented\": false,\n      \"comment\": \"--\",\n      \"lineValue\": \"eth0\"\n    },\n    \"admin_ws_ip\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"192.0.0.1\"\n    },\n    \"admin_ws_acl\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"192.0.0.1\"\n    }\n  },\n  \"cors\": {\n    \"allow_origin\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"http://foo.example\"\n    },\n    \"enforce_cors\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"true\"\n    }\n  },\n  \"certificates\": {\n    \"cert_pem\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"/path/to/cert.pem\"\n    },\n    \"cert_key\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"/path/to/key.pem\"\n    },\n    \"cert_pwd\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"secretpassphrase\"\n    },\n    \"ciphers\": {\n      \"required\": false,\n      \"commented\": true,\n      \"comment\": \"--\",\n      \"lineValue\": \"ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256\"\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/access/websockets/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"access",
+								"websockets",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Current Janus Settings",
 					"request": {
 						"method": "GET",
@@ -56,6 +149,72 @@
 								"api",
 								"access",
 								"janus",
+								"current-ssettings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Current Janus Sip Config",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/access/sip/current-ssettings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"access",
+								"sip",
+								"current-ssettings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Current Janus HTTP Transport Config",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/access/http/current-ssettings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"access",
+								"http",
+								"current-ssettings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Current Janus Websockets Transport Config",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/access/http/current-ssettings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"access",
+								"http",
 								"current-ssettings"
 							]
 						}
