@@ -3,6 +3,7 @@ package africa.jopen.configs.transports;
 import africa.jopen.json.http.JanusHttp;
 import africa.jopen.json.websockets.JanusWebSockets;
 import africa.jopen.utils.XUtils;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -28,7 +29,7 @@ public class Websockets {
 
     private final Logger logger = getLogger(Websockets.class.getSimpleName());
 
-    final String FileName = "janus.transport.websockets.jcfg";
+  public static    final String FileName = "janus.transport.websockets.jcfg";
     final String FileNameJson = FileName + ".json";
 
 
@@ -50,7 +51,37 @@ public class Websockets {
             e.printStackTrace();
         }
     }
+    public boolean updateToBuild(String json){
+        jsonJanus = json;
 
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
+            janusConfigs = mapper.readValue(jsonJanus, new TypeReference<>() {
+            });
+            buildGeneral();
+            saveToLocalBackCopy();
+            return true;
+        } catch (JsonProcessingException e) {
+            logger.severe(e.getMessage());
+        }
+        return false;
+    }
+    public void saveToLocalBackCopy() {
+        try {
+            logger.info("saveFromDefaults ->  ");
+            Writer fileWriter = new FileWriter(CONFIG_FOLDER + File.separator + FileName, false);
+            fileWriter.write(CONFIG);
+            fileWriter.close();
+
+            Writer fileWriterJSON = new FileWriter(CONFIG_FOLDER + File.separator + FileNameJson, false);
+            fileWriterJSON.write(jsonJanus);
+            fileWriterJSON.close();
+
+        } catch (IOException e) {
+            logger.severe(e.getMessage());
+        }
+    }
     public JanusWebSockets loadCurrentSettings(){
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
@@ -88,7 +119,7 @@ public class Websockets {
         resolvedString += getStringJsonFactory(valuesMap, obj.getJSONObject("certificates"), "certificates");
         CONFIG = resolvedString;
 
-        logger.info(resolvedString);
+      //  logger.info(resolvedString);
 
     }
 

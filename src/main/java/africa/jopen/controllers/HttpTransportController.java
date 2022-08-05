@@ -2,6 +2,7 @@ package africa.jopen.controllers;
 
 import africa.jopen.configs.Janus;
 import africa.jopen.configs.plugins.Sip;
+import africa.jopen.configs.transports.Http;
 import africa.jopen.utils.JanusUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,11 +12,11 @@ import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.*;
 import org.json.JSONObject;
 
-@Controller("/api/access/sip")
-public class SipController {
+@Controller("/api/access/http")
+public class HttpTransportController {
 
 
-    private final Sip janusSipConfig = new Sip();
+    private final Http janusSipConfig = new Http();
 
 
     @Get(uri = "/current-ssettings")
@@ -41,18 +42,18 @@ public class SipController {
 
         boolean hasSaved = janusSipConfig.updateToBuild(jsonBody);
         if (hasSaved) {
-            JanusUtils.savePlugin(Sip.FileName);
+            JanusUtils.savePlugin(Http.FileName);
             if (JanusUtils.restartJanus()) {
                 return HttpResponse.ok().contentType(MediaType.TEXT_JSON_TYPE)
                         .body(new JSONObject()
                                 .put("success", true)
-                                .put("message", "Updated & Restarted Janus for " + Sip.FileName + " configs").toString())
+                                .put("message", "Updated & Restarted Janus for " + Http.FileName + " configs").toString())
                         ;
             } else {
                 return HttpResponse.ok().contentType(MediaType.TEXT_JSON_TYPE)
                         .body(new JSONObject()
                                 .put("success", true)
-                                .put("message", "Updated Janus for " + Sip.FileName + " configs , But failed to restart Janus sever").toString())
+                                .put("message", "Updated Janus for " + Http.FileName + " configs , But failed to restart Janus sever").toString())
                         ;
             }
 

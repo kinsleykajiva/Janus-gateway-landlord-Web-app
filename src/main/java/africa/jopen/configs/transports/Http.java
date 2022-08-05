@@ -4,6 +4,7 @@ import africa.jopen.configs.plugins.Sip;
 import africa.jopen.json.http.JanusHttp;
 import africa.jopen.json.sip.JanusSip;
 import africa.jopen.utils.XUtils;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -27,7 +28,7 @@ import static java.util.logging.Logger.*;
 public class Http {
     private final Logger logger = getLogger(Http.class.getSimpleName());
 
-    final String FileName = "janus.transport.http.jcfg";
+   public static final String FileName = "janus.transport.http.jcfg";
     final String FileNameJson = FileName + ".json";
     private JanusHttp janusConfigs;
     private String jsonJanus;
@@ -59,7 +60,37 @@ public class Http {
         }
         return  null;
     }
+    public boolean updateToBuild(String json){
+        jsonJanus = json;
 
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
+            janusConfigs = mapper.readValue(jsonJanus, new TypeReference<>() {
+            });
+            buildGeneral();
+            saveToLocalBackCopy();
+            return true;
+        } catch (JsonProcessingException e) {
+            logger.severe(e.getMessage());
+        }
+        return false;
+    }
+    public void saveToLocalBackCopy() {
+        try {
+            logger.info("saveFromDefaults ->  ");
+            Writer fileWriter = new FileWriter(CONFIG_FOLDER + File.separator + FileName, false);
+            fileWriter.write(CONFIG);
+            fileWriter.close();
+
+            Writer fileWriterJSON = new FileWriter(CONFIG_FOLDER + File.separator + FileNameJson, false);
+            fileWriterJSON.write(jsonJanus);
+            fileWriterJSON.close();
+
+        } catch (IOException e) {
+            logger.severe(e.getMessage());
+        }
+    }
     public void saveFromDefaults(){
         try {
             Writer fileWriter = new FileWriter(CONFIG_FOLDER + File.separator + FileName, false);
@@ -83,7 +114,7 @@ public class Http {
         resolvedString += getStringJsonFactory(valuesMap, obj.getJSONObject("certificates"), "certificates");
 
         CONFIG = resolvedString;
-        logger.info(resolvedString);
+       // logger.info(resolvedString);
 
     }
 

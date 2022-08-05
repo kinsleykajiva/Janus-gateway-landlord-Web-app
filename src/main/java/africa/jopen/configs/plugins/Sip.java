@@ -33,7 +33,7 @@ public class Sip {
 
     private final Logger logger =  Logger.getLogger(Sip.class.getSimpleName());
 
-    final String FileName = "janus.plugin.sip.jcfg";
+    public static final String FileName = "janus.plugin.sip.jcfg";
     final String FileNameJson = FileName + ".json";
     private JanusSip janusConfigs;
     private String jsonJanus;
