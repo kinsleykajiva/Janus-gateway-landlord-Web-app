@@ -68,13 +68,13 @@ public class Application {
         }*/
 
 
-      /*
-       new Janus().saveFromDefaults();
-        new Http();
-        new Websockets();
-        new Sip();
-        new Websockets();*/
 
+//       new Janus().saveFromDefaults();
+       /* new Http().saveFromDefaults();
+        new Websockets().saveFromDefaults();
+        new Sip().saveFromDefaults();
+        new Websockets().saveFromDefaults();
+*/
          Micronaut.run(Application.class, args);
     }
 }

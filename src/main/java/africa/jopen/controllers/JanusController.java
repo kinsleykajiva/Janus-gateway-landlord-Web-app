@@ -57,7 +57,7 @@ public class JanusController {
                                 .put("data",
                                         new JSONObject()
                                                 .put("check", result)
-                                                .put("explanation", result.contains("Not Found") ? "Janus is not installed please install using '/install janus'" :
+                                                .put("explanation", result.contains("Not Found") ? "Janus is not installed please install using '/install-janus-server'" :
                                                         "Janus Gateway Server is installed on the server")
                                 ).toString()
                 );

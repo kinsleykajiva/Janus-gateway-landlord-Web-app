@@ -4,13 +4,13 @@
       "required": false,
       "commented": true,
       "comment": "--",
-      "lineValue": "172.31.47.192"
+      "lineValue": "0.0.0.0"
     },
     "sdp_ip": {
       "required": false,
       "commented": true,
       "comment": "--",
-      "lineValue": "3.72.250.70"
+      "lineValue": "0.0.0.0"
     },
     "keepalive_interval": {
       "required": false,

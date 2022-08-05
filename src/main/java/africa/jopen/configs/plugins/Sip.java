@@ -4,6 +4,7 @@ import africa.jopen.Application;
 import africa.jopen.json.janus.JanusObject;
 import africa.jopen.json.sip.JanusSip;
 import africa.jopen.utils.XUtils;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -49,6 +50,41 @@ public class Sip {
         } catch (URISyntaxException | IOException e) {
             logger.severe(e.getMessage());
             e.printStackTrace();
+        }
+    }
+    /**To update the local configs waiting to be copied to janus folders
+     * @param json the whole json to be loaded as  a object and to be saved to the json file
+     * @return bool , if true configs have been saved to local , if false then the file has failed to save to local configs folder can not proceed to set as janus config .
+     * */
+    public boolean updateToBuild(String json){
+        jsonJanus = json;
+
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
+            janusConfigs = mapper.readValue(jsonJanus, new TypeReference<>() {
+            });
+            buildGeneral();
+            saveToLocalBackCopy();
+            return true;
+        } catch (JsonProcessingException e) {
+            logger.severe(e.getMessage());
+        }
+        return false;
+    }
+    public void saveToLocalBackCopy() {
+        try {
+            logger.info("saveFromDefaults ->  ");
+            Writer fileWriter = new FileWriter(CONFIG_FOLDER + File.separator + FileName, false);
+            fileWriter.write(CONFIG);
+            fileWriter.close();
+
+            Writer fileWriterJSON = new FileWriter(CONFIG_FOLDER + File.separator + FileNameJson, false);
+            fileWriterJSON.write(jsonJanus);
+            fileWriterJSON.close();
+
+        } catch (IOException e) {
+            logger.severe(e.getMessage());
         }
     }
     public JanusSip loadCurrentSettings(){
