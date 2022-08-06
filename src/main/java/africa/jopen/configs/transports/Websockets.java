@@ -1,6 +1,5 @@
 package africa.jopen.configs.transports;
 
-import africa.jopen.json.http.JanusHttp;
 import africa.jopen.json.websockets.JanusWebSockets;
 import africa.jopen.utils.XUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -8,7 +7,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.json.JSONObject;
-
 
 import java.io.File;
 import java.io.FileWriter;

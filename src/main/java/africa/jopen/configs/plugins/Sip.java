@@ -1,7 +1,5 @@
 package africa.jopen.configs.plugins;
 
-import africa.jopen.Application;
-import africa.jopen.json.janus.JanusObject;
 import africa.jopen.json.sip.JanusSip;
 import africa.jopen.utils.XUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -10,7 +8,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.apache.commons.text.StringSubstitutor;
 import org.json.JSONObject;
-
 
 import java.io.File;
 import java.io.FileWriter;

@@ -1,7 +1,5 @@
 package africa.jopen.json.websockets;
 
-import com.fasterxml.jackson.databind.ObjectMapper; // version 2.11.1
-import com.fasterxml.jackson.annotation.JsonProperty; // version 2.11.1
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.micronaut.core.annotation.ReflectiveAccess;
 

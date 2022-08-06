@@ -1,18 +1,13 @@
 package africa.jopen.utils;
 
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.HashMap;
-import java.util.Map;
-
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
+
+import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class StaticFileHandler implements HttpHandler {
     private static final Map<String,String> MIME_MAP = new HashMap<>();

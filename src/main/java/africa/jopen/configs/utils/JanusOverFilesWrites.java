@@ -1,18 +1,14 @@
 package africa.jopen.configs.utils;
 
-import africa.jopen.Application;
 import africa.jopen.utils.XUtils;
 import org.apache.commons.text.StringSubstitutor;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
-
-import static africa.jopen.utils.XUtils.CONFIG_FOLDER;
 
 public class JanusOverFilesWrites {
     final static Logger logger = Logger.getLogger(JanusOverFilesWrites.class.getSimpleName());

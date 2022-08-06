@@ -1,31 +1,14 @@
 package africa.jopen;
 
-import africa.jopen.configs.Janus;
-import africa.jopen.configs.plugins.Sip;
-import africa.jopen.configs.transports.Http;
-import africa.jopen.configs.transports.Websockets;
 import africa.jopen.configs.utils.JanusOverFilesWrites;
-import africa.jopen.json.janus.JanusObject;
-import africa.jopen.utils.AdministratorChecker;
 import africa.jopen.utils.JanusUtils;
 import africa.jopen.utils.XUtils;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import io.micronaut.logging.LoggingSystem;
 import io.micronaut.runtime.Micronaut;
-import io.swagger.v3.oas.annotations.*;
-import io.swagger.v3.oas.annotations.info.*;
-import jakarta.inject.Inject;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
 
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.nio.file.Paths;
-import java.util.Map;
 import java.util.logging.Logger;
 
 import static africa.jopen.utils.AdministratorChecker.IS_RUNNING_AS_ADMINISTRATOR;

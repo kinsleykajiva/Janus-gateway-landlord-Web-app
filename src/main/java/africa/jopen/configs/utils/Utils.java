@@ -1,6 +1,5 @@
 package africa.jopen.configs.utils;
 
-import africa.jopen.configs.transports.Websockets;
 import org.apache.commons.text.StringSubstitutor;
 import org.json.JSONObject;
 

@@ -1,7 +1,5 @@
 package africa.jopen.controllers;
 
-import africa.jopen.configs.Janus;
-import africa.jopen.configs.transports.Http;
 import africa.jopen.configs.transports.Websockets;
 import africa.jopen.utils.JanusUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;

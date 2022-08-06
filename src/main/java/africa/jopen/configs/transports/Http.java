@@ -1,15 +1,12 @@
 package africa.jopen.configs.transports;
 
-import africa.jopen.configs.plugins.Sip;
 import africa.jopen.json.http.JanusHttp;
-import africa.jopen.json.sip.JanusSip;
 import africa.jopen.utils.XUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.json.JSONObject;
-
 
 import java.io.File;
 import java.io.FileWriter;
@@ -23,7 +20,7 @@ import java.util.logging.Logger;
 
 import static africa.jopen.configs.utils.Utils.getStringJsonFactory;
 import static africa.jopen.utils.XUtils.CONFIG_FOLDER;
-import static java.util.logging.Logger.*;
+import static java.util.logging.Logger.getLogger;
 
 public class Http {
     private final Logger logger = getLogger(Http.class.getSimpleName());

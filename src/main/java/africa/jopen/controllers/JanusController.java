@@ -3,7 +3,6 @@ package africa.jopen.controllers;
 
 import africa.jopen.configs.Janus;
 import africa.jopen.utils.JanusUtils;
-import africa.jopen.utils.XUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.micronaut.http.HttpHeaders;
@@ -11,7 +10,6 @@ import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.*;
 import org.json.JSONObject;
-
 
 import java.util.logging.Logger;
 

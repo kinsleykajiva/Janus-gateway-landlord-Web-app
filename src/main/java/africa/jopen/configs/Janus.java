@@ -1,9 +1,14 @@
 package africa.jopen.configs;
 
+import africa.jopen.json.janus.JanusObject;
 import africa.jopen.utils.XUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
-//import org.apache.commons.text.StringSubstitutor;
-import africa.jopen.json.janus.JanusObject;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import io.micronaut.core.annotation.ReflectiveAccess;
+import org.apache.commons.text.StringSubstitutor;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -11,18 +16,12 @@ import java.io.IOException;
 import java.io.Writer;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper; // version 2.11.1
-import com.fasterxml.jackson.databind.SerializationFeature;
-import io.micronaut.core.annotation.ReflectiveAccess;
-import org.apache.commons.text.StringSubstitutor;
-import org.json.JSONObject;
-
-
-import static africa.jopen.utils.XUtils.*;
+import static africa.jopen.utils.XUtils.CONFIG_FOLDER;
+import static africa.jopen.utils.XUtils.testIfToQoute;
 import static java.util.logging.Logger.getLogger;
 
 

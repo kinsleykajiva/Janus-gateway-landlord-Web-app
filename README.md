@@ -17,11 +17,14 @@ Motivation: As a developer I got tired of always opening the console to see logs
 # Installation :
 You can pull the repository, make a build , navigate to target folder .
 - When you build its recommended  that you build a native build to leverage on performance and app size (so far the app is smaller than 100MB).
-- To build Native App : ```  ./mvnw package -Dpackaging=native-image```
+- To build Native App : ``` sudo ./mvnw package -Dpackaging=native-image```
 - To run the newly built native app ``cd Janus-gateway-landlord-Web-app/target`` and run ``` sudo ./Janus-gateway-landlord-Web-app  ``` 
 - When you run the app try to run the native app or jar app as or with admin privileges to allow the app to execute admin related tasks.
 
-
+## To run :
+```bash  
+sudo ./mvnw mn:run
+```
 
 # Janus Configurations
 - Has support for Janus
