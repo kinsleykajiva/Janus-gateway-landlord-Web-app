@@ -1,7 +1,6 @@
 package africa.jopen.utils;
 
 import africa.jopen.Application;
-import africa.jopen.configs.Janus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,12 +12,12 @@ import java.nio.file.Paths;
 import java.text.DecimalFormatSymbols;
 import java.util.Arrays;
 
-import static africa.jopen.utils.AdministratorChecker.IS_RUNNING_AS_ADMINISTRATOR;
-
 public class XUtils {
     private static final Logger logger = LoggerFactory.getLogger(XUtils.class);
     public static String ROOT_FOLDER = "";
     public static String CONFIG_FOLDER = "";
+    public static String DEMOS_DESTINATION_FOLDER = "";
+    public static String MACHINE_PUBLIC_IP = "";
     private final static String[] configFileNames = new String[]{
             "janus.jcfg",
             "janus.plugin.sip.jcfg",
@@ -39,6 +38,7 @@ public class XUtils {
 
         String path = "/opt";
         path += File.separator + ".janus-landlord";
+        DEMOS_DESTINATION_FOLDER = path;
         File customDir = new File(path);
         File configs = new File(path + File.separator + "configs");
 
@@ -64,6 +64,7 @@ public class XUtils {
         ROOT_FOLDER = customDir.getAbsolutePath();
         CONFIG_FOLDER = configs.getAbsolutePath();
         logger.info(ROOT_FOLDER + " :: ROOT_FOLDER");
+        DEMOS_DESTINATION_FOLDER= DEMOS_DESTINATION_FOLDER + File.separator + "demoDocs";
 
         Arrays.stream(configFileNames).toList().forEach(file -> {
             try {

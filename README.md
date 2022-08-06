@@ -47,6 +47,7 @@ This service is heavy dependent on this https://github.com/RSATom/janus-gateway-
 - can update HTTP configs
 - can update websockets configs
 - can restart Janus Gateway Server
+- can open Demos from instance-ip-address:7000/echotest.html for example http://localhost:7000/echotest.html  or http://0.0.0.0:7000/echotest.html  or domain.com:7000/echotest.html , you can enforce http or https access also , depending on the networking on your clouding setup you can do away with the port in the address example from https://domain.com:7000/echotest.html to https://domain.com/echotest.html
 
 
 Remember to always run the app as Admin!
