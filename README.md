@@ -1,5 +1,5 @@
 ## Janus-gateway-landlord-Web-app
-# version 0.1
+# version 0.3
 
 This is a Web app that seeks to make it very easy to use Janus Gateway.The app handles installation , setting up/ Updating configurations from just a single install of this .
 

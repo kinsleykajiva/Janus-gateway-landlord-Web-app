@@ -71,16 +71,21 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
+      <groupId>io.micronaut.reactor</groupId>
+      <artifactId>micronaut-reactor</artifactId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
       <groupId>io.micronaut.beanvalidation</groupId>
       <artifactId>micronaut-hibernate-validator</artifactId>
       <scope>compile</scope>
     </dependency>
     
-    <dependency>
+    <!--<dependency>
       <groupId>io.micronaut</groupId>
       <artifactId>micronaut-websocket</artifactId>
       <version>3.6.0</version>
-    </dependency>
+    </dependency>-->
 
     <dependency>
       <groupId>io.micronaut.problem</groupId>
