@@ -1,6 +1,7 @@
 package africa.jopen.utils;
 
 import com.sun.net.httpserver.HttpServer;
+import org.graalvm.nativeimage.hosted.Feature;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,6 +21,8 @@ public class JanusUtils {
     private static String JANUS_CONFIG_FODLER = "/var/snap/janus-gateway/common/etc";
     private static String JANUS_RECORDING_FODLER = "/var/snap/janus-gateway/common/share/recordings";
     private static String JANUS_DEMO_FODLER = "/snap/janus-gateway/current/opt/janus/share/janus/demos";
+
+    public static boolean IS_JANUS_ONLINE = false;
 
     public static void runDemosServers() {
         HttpServer server = null;

@@ -62,10 +62,11 @@ PostMan - Endpoints - https://github.com/kinsleykajiva/Janus-gateway-landlord-We
 
 
 
-
+<hr>
 ## To Do
 - Create a custom log file locations
 - Create a websocket access to live logs to connected clients.
+- To do code refactoring,remove duplicate code.
 
 
 

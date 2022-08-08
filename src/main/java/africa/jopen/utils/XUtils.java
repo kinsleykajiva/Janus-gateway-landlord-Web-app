@@ -3,9 +3,11 @@ package africa.jopen.utils;
 import africa.jopen.Application;
 import africa.jopen.websockets.JanusLogsWebsockets;
 import io.micronaut.websocket.WebSocketBroadcaster;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.graalvm.polyglot.*;
+import org.graalvm.polyglot.proxy.*;
 import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -20,6 +22,7 @@ public class XUtils {
     public static String CONFIG_FOLDER = "";
     public static String DEMOS_DESTINATION_FOLDER = "";
     public static String MACHINE_PUBLIC_IP = "";
+    private static JSONObject KNOWN_ISSUES_SINCE_START_UP = new JSONObject();
     private final static String[] configFileNames = new String[]{
             "janus.jcfg",
             "janus.plugin.sip.jcfg",
@@ -33,8 +36,16 @@ public class XUtils {
 
 
     };
-    // Warning: JAVA_HOME=/home/variable-k/.jdks/graalvm-ce-17/bin
-//sudo ./mvnw mn:run
+
+    public static void setKnownIssuesSinceStartUp(String name,String knownIssuesSinceStartUp) {
+        KNOWN_ISSUES_SINCE_START_UP .put(name,knownIssuesSinceStartUp);
+    }
+
+    public static JSONObject getKnownIssuesSinceStartUp() {
+        return KNOWN_ISSUES_SINCE_START_UP;
+    }
+
+    //sudo ./mvnw mn:run
 
     public static void createSystemFolders() {
 

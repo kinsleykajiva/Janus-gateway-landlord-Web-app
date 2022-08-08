@@ -6,6 +6,7 @@ import org.apache.commons.text.StringSubstitutor;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -112,6 +113,7 @@ public class JanusOverFilesWrites {
             fileWriter = new FileWriter(file, false);
             fileWriter.write(txt);
             fileWriter.close();
+            XUtils.setKnownIssuesSinceStartUp("overwrote-" + file, String.valueOf(true));
         } catch (IOException e) {
             logger.severe(e.getMessage());
             //throw new RuntimeException(e);

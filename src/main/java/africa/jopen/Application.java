@@ -11,6 +11,10 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.sql.Timestamp;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.TimeZone;
 import java.util.logging.Logger;
 
 import static africa.jopen.utils.AdministratorChecker.IS_RUNNING_AS_ADMINISTRATOR;
@@ -20,19 +24,20 @@ import static africa.jopen.utils.XUtils.DEMOS_DESTINATION_FOLDER;
 import static africa.jopen.utils.XUtils.logInfo;
 
 
-@OpenAPIDefinition(
-        info = @Info(
-                title = "Janus-gateway-landlord-Web-app",
-                version = "0.1"
-        )
-)
+@OpenAPIDefinition(info = @Info(title = "Janus-gateway-landlord-Web-app",version = "0.1"))
 public class Application {
     final static Logger logger = Logger.getLogger(Application.class.getSimpleName());
 
 
 
     public static void main(String[] args) {
+
         logger.info("Started application ");
+        XUtils.setKnownIssuesSinceStartUp("startup-time",new Timestamp(System.currentTimeMillis()).toString());
+        XUtils.setKnownIssuesSinceStartUp("time-zone-name",String.valueOf(TimeZone.getDefault().getDisplayName()) );
+        XUtils.setKnownIssuesSinceStartUp("time-zone-id",String.valueOf(TimeZone.getDefault().getID()) );
+
+
         logger.info("Running as Admin " + IS_RUNNING_AS_ADMINISTRATOR);
         logInfo("Running as Admin " + IS_RUNNING_AS_ADMINISTRATOR);
         logger.info("Started application ");
@@ -40,10 +45,12 @@ public class Application {
             String getHostAddress = String.valueOf(InetAddress.getLocalHost().getHostAddress());
             XUtils.MACHINE_PUBLIC_IP = String.valueOf(InetAddress.getLocalHost().getHostAddress());
             logger.info("Ip Address : " +getHostAddress);
+            XUtils.setKnownIssuesSinceStartUp("ip-address",getHostAddress );
         } catch (UnknownHostException e) {
             e.printStackTrace();
             logger.severe(e.getMessage());
             XUtils.MACHINE_PUBLIC_IP=null;
+            XUtils.setKnownIssuesSinceStartUp("ip-address","Exception-"+e.getMessage() );
             //throw new RuntimeException(e);
         }
         XUtils.createSystemFolders();
