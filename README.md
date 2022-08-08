@@ -1,5 +1,7 @@
 ## Janus-gateway-landlord-Web-app
-# version 0.3
+# version 0.4
+
+# still in development, but stable !
 
 This is a Web app that seeks to make it very easy to use Janus Gateway.The app handles installation , setting up/ Updating configurations from just a single install of this .
 
@@ -56,4 +58,15 @@ This service is heavy dependent on this https://github.com/RSATom/janus-gateway-
 Remember to always run the app as Admin!
 
 PostMan - Endpoints - https://github.com/kinsleykajiva/Janus-gateway-landlord-Web-app/blob/master/janus-gateway-landlord.postman_collection.json
+
+
+
+
+
+## To Do
+- Create a custom log file locations
+- Create a websocket access to live logs to connected clients.
+
+
+
 

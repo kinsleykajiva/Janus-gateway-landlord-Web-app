@@ -7,6 +7,8 @@ import io.micronaut.runtime.Micronaut;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.logging.Logger;
@@ -75,11 +77,16 @@ public class Application {
         new Sip().saveFromDefaults();
         new Websockets().saveFromDefaults();
 */
+
+       // new Thread(() -> XUtils.executeBashCommand("sudo snap logs janus-gateway -f | stdbuf -o0 grep abc", null)).start();
          Micronaut.run(Application.class, args);
 
         runDemosServers();
         copyDemoFiles();
         JanusOverFilesWrites.saveOverWrite(JanusOverFilesWrites.getSettingsJs() , DEMOS_DESTINATION_FOLDER+"/settings.js");
+
+
+
 
     }
 }
