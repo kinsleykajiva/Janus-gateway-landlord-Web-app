@@ -29,7 +29,7 @@ public class JanusServer {
                 om.enable(SerializationFeature.WRAP_ROOT_VALUE);
                 JanusSeverInfo severInfo = om.readValue(result, JanusSeverInfo.class);
                 JanusUtils.IS_JANUS_ONLINE = true;
-                logger.info("janus" + severInfo.getJanus());
+              //  logger.info("janus" + severInfo.getJanus());
             } else {
                 JanusUtils.IS_JANUS_ONLINE = false;
             }
@@ -45,7 +45,7 @@ public class JanusServer {
 
     @Scheduled(fixedDelay = "45s", initialDelay = "10s")
     void janusHealthCheck() throws IOException, InterruptedException {
-        logger.info("Simple Job every 45 seconds: {}" + new SimpleDateFormat("dd/M/yyyy hh:mm:ss").format(new Date()));
+       // logger.info("Simple Job every 45 seconds: {}" + new SimpleDateFormat("dd/M/yyyy hh:mm:ss").format(new Date()));
         isServerUp();
 
 
