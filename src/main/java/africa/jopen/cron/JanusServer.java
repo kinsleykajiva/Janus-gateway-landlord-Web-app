@@ -38,7 +38,7 @@ public class JanusServer {
             return result != null;
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
-            logger.severe(e.getMessage());
+            //logger.severe(e.getMessage());
         }
         return false;
     }
