@@ -71,7 +71,7 @@ PostMan - Endpoints - https://github.com/kinsleykajiva/Janus-gateway-landlord-We
 Well i have to say that , this is my first project where I have taken GraalVM seriously and used it to build and deploy , 
 it has not been easy running the built image/binary  file  on a remote ubuntu sever as i thought you can run the binary as a service just like jar files ,.
 Tips or help is welcome .
-In the mean time , I have opted to delpy the app on the ubuntu server as follows:
+In the meantime , I have opted to deploy the app on the ubuntu server as follows:
 - Install GraalVM ```  wget https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.2.0/graalvm-ce-java17-linux-amd64-22.2.0.tar.gz \
   && tar -xf graalvm-ce-java17-linux-amd64-22.2.0.tar.gz \
   && sudo cp -R graalvm-ce-java17-22.2.0/ usr/lib/jvm/ ```
