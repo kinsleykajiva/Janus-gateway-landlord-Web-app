@@ -13,8 +13,7 @@ Motivation: As a developer I got tired of always opening the console to see logs
 
 # Requirements
 - Linux (For now Debian Based OS,please me to change this ) . 
-- JDK 17+ to run . 
-- Better with GraalVM
+- GraalVM JDK 17 (https://github.com/graalvm/graalvm-ce-builds/releases/tag/vm-22.2.0 ) to build/run .
 - make sure you have snap installed for more review https://snapcraft.io/install/ubuntu-package-status/ubuntu.
 - This so far has been built and tested on Ubuntu,please try to make changes to suite your OS.
 
@@ -66,10 +65,37 @@ PostMan - Endpoints - https://github.com/kinsleykajiva/Janus-gateway-landlord-We
 
 
 <hr>
+
+## Remote Deployments:
+
+Well i have to say that , this is my first project where I have taken GraalVM seriously and used it to build and deploy , 
+it has not been easy running the built image/binary  file  on a remote ubuntu sever as i thought you can run the binary as a service just like jar files ,.
+Tips or help is welcome .
+In the mean time , I have opted to delpy the app on the ubuntu server as follows:
+- Install GraalVM ```  wget https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.2.0/graalvm-ce-java17-linux-amd64-22.2.0.tar.gz \
+  && tar -xf graalvm-ce-java17-linux-amd64-22.2.0.tar.gz \
+  && sudo cp -R graalvm-ce-java17-22.2.0/ usr/lib/jvm/ ```
+
+add System env variable ```    export GRAALGU=/usr/lib/jvm/graalvm-ce-java17-22.2.0/bin ```    
+add System env variable ```    export PATH=$JAVA_HOME/BIN:$GRAALGU:$PATH ```   
+update or set default java installed on your system by running ``` update-alternatives --install /usr/bin/java java /usr/lib/jvm/graalvm-ce-java17-22.2.0/bin/java 2```
+
+- Test your GraalVM version by running ```java -version ```
+
+- Install Maven may not be necessary, for me I had to install for it to work for some reason .
+- Clone this repo on the remote machine/server/instance and copy the image/native image from the folder ```Janus-gateway-landlord-Web-app/release/```
+- for example, you can use ```sudo mkdir appsFolder && cp -R  Janus-gateway-landlord-Web-app/release/ appsFolder/```
+- depending on how you install GraalVM you make need to run it as root or Admin , but the application definitely needs to  be run as Admin as expressed above 
+ 
+
+<hr>
 ## To Do
 - Create a custom log file locations
 - Create a websocket access to live logs to connected clients.
 - To do code refactoring,remove duplicate code.
+- better deployment mechanism or dev ops
+
+
 
 
 
