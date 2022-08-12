@@ -2,6 +2,9 @@ package africa.jopen.controllers;
 
 
 import africa.jopen.configs.Janus;
+import africa.jopen.configs.plugins.Sip;
+import africa.jopen.configs.transports.Http;
+import africa.jopen.configs.transports.Websockets;
 import africa.jopen.utils.JanusUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -109,6 +112,24 @@ public class JanusController {
                 .body(new JSONObject()
                         .put("success", true)
                         .put("message", "Reset to Defaults").toString())
+                ;
+    }
+    @Post(uri = "/load-afresh/reset")
+    @Produces(MediaType.TEXT_PLAIN)
+    public HttpResponse saveLoadAfresh() {
+        logInfo("saveLoadAfresh");
+
+
+        new Janus().saveToLocalBackCopy();
+        new Http().saveFromDefaults();
+        new Websockets().saveFromDefaults();
+        new Sip().saveFromDefaults();
+
+
+        return HttpResponse.ok().contentType(MediaType.TEXT_JSON_TYPE)
+                .body(new JSONObject()
+                        .put("success", true)
+                        .put("message", "Reset to Defaults:afresh").toString())
                 ;
     }
 
