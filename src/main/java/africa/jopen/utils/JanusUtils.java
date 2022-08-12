@@ -27,7 +27,7 @@ public class JanusUtils {
     public static void runDemosServers() {
         HttpServer server = null;
         try {
-            server = HttpServer.create(new InetSocketAddress(7000), 0);
+            server = HttpServer.create(new InetSocketAddress(3200), 0);
             server.createContext("/", new StaticFileHandler("/", JANUS_DEMO_FODLER, "echotest.html"));
             server.setExecutor(null);
             server.start();
