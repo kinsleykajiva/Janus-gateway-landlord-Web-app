@@ -80,7 +80,7 @@ add System env variable ```    export GRAALGU=/usr/lib/jvm/graalvm-ce-java17-22.
 add System env variable ```    export PATH=$JAVA_HOME/BIN:$GRAALGU:$PATH ```   
 update or set default java installed on your system by running ``` update-alternatives --install /usr/bin/java java /usr/lib/jvm/graalvm-ce-java17-22.2.0/bin/java 2```
 
-- Test your GraalVM version by running ```java -version ```
+- Test your GraalVM version by running ```java -version ```   if your lost or is not working please make use of https://github.com/ravening/dev_setup/blob/master/Install-GraalVm-Ubuntu.md but make sure its jdk 17 not jdk 11.
 
 - Install Maven may not be necessary, for me I had to install for it to work for some reason .
 - Clone this repo on the remote machine/server/instance and copy the image/native image from the folder ```Janus-gateway-landlord-Web-app/release/```
