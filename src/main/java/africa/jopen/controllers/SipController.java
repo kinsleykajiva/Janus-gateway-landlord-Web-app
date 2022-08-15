@@ -22,6 +22,7 @@ public class SipController {
     public HttpResponse getCurrentSettings() throws JsonProcessingException {
 
         var res = janusSipConfig.loadCurrentSettings();
+        var jcfg = janusSipConfig.loadCurrentSettingsJCFG();
         ObjectMapper mapper = new ObjectMapper();
         String jsonStr = mapper.writeValueAsString(res);
 
@@ -31,6 +32,7 @@ public class SipController {
                         new JSONObject()
                                 .put("success", true)
                                 .put("message", "Get current settings")
+                                .put("jcfg", jcfg)
                                 .put("data", new JSONObject(jsonStr)).toString()
                 );
     }

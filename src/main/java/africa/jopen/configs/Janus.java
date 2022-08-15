@@ -15,10 +15,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 import static africa.jopen.utils.XUtils.CONFIG_FOLDER;
 import static africa.jopen.utils.XUtils.testIfToQoute;
@@ -66,6 +70,15 @@ public class Janus {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public String loadCurrentSettingsJCFG () {
+        try {
+            Path filePath = Path.of(CONFIG_FOLDER + File.separator + FileName);
+            return Files.readString(filePath);
+        } catch (IOException e) {
+            return null;
+        }
     }
 
     public void saveToLocalBackCopy() {

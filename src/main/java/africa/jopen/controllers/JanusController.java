@@ -31,6 +31,8 @@ public class JanusController {
 
 
         var res = janusConfig.loadCurrentSettings();
+        var jcfg = janusConfig.loadCurrentSettingsJCFG();
+        System.out.println("Current settings" + jcfg);
         ObjectMapper mapper = new ObjectMapper();
         String jsonStr = mapper.writeValueAsString(res);
 
@@ -40,7 +42,9 @@ public class JanusController {
                         new JSONObject()
                                 .put("success", true)
                                 .put("message", "Get current settings")
-                                .put("data", new JSONObject(jsonStr)).toString()
+                                .put("jcfg", jcfg)
+                                .put("data", new JSONObject(jsonStr)
+                                ).toString()
                 );
     }
 
