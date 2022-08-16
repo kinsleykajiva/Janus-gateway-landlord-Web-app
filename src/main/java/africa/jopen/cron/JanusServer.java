@@ -48,13 +48,12 @@ public class JanusServer {
         return false;
     }
 
-    @Scheduled(fixedDelay = "50", initialDelay = "10s")
-     void updateServerUpTime()  {
+    @Scheduled(fixedDelay = "150s")
+    void updateServerUpTime()  {
 
         try {
             String ts = XUtils.getKnownIssuesSinceStartUp().getString("startup-time") ;
-            Date date = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss.SSS").parse(ts);
-            System.out.println(date);
+            Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").parse(ts);
             JSONObject jsonLife = new JSONObject();
             Timestamp timestamp1 = new Timestamp(date.getTime());
 
@@ -71,18 +70,18 @@ public class JanusServer {
             jsonLife.put("Seconds",seconds);
             jsonLife.put("last-timestamp",timestamp2.toString());
 
-            XUtils.setKnownIssuesSinceStartUp("startup-life",jsonLife.toString());
+            XUtils.setKnownIssuesSinceStartUp("startup-life",jsonLife);
         } catch (ParseException e){
             // handleException
             XUtils.setKnownIssuesSinceStartUp("startup-life", "-");
+            XUtils.setKnownIssuesSinceStartUp("startup-life-Exception", e.getMessage());
         }
-        System.out.println("|||"+ XUtils.getKnownIssuesSinceStartUp());
 
     }
 
-    @Scheduled(fixedDelay = "40", initialDelay = "10s")
-    void janusHealthCheck() throws IOException, InterruptedException {
-     //  logger.info("Simple Job every 45 seconds: {}" + new SimpleDateFormat("dd/M/yyyy hh:mm:ss").format(new Date()));
+    @Scheduled(fixedDelay = "40s", initialDelay = "10s")
+    void janusHealthCheck()  {
+
         isServerUp();
 
 

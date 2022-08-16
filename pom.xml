@@ -80,12 +80,11 @@
       <artifactId>micronaut-hibernate-validator</artifactId>
       <scope>compile</scope>
     </dependency>
-    
-    <!--<dependency>
-      <groupId>io.micronaut</groupId>
-      <artifactId>micronaut-websocket</artifactId>
-      <version>3.6.0</version>
-    </dependency>-->
+
+    <dependency>
+      <groupId>io.micronaut.security</groupId>
+      <artifactId>micronaut-security-jwt</artifactId>
+    </dependency>
 
     <dependency>
       <groupId>io.micronaut.problem</groupId>
@@ -252,6 +251,33 @@
           </compilerArgs>
         </configuration>
       </plugin>
+
+
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>java</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <executable>java</executable>
+          <arguments>
+            <argument>-Dhttp.proxyHost=myproxy.example.com</argument>
+            <argument>-Dhttp.proxyPort=8080</argument>
+            <argument>-classpath</argument>
+            <classpath />
+            <argument>africa.jopen.Application</argument>
+          </arguments>
+        </configuration>
+      </plugin>
+
+
+
     </plugins>
   </build>
 

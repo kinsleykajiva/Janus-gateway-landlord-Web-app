@@ -40,6 +40,9 @@ public class XUtils {
     public static void setKnownIssuesSinceStartUp(String name,String knownIssuesSinceStartUp) {
         KNOWN_ISSUES_SINCE_START_UP .put(name,knownIssuesSinceStartUp);
     }
+    public static void setKnownIssuesSinceStartUp(String name,JSONObject knownIssuesSinceStartUp) {
+        KNOWN_ISSUES_SINCE_START_UP .put(name,knownIssuesSinceStartUp);
+    }
 
     public static JSONObject getKnownIssuesSinceStartUp() {
         return KNOWN_ISSUES_SINCE_START_UP;

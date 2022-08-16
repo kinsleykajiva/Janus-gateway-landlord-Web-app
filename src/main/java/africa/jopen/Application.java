@@ -1,22 +1,22 @@
 package africa.jopen;
 
 import africa.jopen.configs.utils.JanusOverFilesWrites;
+import africa.jopen.security.AuthenticationProviderUserPassword;
 import africa.jopen.utils.JanusUtils;
 import africa.jopen.utils.XUtils;
+import io.micronaut.context.ApplicationContext;
+import io.micronaut.context.annotation.Parameter;
+import io.micronaut.context.annotation.Value;
 import io.micronaut.runtime.Micronaut;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.util.Date;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.TimeZone;
 import java.util.logging.Logger;
 
@@ -29,19 +29,36 @@ import static africa.jopen.utils.XUtils.logInfo;
 
 @OpenAPIDefinition(info = @Info(title = "Janus-gateway-landlord-Web-app",version = "0.1"))
 public class Application {
-    final static Logger logger = Logger.getLogger(Application.class.getSimpleName());
-
-
+    final static Logger       logger = Logger.getLogger(Application.class.getSimpleName());
 
     public static void main(String[] args) {
 
         logger.info("Started application ");
+        logger.info("System args passed   " + args);
+        Arrays.stream(args)
+                .forEach (x -> {
+           if(x.contains("basicWebAuthUserName")){
+               AuthenticationProviderUserPassword.INIT_USERNAME = x.split("=")[1];
+           }
+             if(x.contains("basicWebAuthPassword")){
+                 AuthenticationProviderUserPassword.INIT_PASSWORD = x.split("=")[1];
+           }
+        });
+
+        logger.info("Passed 1-> " +  AuthenticationProviderUserPassword.INIT_USERNAME);
+        logger.info("Passed 2-> " +  AuthenticationProviderUserPassword.INIT_PASSWORD);
+
         XUtils.setKnownIssuesSinceStartUp("startup-time",new Timestamp(System.currentTimeMillis()).toString());
         XUtils.setKnownIssuesSinceStartUp("time-zone-name",String.valueOf(TimeZone.getDefault().getDisplayName()) );
         XUtils.setKnownIssuesSinceStartUp("time-zone-id",String.valueOf(TimeZone.getDefault().getID()) );
 
 
         logger.info("Running as Admin " + IS_RUNNING_AS_ADMINISTRATOR);
+        if(!IS_RUNNING_AS_ADMINISTRATOR) {
+            logger.severe("App is not running AS Admin");
+            logger.severe("App is exiting");
+            System.exit(1);
+        }
         logInfo("Running as Admin " + IS_RUNNING_AS_ADMINISTRATOR);
         logger.info("Started application ");
         try {
@@ -53,7 +70,7 @@ public class Application {
             e.printStackTrace();
             logger.severe(e.getMessage());
             XUtils.MACHINE_PUBLIC_IP=null;
-            XUtils.setKnownIssuesSinceStartUp("ip-address","Exception-"+e.getMessage() );
+            XUtils.setKnownIssuesSinceStartUp("ip-address-Exception",e.getMessage() );
             //throw new RuntimeException(e);
         }
         XUtils.createSystemFolders();
@@ -87,6 +104,8 @@ public class Application {
         new Sip().saveFromDefaults();
         new Websockets().saveFromDefaults();
 */
+
+
 
        // new Thread(() -> XUtils.executeBashCommand("sudo snap logs janus-gateway -f | stdbuf -o0 grep abc", null)).start();
          Micronaut.run(Application.class, args);

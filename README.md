@@ -12,7 +12,7 @@ Motivation: As a developer I got tired of always opening the console to see logs
 
 
 # Requirements
-- Linux (For now Debian Based OS,please me to change this ) . 
+- Linux (For now Debian Based OS,please help me to change this ) . 
 - GraalVM JDK 17 (https://github.com/graalvm/graalvm-ce-builds/releases/tag/vm-22.2.0 ) to build/run .
 - make sure you have snap installed for more review https://snapcraft.io/install/ubuntu-package-status/ubuntu.
 - This so far has been built and tested on Ubuntu,please try to make changes to suite your OS.
@@ -84,10 +84,13 @@ update or set default java installed on your system by running ``` update-altern
 
 - Install Maven may not be necessary, for me I had to install for it to work for some reason .
 - Clone this repo on the remote machine/server/instance and copy the image/native image from the folder ```Janus-gateway-landlord-Web-app/release/```
-- for example, you can use ```sudo mkdir appsFolder && cp -R  Janus-gateway-landlord-Web-app/release/ appsFolder/```
-- depending on how you install GraalVM you make need to run it as root or Admin , but the application definitely needs to  be run as Admin as expressed above 
- 
+- You just runt the image in the release folder .
+- Auth Test: please run in release folder to test and see the logged pass is the same as you pass in the arguments ``` ./Janus-gateway-landlord-Web-app  basicWebAuthUserName=no_money basicWebAuthPassword=SkillS@Home#ArePretty!``` 
+- in local development to run or test using console run : ``` sudo ./mvnw mn:run -Dmn.appArgs="basicWebAuthUserName=no_money basicWebAuthPassword=SkillS@Home#ArePretty!"```
 
+
+Yes Please replace the username and password with your own !
+To run the native image application as a service you can consider to use  ``nohup`` for example navigate to the release folder and run ``` nohup  ./Janus-gateway-landlord-Web-app & ``` .Remember to run as root or admin user .
 <hr>
 ## To Do
 - Create a custom log file locations

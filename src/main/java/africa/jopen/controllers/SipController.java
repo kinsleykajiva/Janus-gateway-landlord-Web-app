@@ -8,8 +8,10 @@ import io.micronaut.http.HttpHeaders;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.*;
+import io.micronaut.security.annotation.Secured;
+import io.micronaut.security.rules.SecurityRule;
 import org.json.JSONObject;
-
+@Secured (SecurityRule.IS_AUTHENTICATED)
 @Controller("/api/access/sip")
 public class SipController {
 
