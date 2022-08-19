@@ -87,7 +87,7 @@ update or set default java installed on your system by running ``` update-altern
 - You just runt the image in the release folder .
 - Auth Test: please run in release folder to test and see the logged pass is the same as you pass in the arguments ``` ./Janus-gateway-landlord-Web-app  basicWebAuthUserName=no_money basicWebAuthPassword=SkillS@Home#ArePretty!``` 
 - in local development to run or test using console run : ``` sudo ./mvnw mn:run -Dmn.appArgs="basicWebAuthUserName=no_money basicWebAuthPassword=SkillS@Home#ArePretty!"```
-  http://18.193.124.131:9002/fcm/incoming-call%22
+
 
 Yes Please replace the username and password with your own !
 To run the native image application as a service you can consider to use  ``nohup`` for example navigate to the release folder and run ``` nohup  ./Janus-gateway-landlord-Web-app & ``` .Remember to run as root or admin user .
