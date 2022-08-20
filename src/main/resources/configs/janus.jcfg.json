@@ -468,8 +468,8 @@
       "lineValue": "true"
     },
     "disable": {
-      "required": true,
-      "commented": false,
+      "required": false,
+      "commented": true,
       "comment": "--",
       "lineValue": "libjanus_sampleevh.so"
     },
