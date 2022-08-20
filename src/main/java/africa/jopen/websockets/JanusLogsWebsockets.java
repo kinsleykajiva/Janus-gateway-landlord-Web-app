@@ -1,7 +1,6 @@
 package africa.jopen.websockets;
 
 
-import africa.jopen.Application;
 import africa.jopen.utils.XUtils;
 import io.micronaut.websocket.WebSocketBroadcaster;
 import io.micronaut.websocket.WebSocketSession;

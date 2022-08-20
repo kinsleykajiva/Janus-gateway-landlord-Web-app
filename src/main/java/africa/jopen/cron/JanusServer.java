@@ -8,7 +8,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import io.micronaut.scheduling.annotation.Scheduled;
 import jakarta.inject.Singleton;
-import netscape.javascript.JSObject;
 import org.json.JSONObject;
 
 import java.io.IOException;

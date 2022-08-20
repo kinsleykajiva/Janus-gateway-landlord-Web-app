@@ -7,8 +7,6 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.result.InsertOneResult;
 import org.bson.Document;
-import org.bson.json.JsonMode;
-import org.bson.json.JsonWriterSettings;
 import org.bson.types.ObjectId;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -92,12 +90,13 @@ public class LazyMongoDB {
 		JSONArray                 jsonArray           = new JSONArray();
 		MongoCollection<Document> sipEventsCollection = database.getCollection(tableEvent);
 		for (Document document : sipEventsCollection.find()) {
-			jsonArray.put(document.toJson(JsonWriterSettings
-					.builder()
-					.outputMode(JsonMode.RELAXED)
-					.build()));
-
+			JSONObject jsonObject = new JSONObject();
+			for (String key : document.keySet()) {
+				jsonObject.put(key, document.get(key));
+			}
+			jsonArray.put(jsonObject);
 		}
+
 		return  jsonArray;
 	}
 

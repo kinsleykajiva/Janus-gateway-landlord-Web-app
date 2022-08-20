@@ -1,7 +1,6 @@
 package africa.jopen.utils;
 
 import com.sun.net.httpserver.HttpServer;
-import org.graalvm.nativeimage.hosted.Feature;
 
 import java.io.File;
 import java.io.IOException;

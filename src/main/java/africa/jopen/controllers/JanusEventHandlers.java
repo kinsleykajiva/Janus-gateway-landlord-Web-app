@@ -20,14 +20,17 @@ public class JanusEventHandlers {
 	@Get (uri = "/feeds/event")
 	@Produces (MediaType.TEXT_PLAIN)
 	public HttpResponse getEvents() {
-		var db =  LazyMongoDB.getInstance();
+		var          db    =  LazyMongoDB.getInstance();
+		var jArray = db.getEvents("sip_events");
+
 
 		return HttpResponse.ok().contentType(MediaType.TEXT_JSON_TYPE)
 				.body(
 						new JSONObject()
 								.put("success", true)
-								.put("message", "Saved Event")
-								.put("data",db.getEvents("sip_events"))
+								.put("message", "Saved Events")
+								.put("data",new JSONObject()
+										.put("sip_events",jArray))
 								.toString()
 				);
 

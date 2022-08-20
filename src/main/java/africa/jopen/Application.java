@@ -5,18 +5,10 @@ import africa.jopen.database.mongodb.LazyMongoDB;
 import africa.jopen.security.AuthenticationProviderUserPassword;
 import africa.jopen.utils.JanusUtils;
 import africa.jopen.utils.XUtils;
-import com.github.wnameless.json.flattener.JsonFlattener;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import io.micronaut.runtime.Micronaut;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
-import org.bson.Document;
 
-
-import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.sql.Timestamp;
