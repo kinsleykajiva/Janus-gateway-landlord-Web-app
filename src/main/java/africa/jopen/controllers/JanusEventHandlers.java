@@ -11,7 +11,7 @@ import io.micronaut.security.annotation.Secured;
 import io.micronaut.security.rules.SecurityRule;
 import org.json.JSONObject;
 
-
+@Secured (SecurityRule.IS_ANONYMOUS)
 @Controller ("/api/janus/events")
 public class JanusEventHandlers {
 
