@@ -18,7 +18,7 @@ import static africa.jopen.utils.XUtils.*;
 
 public class JanusUtils {
     final static Logger logger = Logger.getLogger(JanusUtils.class.getSimpleName());
-    private static String JANUS_CONFIG_FODLER = "/var/snap/janus-gateway/common/etc";
+    public static String JANUS_CONFIG_FODLER = "/var/snap/janus-gateway/common/etc";
     private static String JANUS_RECORDING_FODLER = "/var/snap/janus-gateway/common/share/recordings";
     private static String JANUS_DEMO_FODLER = "/snap/janus-gateway/current/opt/janus/share/janus/demos";
 
@@ -40,13 +40,15 @@ public class JanusUtils {
  * This attempts to make sure the config folders are writable only .
  * */
     public static void makeFoldersAccessible() {
-        if (!new File(JANUS_CONFIG_FODLER).canWrite()) {
-            new File(JANUS_CONFIG_FODLER).setWritable(true);
+        var janusConfigs = new File(JANUS_CONFIG_FODLER);
+        if (janusConfigs.exists() && !janusConfigs.canWrite()) {
+            janusConfigs.setWritable(true);
             executeBashCommand("sudo chmod -R 777 " + JANUS_CONFIG_FODLER);
             logger.info("Set to write" + JANUS_CONFIG_FODLER);
         }
-        if (!new File(JANUS_RECORDING_FODLER).canWrite()) {
-            new File(JANUS_RECORDING_FODLER).setWritable(true);
+        var janusRecordingConfigs = new File(JANUS_RECORDING_FODLER);
+        if (janusRecordingConfigs.exists() && !janusRecordingConfigs.canWrite()) {
+            janusRecordingConfigs.setWritable(true);
             executeBashCommand("sudo chmod -R 777 " + JANUS_RECORDING_FODLER);
             logger.info("Set to write " + JANUS_RECORDING_FODLER);
         }

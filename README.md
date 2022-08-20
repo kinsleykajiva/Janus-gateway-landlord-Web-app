@@ -1,5 +1,5 @@
 ## Janus-gateway-landlord-Web-app 
-[![Latest release](https://img.shields.io/badge/version-0.5-blue)](https://img.shields.io/badge/v0.1-tag-green)
+[![Latest release](https://img.shields.io/badge/version-0.6-blue)](https://img.shields.io/badge/v0.1-tag-green)
 
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)   ![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black) ![Linux](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)   
 [![Linux](https://svgshare.com/i/Zhy.svg)](https://svgshare.com/i/Zhy.svg)
@@ -55,7 +55,8 @@ This service is heavy dependent on this https://github.com/RSATom/janus-gateway-
 - can update websockets configs
 - can restart Janus Gateway Server
 - can open Demos from instance-ip-address:3200/echotest.html for example http://localhost:3200/echotest.html  or http://0.0.0.0:3200/echotest.html  or domain.com:3200/echotest.html , you can enforce http or https access also , depending on the networking on your clouding setup you can do away with the port in the address example from https://domain.com:3200/echotest.html to https://domain.com/echotest.html
-
+- can Janus store events to this app as a server, so far can save to MongoDB . Pass MongoDB arguments `` mongoPORT=27017 mongoHOST=localhost mongoPASSWORD=rootuser mongoUSERNAME=root mongoNAME=landlord ``  . mongoPORT - is the database port , mongoHOST - host adddress , mongoPASSWORD- database password , mongoUSERNAME - username , mongoNAME - database name .
+- 
 
 Remember to always run the app as Admin!
 
@@ -87,7 +88,7 @@ update or set default java installed on your system by running ``` update-altern
 - You just runt the image in the release folder .
 - Auth Test: please run in release folder to test and see the logged pass is the same as you pass in the arguments ``` ./Janus-gateway-landlord-Web-app  basicWebAuthUserName=no_money basicWebAuthPassword=SkillS@Home#ArePretty!``` 
 - in local development to run or test using console run : ``` sudo ./mvnw mn:run -Dmn.appArgs="basicWebAuthUserName=no_money basicWebAuthPassword=SkillS@Home#ArePretty!"```
-
+- if your have MongoDB installed as a database pass as : ``` ./mvnw mn:run -Dmn.appArgs="basicWebAuthUserName=no_money basicWebAuthPassword=SkillS@Home#ArePretty! mongoPORT=27017 mongoHOST=localhost mongoPASSWORD=rootuser mongoUSERNAME=root mongoNAME=landlord" ```
 
 Yes Please replace the username and password with your own !
 To run the native image application as a service you can consider to use  ``nohup`` for example navigate to the release folder and run ``` nohup  ./Janus-gateway-landlord-Web-app & ``` .Remember to run as root or admin user .

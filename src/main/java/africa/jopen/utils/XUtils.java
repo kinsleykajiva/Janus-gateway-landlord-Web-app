@@ -12,6 +12,7 @@ import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DecimalFormatSymbols;
 import java.util.Arrays;
@@ -96,7 +97,11 @@ public class XUtils {
 
 
     }
-
+    /**Checking whether the folder of the file exists or not.*/
+    public static boolean dirExists(String file) {
+        Path parent = Paths.get(file).getParent();
+        return parent != null && Files.isDirectory(parent);
+    }
     public static void logInfo(String message) {
         System.out.println(message);
     }

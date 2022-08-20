@@ -1,8 +1,10 @@
 package africa.jopen.configs.utils;
 
+import africa.jopen.utils.JanusUtils;
 import africa.jopen.utils.XUtils;
 import org.apache.commons.text.StringSubstitutor;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
@@ -10,6 +12,8 @@ import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
+
+import static africa.jopen.utils.JanusUtils.JANUS_CONFIG_FODLER;
 
 public class JanusOverFilesWrites {
     final static Logger logger = Logger.getLogger(JanusOverFilesWrites.class.getSimpleName());
@@ -109,14 +113,30 @@ public class JanusOverFilesWrites {
 
     public static void saveOverWrite(final String txt ,final  String file) {
         Writer fileWriter = null;
+
         try {
+            if(!XUtils.dirExists(JANUS_CONFIG_FODLER)){
+                logger.info(JANUS_CONFIG_FODLER+ " folder does not exist");
+                return;
+            }
             fileWriter = new FileWriter(file, false);
             fileWriter.write(txt);
             fileWriter.close();
             XUtils.setKnownIssuesSinceStartUp("overwrote-" + file, String.valueOf(true));
         } catch (IOException e) {
             logger.severe(e.getMessage());
-            //throw new RuntimeException(e);
+            e.printStackTrace();
+        }
+        finally {
+            if(fileWriter != null){
+                try {
+                    fileWriter.close();
+                } catch (IOException e) {
+                    logger.severe(e.getMessage());
+                    e.printStackTrace();
+                }
+            }
+
         }
 
     }
