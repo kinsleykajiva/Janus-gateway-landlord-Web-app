@@ -1,6 +1,7 @@
 package africa.jopen.controllers;
 
 
+import africa.jopen.Application;
 import africa.jopen.database.mongodb.LazyMongoDB;
 import com.github.wnameless.json.flattener.JsonFlattener;
 import io.micronaut.http.HttpHeaders;
@@ -11,11 +12,13 @@ import io.micronaut.security.annotation.Secured;
 import io.micronaut.security.rules.SecurityRule;
 import org.json.JSONObject;
 
+import java.util.logging.Logger;
+
 @Secured (SecurityRule.IS_ANONYMOUS)
 @Controller ("/api/janus/events")
 public class JanusEventHandlers {
 
-
+	Logger logger = Logger.getLogger(JanusEventHandlers.class.getSimpleName());
 
 	@Get (uri = "/feeds/event")
 	@Produces (MediaType.TEXT_PLAIN)
@@ -44,7 +47,8 @@ public class JanusEventHandlers {
 		var db =  LazyMongoDB.getInstance();
 		String jsonStr = JsonFlattener.flatten(jsonBody);
 		db.saveEvent("sip_events",jsonStr);
-
+logger.info("jsonStr- "+jsonStr);
+logger.info("jsonBody- "+jsonBody);
 		return HttpResponse.ok().contentType(MediaType.TEXT_JSON_TYPE)
 				.body(
 						new JSONObject()

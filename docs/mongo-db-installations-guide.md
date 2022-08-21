@@ -25,6 +25,11 @@ sudo apt-get update
 ```
 
 ```bash
+wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb && sudo dpkg -i libssl1.1_1.1.1f-1ubuntu2_amd64.deb && sudo rm -f libssl1.1_1.1.1f-1ubuntu2_amd64.deb
+
+```
+
+```bash
 sudo apt-get install -y mongodb-org
 
 ```
@@ -75,7 +80,25 @@ Begin using MongoDB.
 ```bash
 mongosh
 ```
-To set up MongoDB user - https://www.guru99.com/mongodb-create-user.html
+To set up MongoDB user example - https://www.guru99.com/mongodb-create-user.html
+
+for example to set up user `root` and password `rootuser` , remember this is run in mongo termianl , run `mongosh` then run :
+```bash 
+use admin
+db.createUser({	user: "root",pwd: "rootuser",roles:[{role: "userAdminAnyDatabase" , db:"landlord"}]})
+	
+	
+
+	mongosh --port 27017 -u root -p 'rootuser' --authenticationDatabase 'landlord'
 
 
+```
 
+To creat database for example creating a database called **landlord** just run : `use landlord`
+
+To create table or collection in the selected database you need to run `db.createCollection("sip_events");`
+
+
+from here the rest
+
+db.getUser("root")

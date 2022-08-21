@@ -73,13 +73,31 @@ Well i have to say that , this is my first project where I have taken GraalVM se
 it has not been easy running the built image/binary  file  on a remote ubuntu sever as i thought you can run the binary as a service just like jar files ,.
 Tips or help is welcome .
 In the meantime , I have opted to deploy the app on the ubuntu server as follows:
-- Install GraalVM ```  wget https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.2.0/graalvm-ce-java17-linux-amd64-22.2.0.tar.gz \
-  && tar -xf graalvm-ce-java17-linux-amd64-22.2.0.tar.gz \
-  && sudo cp -R graalvm-ce-java17-22.2.0/ usr/lib/jvm/ ```
+Install GraalVM :
+`sudo apt install openjdk-17-jre-headless && \
+wget https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.2.0/graalvm-ce-java17-linux-amd64-22.2.0.tar.gz && \
+tar -xf graalvm-ce-java17-linux-amd64-22.2.0.tar.gz && \
+sudo mv graalvm-ce-java17-22.2.0 /usr/lib/jvm/ && \
+cd /usr/lib/jvm && \
+sudo ln -s graalvm-ce-java17-linux-amd64-22.2.0 graalvm && sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/graalvm-ce-java17-22.2.0/bin/java 2  && \
+sudo update-alternatives --config java`
+To test run `java -version` , it shouw say something like this :
+
+`openjdk version "17.0.4" 2022-07-19
+OpenJDK Runtime Environment GraalVM CE 22.2.0 (build 17.0.4+8-jvmci-22.2-b06)
+OpenJDK 64-Bit Server VM GraalVM CE 22.2.0 (build 17.0.4+8-jvmci-22.2-b06, mixed mode, sharing)
+`
+
+
+to export `sudo nano ~/.profile`
+
+
 
 add System env variable ```    export GRAALGU=/usr/lib/jvm/graalvm-ce-java17-22.2.0/bin ```    
 add System env variable ```    export PATH=$JAVA_HOME/BIN:$GRAALGU:$PATH ```   
-update or set default java installed on your system by running ``` update-alternatives --install /usr/bin/java java /usr/lib/jvm/graalvm-ce-java17-22.2.0/bin/java 2```
+run `source ~/.profile`
+
+run `gu install native-image`  ,  it should run the gu installation
 
 - Test your GraalVM version by running ```java -version ```   if your lost or is not working please make use of https://github.com/ravening/dev_setup/blob/master/Install-GraalVm-Ubuntu.md but make sure its jdk 17 not jdk 11.
 
@@ -113,6 +131,7 @@ Yes there are plans to have this web app also handle native installation , also 
 - Create a websocket access to live logs to connected clients.
 - To do code refactoring,remove duplicate code.
 - better deployment mechanism or dev ops
+- Add support for native installations 
 
 
 
