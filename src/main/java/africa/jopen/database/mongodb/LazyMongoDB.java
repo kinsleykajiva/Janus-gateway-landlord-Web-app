@@ -21,9 +21,9 @@ public class LazyMongoDB {
 	public static String DB_HOST     = "";
 	public static String DB_USERNAME = "";
 	public static String DB_PASSWORD = "";
-	public static int    DB_PORT     = 27017;
-	Logger logger = Logger.getLogger(LazyMongoDB.class.getSimpleName());
-	private static LazyMongoDB   instance;
+	public static  int         DB_PORT = 27017;
+	static         Logger      logger  = Logger.getLogger(LazyMongoDB.class.getSimpleName());
+	private static LazyMongoDB instance;
 	private        MongoDatabase database;
 
 	private LazyMongoDB () {
@@ -46,6 +46,7 @@ public class LazyMongoDB {
 				DB_PASSWORD == null || DB_PASSWORD.isEmpty()  ||
 				DB_USERNAME == null || DB_USERNAME.isEmpty()
 		){
+			logger.info("No Access to Mongo Database!");
 			return null;
 		}
 		if (instance == null) {
@@ -112,9 +113,9 @@ public class LazyMongoDB {
 		try {
 			var             newDoc = processJ(new Document(), new JSONObject(jsonStr));
 			InsertOneResult result = sipEventsCollection.insertOne(newDoc);
-			logger.info("Added new document: " + result);
+			//logger.info("Added new document: " + result);
 		} catch (MongoException me) {
-			logger.severe("Failed to insert document " + me.getMessage());
+		//	logger.severe("Failed to insert document " + me.getMessage());
 			me.printStackTrace();
 		}
 	}

@@ -133,7 +133,8 @@ public class Janus {
         resolvedString += getStringJsonFactory(valuesMap, obj.getJSONObject("transports"), "transports");
         resolvedString += getStringJsonFactory(valuesMap, obj.getJSONObject("events"), "events");
         CONFIG = resolvedString;
-       // logger.info(resolvedString);
+
+        logger.info(resolvedString);
     }
 
     private String getStringJsonFactory(Map<String, String> valuesMap, JSONObject general, String level) {

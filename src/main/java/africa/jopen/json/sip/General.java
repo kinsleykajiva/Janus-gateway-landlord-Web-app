@@ -20,6 +20,12 @@ public class General{
     public void setSdp_ip(SdpIp sdp_ip) {
         this.sdp_ip = sdp_ip; }
     SdpIp sdp_ip;
+    @JsonProperty("local_media_ip")
+    public LocalMediaIp getLocal_media_ip() {
+        return this.local_media_ip; }
+    public void setLocal_media_ip(LocalMediaIp local_media_ip) {
+        this.local_media_ip = local_media_ip; }
+    LocalMediaIp local_media_ip;
     @JsonProperty("keepalive_interval")
     public KeepaliveInterval getKeepalive_interval() {
         return this.keepalive_interval; }
@@ -68,4 +74,16 @@ public class General{
     public void setDscp_video_rtp(DscpVideoRtp dscp_video_rtp) {
         this.dscp_video_rtp = dscp_video_rtp; }
     DscpVideoRtp dscp_video_rtp;
+    @JsonProperty("sips_certs_dir")
+    public SipsCertsDir getSips_certs_dir() {
+        return this.sips_certs_dir; }
+    public void setSips_certs_dir(SipsCertsDir sips_certs_dir) {
+        this.sips_certs_dir = sips_certs_dir; }
+    SipsCertsDir sips_certs_dir;
+    @JsonProperty("sip_timer_t1x64")
+    public SipTimerT1x64 getSip_timer_t1x64() {
+        return this.sip_timer_t1x64; }
+    public void setSip_timer_t1x64(SipTimerT1x64 sip_timer_t1x64) {
+        this.sip_timer_t1x64 = sip_timer_t1x64; }
+    SipTimerT1x64 sip_timer_t1x64;
 }

@@ -69,24 +69,27 @@ PostMan - Endpoints - https://github.com/kinsleykajiva/Janus-gateway-landlord-We
 
 ## Remote Deployments:
 
-Well i have to say that , this is my first project where I have taken GraalVM seriously and used it to build and deploy , 
+Well I have to say that , this is my first project where I have taken GraalVM seriously and used it to build and deploy , 
 it has not been easy running the built image/binary  file  on a remote ubuntu sever as i thought you can run the binary as a service just like jar files ,.
 Tips or help is welcome .
 In the meantime , I have opted to deploy the app on the ubuntu server as follows:
 Install GraalVM :
-`sudo apt install openjdk-17-jre-headless && \
-wget https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.2.0/graalvm-ce-java17-linux-amd64-22.2.0.tar.gz && \
-tar -xf graalvm-ce-java17-linux-amd64-22.2.0.tar.gz && \
-sudo mv graalvm-ce-java17-22.2.0 /usr/lib/jvm/ && \
-cd /usr/lib/jvm && \
-sudo ln -s graalvm-ce-java17-linux-amd64-22.2.0 graalvm && sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/graalvm-ce-java17-22.2.0/bin/java 2  && \
-sudo update-alternatives --config java`
+```bash
+sudo apt install openjdk-17-jre-headless && \
+wget https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.2.0/graalvm-ce-java17-linux-amd64-22.2.0.tar.gz && & \
+tar -xf graalvm-ce-java17-linux-amd64-22.2.0.tar.gz && & \
+sudo mv graalvm-ce-java17-22.2.0 /usr/lib/jvm/ && & \
+cd /usr/lib/jvm && & \
+sudo ln -s graalvm-ce-java17-linux-amd64-22.2.0 graalvm && sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/graalvm-ce-java17-22.2.0/bin/java 2  && & \
+sudo update-alternatives --config java
+```
 To test run `java -version` , it shouw say something like this :
 
-`openjdk version "17.0.4" 2022-07-19
+```shell
+openjdk version "17.0.4" 2022-07-19
 OpenJDK Runtime Environment GraalVM CE 22.2.0 (build 17.0.4+8-jvmci-22.2-b06)
 OpenJDK 64-Bit Server VM GraalVM CE 22.2.0 (build 17.0.4+8-jvmci-22.2-b06, mixed mode, sharing)
-`
+```
 
 
 to export `sudo nano ~/.profile`
@@ -108,11 +111,26 @@ run `gu install native-image`  ,  it should run the gu installation
 - in local development to run or test using console run : ``` sudo ./mvnw mn:run -Dmn.appArgs="basicWebAuthUserName=no_money basicWebAuthPassword=SkillS@Home#ArePretty!"```
 - if your have MongoDB installed as a database pass as : ``` ./mvnw mn:run -Dmn.appArgs="basicWebAuthUserName=no_money basicWebAuthPassword=SkillS@Home#ArePretty! mongoPORT=27017 mongoHOST=localhost mongoPASSWORD=rootuser mongoUSERNAME=root mongoNAME=landlord" ```
 
+## Passed Parameters meaning
+
+- basicWebAuthUserName - bais auth user 
+- basicWebAuthPassword - bais auth password 
+- mongoPORT - mongo database port where the server is running
+- mongoHOST - mongo database host address where the server is running
+- mongoPASSWORD - mongo database user password
+- mongoUSERNAME - mongo database user name
+- mongoNAME - mongo database target database name
+- janusInstall - this is a constant variable that describes the installation type . 0-means its janus was installed using snap on this machine , 1 mean its janus was installed natively or directly by the user or Admin via SSH.
+
+
+
 Yes Please replace the username and password with your own !
 To run the native image application as a service you can consider to use  ``nohup`` for example navigate to the release folder and run ``` nohup  ./Janus-gateway-landlord-Web-app & ``` .Remember to run as root or admin user .
 
 <hr>
-Janus installation guide  - https://gist.github.com/kinsleykajiva/5ee2122ad9c549fc10a88c14c725023d
+## Docs
+
+Janus installation guide  - https://gist.github.com/kinsleykajiva/5ee2122ad9c549fc10a88c14c725023d or docs/
 
 <hr>
 

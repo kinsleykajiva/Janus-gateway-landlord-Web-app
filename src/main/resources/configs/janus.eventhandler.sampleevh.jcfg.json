@@ -1,0 +1,70 @@
+{
+  "general": {
+    "enabled": {
+      "required": true,
+      "commented": false,
+      "comment": " By default the module is not enabled",
+      "lineValue": "0.0.0.0"
+    },
+    "events": {
+      "required": true,
+      "commented": false,
+      "comment": "Comma separated list of the events mask you're interested in. Valid values are none, sessions, handles, jsep, webrtc,media, plugins, transports, core, external and all",
+      "lineValue": "all"
+    },
+    "grouping": {
+      "required": true,
+      "commented": false,
+      "comment": "",
+      "lineValue": "true"
+    },
+    "json": {
+      "required": true,
+      "commented": false,
+      "comment": "",
+      "lineValue": "indented"
+    },
+    "compress": {
+      "required": false,
+      "commented": true,
+      "comment": "",
+      "lineValue": "true"
+    },
+    "compression": {
+      "required": false,
+      "commented": true,
+      "comment": "",
+      "lineValue": "9"
+    },
+    "backend": {
+      "required": true,
+      "commented": false,
+      "comment": "",
+      "lineValue": "http://addresss/url/path"
+    },
+    "backend_user": {
+      "required": false,
+      "commented": true,
+      "comment": "",
+      "lineValue": "auth user name"
+    },
+    "backend_pwd": {
+      "required": false,
+      "commented": true,
+      "comment": "",
+      "lineValue": "auth user password"
+    },
+    "max_retransmissions": {
+      "required": false,
+      "commented": true,
+      "comment": "",
+      "lineValue": "5"
+    },
+    "retransmissions_backoff": {
+      "required": false,
+      "commented": true,
+      "comment": "",
+      "lineValue": "100"
+    }
+  }
+}

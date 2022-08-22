@@ -3,13 +3,18 @@
     "local_ip": {
       "required": false,
       "commented": true,
-      "comment": "--",
+      "comment": "If not set it will be automatically guessed from the system",
       "lineValue": "0.0.0.0"
     },
     "sdp_ip": {
       "required": false,
       "commented": true,
       "comment": "--",
+      "lineValue": "0.0.0.0"
+    },"local_media_ip": {
+      "required": false,
+      "commented": true,
+      "comment": "Specify which local IP address to bind for the media stack.If not set it will be automatically set to the value of local_ip",
       "lineValue": "0.0.0.0"
     },
     "keepalive_interval": {
@@ -27,7 +32,7 @@
     "user_agent": {
       "required": false,
       "commented": true,
-      "comment": "--",
+      "comment": "User-Agent string to be used",
       "lineValue": "Cool WebRTC Gateway"
     },
     "register_ttl": {
@@ -59,6 +64,18 @@
       "commented": true,
       "comment": "--",
       "lineValue": "26"
+    },
+    "sips_certs_dir": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "/etc/sip/certs"
+    },
+    "sip_timer_t1x64": {
+      "required": true,
+      "commented": false,
+      "comment": "--",
+      "lineValue": "32000"
     }
   }
 }

@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>africa.jopen</groupId>
   <artifactId>Janus-gateway-landlord-Web-app</artifactId>
-  <version>0.6</version>
+  <version>0.7</version>
   <packaging>${packaging}</packaging>
 
   <parent>
@@ -147,6 +147,11 @@
       <groupId>com.github.wnameless.json</groupId>
       <artifactId>json-flattener</artifactId>
       <version>0.13.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.greenrobot</groupId>
+      <artifactId>eventbus-java</artifactId>
+      <version>3.3.1</version>
     </dependency>
 
   </dependencies>

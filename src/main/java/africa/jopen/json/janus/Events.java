@@ -13,6 +13,12 @@ public class Events{
     public void setBroadcast(Broadcast broadcast) {
         this.broadcast = broadcast; }
     Broadcast broadcast;
+    @JsonProperty("combine_media_stats")
+    public CombineMediaStats getCombine_media_stats() {
+        return this.combine_media_stats; }
+    public void setCombine_media_stats(CombineMediaStats combine_media_stats) {
+        this.combine_media_stats = combine_media_stats; }
+    CombineMediaStats combine_media_stats;
     @JsonProperty("disable")
     public Disable getDisable() {
         return this.disable; }

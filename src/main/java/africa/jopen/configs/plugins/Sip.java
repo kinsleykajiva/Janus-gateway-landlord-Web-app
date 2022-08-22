@@ -149,7 +149,7 @@ public class Sip {
         // Replace
         var bul = sub.replace(templateString);
         CONFIG = bul;
-        logger.info(bul);
+      //  logger.info(bul);
 
     }
 

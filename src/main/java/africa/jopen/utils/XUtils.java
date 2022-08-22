@@ -2,6 +2,7 @@ package africa.jopen.utils;
 
 import africa.jopen.Application;
 import io.micronaut.websocket.WebSocketBroadcaster;
+import org.graalvm.nativeimage.Platform;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,8 @@ import java.nio.file.Paths;
 import java.text.DecimalFormatSymbols;
 import java.util.Arrays;
 
+import static java.util.Objects.isNull;
+
 public class XUtils {
     private static final Logger logger = LoggerFactory.getLogger(XUtils.class);
     public static String ROOT_FOLDER = "";
@@ -27,11 +30,13 @@ public class XUtils {
             "janus.plugin.sip.jcfg",
             "janus.transport.http.jcfg",
             "janus.transport.websockets.jcfg",
+            "janus.eventhandler.sampleevh.jcfg",
 /*the following is just load or make a reference but this can be done better or saved elsewhere*/
             "janus.jcfg.json",
             "janus.plugin.sip.jcfg.json",
             "janus.transport.http.jcfg.json",
             "janus.transport.websockets.jcfg.json",
+            "janus.eventhandler.sampleevh.jcfg.json",
 
 
     };
@@ -248,6 +253,8 @@ public class XUtils {
         return success;
     }
 
+
+
     public static boolean executeBashCommand(String command, WebSocketBroadcaster broadcaster){
 
         boolean success = false;
@@ -266,7 +273,7 @@ public class XUtils {
             p.waitFor();
             BufferedReader b = new BufferedReader(new InputStreamReader(p.getInputStream()));
             String line = "";
-            logInfo("xxxxxx");
+
             while ((line = b.readLine()) != null) {
                 if(broadcaster != null){
                     broadcaster.broadcast(String.format("%s", line));
@@ -284,4 +291,6 @@ public class XUtils {
         }
         return success;
     }
+
+
 }

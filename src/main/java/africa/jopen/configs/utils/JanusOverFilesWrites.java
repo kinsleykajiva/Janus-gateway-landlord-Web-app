@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 import static africa.jopen.utils.JanusUtils.JANUS_CONFIG_FODLER;
 
 public class JanusOverFilesWrites {
-    final static Logger logger = Logger.getLogger(JanusOverFilesWrites.class.getSimpleName());
+    static final Logger logger = Logger.getLogger(JanusOverFilesWrites.class.getSimpleName());
     private static String SETTINGS_JS = """
             // We use this shared JavaScript file as a simple way to have all demos
             // refer to the same settings, e.g., in terms of which server to connect

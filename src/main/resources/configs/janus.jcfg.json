@@ -144,6 +144,18 @@
       "comment": "--",
       "lineValue": "8"
     },
+    "allow_loop_indication": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "true"
+    },
+    "task_pool_size": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "100"
+    },
     "opaqueid_in_api": {
       "required": false,
       "commented": true,
@@ -155,6 +167,12 @@
       "commented": true,
       "comment": "--",
       "lineValue": "true"
+    },
+    "exit_on_dl_error": {
+      "required": false,
+      "commented": true,
+      "comment": "--",
+      "lineValue": "false"
     },
     "no_webrtc_encryption": {
       "required": false,
@@ -464,6 +482,12 @@
     "broadcast": {
       "required": false,
       "commented": true,
+      "comment": "--",
+      "lineValue": "true"
+    },
+    "combine_media_stats": {
+      "required": true,
+      "commented": false,
       "comment": "--",
       "lineValue": "true"
     },
