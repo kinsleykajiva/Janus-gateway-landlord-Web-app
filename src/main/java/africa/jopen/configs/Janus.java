@@ -1,5 +1,6 @@
 package africa.jopen.configs;
 
+import africa.jopen.events.MessageEvent;
 import africa.jopen.json.janus.JanusObject;
 import africa.jopen.utils.XUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -7,7 +8,11 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import io.micronaut.core.annotation.ReflectiveAccess;
+import io.micronaut.websocket.annotation.OnMessage;
 import org.apache.commons.text.StringSubstitutor;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -38,9 +43,13 @@ public class Janus {
     private JanusObject janusConfigs;
     private String jsonJanus;
     private String CONFIG = "";
+    @Subscribe (sticky = true, threadMode = ThreadMode.MAIN)
+    public void onEvent (MessageEvent event) {
 
+    }
 
     public Janus() {
+        EventBus.getDefault().register(this);
         try {
             // loads the default data
             jsonJanus = XUtils.readFileFromResources("configs/" + FileNameJson);
@@ -134,7 +143,7 @@ public class Janus {
         resolvedString += getStringJsonFactory(valuesMap, obj.getJSONObject("events"), "events");
         CONFIG = resolvedString;
 
-        logger.info(resolvedString);
+       // logger.info(resolvedString);
     }
 
     private String getStringJsonFactory(Map<String, String> valuesMap, JSONObject general, String level) {

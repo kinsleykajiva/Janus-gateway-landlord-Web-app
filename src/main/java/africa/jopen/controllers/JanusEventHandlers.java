@@ -106,7 +106,10 @@ public class JanusEventHandlers {
 	public HttpResponse newEvents(HttpHeaders httpHeaders, @Body String jsonBody) {
 		var db =  LazyMongoDB.getInstance();
 		String jsonStr = JsonFlattener.flatten(jsonBody);
-		EventBus.getDefault().post(new MessageEvent(MessageEvent.MESSAGE_NEW_SIP_EVENT ,jsonStr));
+		if(EventBus.getDefault().hasSubscriberForEvent(MessageEvent.class)) {
+			logger.info("Sub found");
+			EventBus.getDefault().post(new MessageEvent(MessageEvent.MESSAGE_NEW_SIP_EVENT, jsonStr));
+		}
 		assert db != null;
 		db.saveEvent("sip_events",jsonStr);
 		//logger.info("jsonStr- "+jsonStr);
