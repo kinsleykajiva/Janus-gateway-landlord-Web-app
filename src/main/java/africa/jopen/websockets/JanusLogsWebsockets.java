@@ -46,7 +46,12 @@ public class JanusLogsWebsockets {
 
 	@OnOpen
 	public Publisher<String> onOpen (String tail, String logs, WebSocketSession session) {
+
+		System.out.println("onOpen: " + session.getId());
 		sessions.put(session.getId(), session);
+		System.out.println("onOpen: " + sessions.size());
+		logger.info("onOpen: " + sessions.size());
+
 		XUtils.setKnownIssuesSinceStartUp("websocket--client-count", String.valueOf(sessions.size()));
 		return broadcaster.broadcast(new JSONObject()
 						.put("type", "joined")
@@ -59,12 +64,13 @@ public class JanusLogsWebsockets {
 
 	@OnMessage
 	public Publisher<String> onMessage (String tail, String logs, String message, WebSocketSession session) {
-
+		System.out.println("onOpen: " + message);
 		return broadcaster.broadcast(String.format("[%s] %s", logs, message),  MediaType.APPLICATION_JSON_TYPE);
 	}
 
 	@OnClose
 	public Publisher<String> onClose (String tail, String logs, WebSocketSession session) {
+		System.out.println("[onClose] " + tail + " " + logs  + session.getId());
 		sessions.remove(session.getId());
 		XUtils.setKnownIssuesSinceStartUp("websocket--client-count", String.valueOf(sessions.size()));
 		return broadcaster.broadcast(String.format("[%s] Leaving %s!", logs, tail), MediaType.APPLICATION_JSON_TYPE);
@@ -73,6 +79,8 @@ public class JanusLogsWebsockets {
 	@Subscribe (sticky = true, threadMode = ThreadMode.BACKGROUND)
 	@OnMessage
 	public void onEvent (MessageEvent event) {
+		System.out.println("onEvent: " + event);
+		logger.info("onEvent: " + event);
 		if (MessageEvent.MESSAGE_NEW_SIP_EVENT == event.getEventType()) {
 			for (var entry : sessions.entrySet()) {
 				entry.getValue().sendAsync(
@@ -86,6 +94,7 @@ public class JanusLogsWebsockets {
 
 		}
 	}
+
 
 
 }

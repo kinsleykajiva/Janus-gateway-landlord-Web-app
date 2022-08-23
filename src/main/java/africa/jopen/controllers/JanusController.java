@@ -35,7 +35,7 @@ public class JanusController {
 
 		var res  = janusConfig.loadCurrentSettings();
 		var jcfg = janusConfig.loadCurrentSettingsJCFG();
-		System.out.println("Current settings" + jcfg);
+
 		ObjectMapper mapper  = new ObjectMapper();
 		String       jsonStr = mapper.writeValueAsString(res);
 

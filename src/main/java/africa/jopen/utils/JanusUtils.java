@@ -195,7 +195,7 @@ public class JanusUtils {
 		Path targetDirectory = Paths.get(DEMOS_DESTINATION_FOLDER);
 		copy(sourceDirectory, targetDirectory);
 
-		logger.info("Copying file " + JANUS_DEMO_FODLER + " to " + DEMOS_DESTINATION_FOLDER);
+		//logger.info("Copying file " + JANUS_DEMO_FODLER + " to " + DEMOS_DESTINATION_FOLDER);
 
 		try {
           /*  Path sourcepath = Paths.get(JANUS_DEMO_FODLER);
