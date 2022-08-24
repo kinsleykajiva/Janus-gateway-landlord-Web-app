@@ -1,7 +1,7 @@
 package africa.jopen.configs.eventhandlers;
 
 import africa.jopen.json.simpleevents.Root;
-import africa.jopen.json.sip.JanusSip;
+
 import africa.jopen.utils.XUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -83,11 +83,11 @@ public class SampleEventHandler {
             logger.severe(e.getMessage());
         }
     }
-    public JanusSip loadCurrentSettings(){
+    public Root loadCurrentSettings(){
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
         try {
-            JanusSip sip  = mapper.readValue(Paths.get(CONFIG_FOLDER + File.separator + FileNameJson).toFile(), JanusSip.class);
+            Root sip  = mapper.readValue(Paths.get(CONFIG_FOLDER + File.separator + FileNameJson).toFile(), Root.class);
             return sip;
         } catch (IOException e) {
             logger.severe(e.getMessage());

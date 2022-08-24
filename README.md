@@ -134,11 +134,30 @@ Janus installation guide  - https://gist.github.com/kinsleykajiva/5ee2122ad9c549
 
 <hr>
 
+## Janus configs json files and App folder structure .
+
+When the app first runs or when ever its started it creates a base folder for caching `/opt/.janus-landlord/` .
+This folder always has what's currently configured in tha janus jcfg files .Since the app does not parse the jcfg files directly but overwrites them ,
+if you need to enable some config lines per file config just edit in that folder `/opt/.janus-landlord/` .
+
+In the event you also delete the files in the `/opt/.janus-landlord/`  or even if the files are found to be empty as well the files themselves even if they exist, the app will reset the folder files when the app is restarted  
+meaning all those configs you had will be lost to be reset to default to match what's in the folder of the project `src/main/resources/configs` . So be care full in that area as well .
+
+
+
+
 ## None Goals of the project
 
 - This project is not directly a janus installation management app , janus installation is directly your responsibility . Install janus however you want but for now ,this only handles snap based installation .
 
 Yes there are plans to have this web app also handle native installation , also there is some considerations for handling docker installations .
+
+
+<hr>
+
+## Known Issues
+
+- Websockets are failing to work properly . The client fails to connect if the app is run as an image/binary.This is a problem because we need the app to run as a native image application than to run as a jar .
 
 
 <hr>

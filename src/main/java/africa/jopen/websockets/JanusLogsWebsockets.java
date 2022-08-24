@@ -35,7 +35,6 @@ public class JanusLogsWebsockets {
 	private static final Logger logger = LoggerFactory.getLogger(JanusLogsWebsockets.class);
 
 	public final  WebSocketBroadcaster          broadcaster;
-	private       Thread                        tailThread;
 
 	private final Map<String, WebSocketSession> sessions        = new ConcurrentHashMap<>();
 
