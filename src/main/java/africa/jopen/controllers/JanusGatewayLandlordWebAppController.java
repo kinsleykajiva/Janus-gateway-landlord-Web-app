@@ -9,27 +9,20 @@ import io.micronaut.security.annotation.Secured;
 import io.micronaut.security.rules.SecurityRule;
 
 @Secured (SecurityRule.IS_AUTHENTICATED)
-@Controller("/api/home")
+@Controller ("/api/home")
 public class JanusGatewayLandlordWebAppController {
 
-    @Get(uri="/", produces="text/plain")
-    public String index() {
-        return "Example Response";
-    }
+	@Get (uri = "/", produces = "text/plain")
+	public String index () {
+		return "Example Response";
+	}
 
-    @Get(uri="/whats-going-on", produces="text/plain")
-    public HttpResponse knownIssues() {
-        return HttpResponse.ok().contentType(MediaType.TEXT_JSON_TYPE)
-                .body(XUtils.getKnownIssuesSinceStartUp().toString())
-                ;
-    }
-
-
-
-
-
-
-
+	@Get (uri = "/whats-going-on", produces = "text/plain")
+	public HttpResponse knownIssues () {
+		return HttpResponse.ok().contentType(MediaType.TEXT_JSON_TYPE)
+				.body(XUtils.getKnownIssuesSinceStartUp().toString())
+				;
+	}
 
 
 }

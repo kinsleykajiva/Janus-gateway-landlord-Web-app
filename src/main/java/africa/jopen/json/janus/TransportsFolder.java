@@ -14,40 +14,48 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class TransportsFolder{
-    boolean required;
-    boolean commented;
-    String comment;
+@JsonIgnoreProperties (ignoreUnknown = true)
+public class TransportsFolder {
+	boolean required;
+	boolean commented;
+	String  comment;
 
-    @JsonProperty("lineValue")
-    String lineValue;
+	@JsonProperty ("lineValue")
+	String lineValue;
 
-    @JsonProperty("required")
-    public boolean getRequired() {
-        return this.required; }
+	@JsonProperty ("required")
+	public boolean getRequired () {
+		return this.required;
+	}
 
-    public void setRequired(boolean required) {
-        this.required = required; }
+	public void setRequired (boolean required) {
+		this.required = required;
+	}
 
-    @JsonProperty("commented")
-    public boolean getCommented() {
-        return this.commented; }
+	@JsonProperty ("commented")
+	public boolean getCommented () {
+		return this.commented;
+	}
 
-    public void setCommented(boolean commented) {
-        this.commented = commented; }
+	public void setCommented (boolean commented) {
+		this.commented = commented;
+	}
 
-    @JsonProperty("comment")
-    public String getComment() {
-        return this.comment; }
+	@JsonProperty ("comment")
+	public String getComment () {
+		return this.comment;
+	}
 
-    public void setComment(String comment) {
-        this.comment = comment; }
+	public void setComment (String comment) {
+		this.comment = comment;
+	}
 
 
-    public String getLineValue() {
-        return this.lineValue; }
+	public String getLineValue () {
+		return this.lineValue;
+	}
 
-    public void setLineValue(String lineValue) {
-        this.lineValue = lineValue; }
+	public void setLineValue (String lineValue) {
+		this.lineValue = lineValue;
+	}
 }

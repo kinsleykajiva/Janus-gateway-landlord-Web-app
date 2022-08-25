@@ -20,12 +20,8 @@ import org.reactivestreams.Publisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 
 @Secured (SecurityRule.IS_ANONYMOUS)
@@ -34,9 +30,9 @@ public class JanusLogsWebsockets {
 
 	private static final Logger logger = LoggerFactory.getLogger(JanusLogsWebsockets.class);
 
-	public final  WebSocketBroadcaster          broadcaster;
+	public final WebSocketBroadcaster broadcaster;
 
-	private final Map<String, WebSocketSession> sessions        = new ConcurrentHashMap<>();
+	private final Map<String, WebSocketSession> sessions = new ConcurrentHashMap<>();
 
 	public JanusLogsWebsockets (WebSocketBroadcaster broadcaster) {
 		this.broadcaster = broadcaster;
@@ -64,12 +60,12 @@ public class JanusLogsWebsockets {
 	@OnMessage
 	public Publisher<String> onMessage (String tail, String logs, String message, WebSocketSession session) {
 		System.out.println("onOpen: " + message);
-		return broadcaster.broadcast(String.format("[%s] %s", logs, message),  MediaType.APPLICATION_JSON_TYPE);
+		return broadcaster.broadcast(String.format("[%s] %s", logs, message), MediaType.APPLICATION_JSON_TYPE);
 	}
 
 	@OnClose
 	public Publisher<String> onClose (String tail, String logs, WebSocketSession session) {
-		System.out.println("[onClose] " + tail + " " + logs  + session.getId());
+		System.out.println("[onClose] " + tail + " " + logs + session.getId());
 		sessions.remove(session.getId());
 		XUtils.setKnownIssuesSinceStartUp("websocket--client-count", String.valueOf(sessions.size()));
 		return broadcaster.broadcast(String.format("[%s] Leaving %s!", logs, tail), MediaType.APPLICATION_JSON_TYPE);
@@ -93,7 +89,6 @@ public class JanusLogsWebsockets {
 
 		}
 	}
-
 
 
 }

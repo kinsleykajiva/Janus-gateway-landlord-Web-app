@@ -13,12 +13,12 @@ import static io.micronaut.http.HttpStatus.FORBIDDEN;
 import static io.micronaut.http.HttpStatus.UNAUTHORIZED;
 
 @Singleton
-@Replaces(DefaultAuthorizationExceptionHandler.class)
+@Replaces (DefaultAuthorizationExceptionHandler.class)
 public class DefaultAuthorizationExceptionHandlerReplacement extends DefaultAuthorizationExceptionHandler {
 
 	@Override
-	protected MutableHttpResponse<?> httpResponseWithStatus(HttpRequest request,
-	                                                        AuthorizationException e) {
+	protected MutableHttpResponse<?> httpResponseWithStatus (HttpRequest request,
+	                                                         AuthorizationException e) {
 		if (e.isForbidden()) {
 			return HttpResponse.status(FORBIDDEN);
 		}

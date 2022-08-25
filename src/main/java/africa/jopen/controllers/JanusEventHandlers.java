@@ -23,15 +23,12 @@ import java.util.logging.Logger;
 @Controller ("/api/janus/events")
 public class JanusEventHandlers {
 
+	private final SampleEventHandler sampleEventHandler = new SampleEventHandler();
 	Logger logger = Logger.getLogger(JanusEventHandlers.class.getSimpleName());
 
-
-	private final SampleEventHandler sampleEventHandler = new SampleEventHandler();
-
-
-	@Get(uri = "/current-ssettings")
-	@Produces(MediaType.TEXT_PLAIN)
-	public HttpResponse getCurrentSettings() throws JsonProcessingException {
+	@Get (uri = "/current-ssettings")
+	@Produces (MediaType.TEXT_PLAIN)
+	public HttpResponse getCurrentSettings () throws JsonProcessingException {
 
 		var          res     = sampleEventHandler.loadCurrentSettings();
 		var          jcfg    = sampleEventHandler.loadCurrentSettingsJCFG();
@@ -49,9 +46,9 @@ public class JanusEventHandlers {
 				);
 	}
 
-	@Post(uri = "/update")
-	@Produces(MediaType.TEXT_PLAIN)
-	public HttpResponse update(HttpHeaders httpHeaders, @Body String jsonBody) {
+	@Post (uri = "/update")
+	@Produces (MediaType.TEXT_PLAIN)
+	public HttpResponse update (HttpHeaders httpHeaders, @Body String jsonBody) {
 
 		boolean hasSaved = sampleEventHandler.updateToBuild(jsonBody);
 		if (hasSaved) {
@@ -82,8 +79,8 @@ public class JanusEventHandlers {
 
 	@Get (uri = "/feeds/event")
 	@Produces (MediaType.TEXT_PLAIN)
-	public HttpResponse getEvents() {
-		var          db    =  LazyMongoDB.getInstance();
+	public HttpResponse getEvents () {
+		var db     = LazyMongoDB.getInstance();
 		var jArray = db.getEvents("sip_events");
 
 
@@ -92,26 +89,25 @@ public class JanusEventHandlers {
 						new JSONObject()
 								.put("success", true)
 								.put("message", "Saved Events")
-								.put("data",new JSONObject()
-										.put("sip_events",jArray))
+								.put("data", new JSONObject()
+										.put("sip_events", jArray))
 								.toString()
 				);
 
 	}
 
 
-
 	@Post (uri = "/new")
 	@Produces (MediaType.TEXT_PLAIN)
-	public HttpResponse newEvents(HttpHeaders httpHeaders, @Body String jsonBody) {
-		var db =  LazyMongoDB.getInstance();
+	public HttpResponse newEvents (HttpHeaders httpHeaders, @Body String jsonBody) {
+		var    db      = LazyMongoDB.getInstance();
 		String jsonStr = JsonFlattener.flatten(jsonBody);
-		if(EventBus.getDefault().hasSubscriberForEvent(MessageEvent.class)) {
+		if (EventBus.getDefault().hasSubscriberForEvent(MessageEvent.class)) {
 			logger.info("Sub found");
 			EventBus.getDefault().post(new MessageEvent(MessageEvent.MESSAGE_NEW_SIP_EVENT, jsonStr));
 		}
 		assert db != null;
-		db.saveEvent("sip_events",jsonStr);
+		db.saveEvent("sip_events", jsonStr);
 		//logger.info("jsonStr- "+jsonStr);
 		//logger.info("jsonBody- "+jsonBody);
 		return HttpResponse.ok().contentType(MediaType.TEXT_JSON_TYPE)
@@ -123,10 +119,6 @@ public class JanusEventHandlers {
 				);
 
 	}
-
-
-
-
 
 
 }

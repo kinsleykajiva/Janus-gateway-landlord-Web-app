@@ -12,16 +12,16 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.FluxSink;
 
 @Singleton
-public class AuthenticationProviderUserPassword implements AuthenticationProvider  {
+public class AuthenticationProviderUserPassword implements AuthenticationProvider {
 	public static String INIT_USERNAME = "";
 	public static String INIT_PASSWORD = "";
 
 	@Override
-	public Publisher<AuthenticationResponse> authenticate(@Nullable HttpRequest<?> httpRequest,
-	                                                      AuthenticationRequest<?, ?> authenticationRequest) {
+	public Publisher<AuthenticationResponse> authenticate (@Nullable HttpRequest<?> httpRequest,
+	                                                       AuthenticationRequest<?, ?> authenticationRequest) {
 		return Flux.create(emitter -> {
-			if ( authenticationRequest.getIdentity().equals(INIT_USERNAME.isEmpty() ? "no_money" :INIT_USERNAME) &&
-			     authenticationRequest.getSecret().equals(INIT_PASSWORD.isEmpty() ? "SkillS@Home#ArePretty!":INIT_PASSWORD) ) {
+			if (authenticationRequest.getIdentity().equals(INIT_USERNAME.isEmpty() ? "no_money" : INIT_USERNAME) &&
+			    authenticationRequest.getSecret().equals(INIT_PASSWORD.isEmpty() ? "SkillS@Home#ArePretty!" : INIT_PASSWORD)) {
 				emitter.next(AuthenticationResponse.success((String) authenticationRequest.getIdentity()));
 				emitter.complete();
 			} else {

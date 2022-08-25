@@ -19,10 +19,9 @@ import static africa.jopen.utils.XUtils.*;
 public class JanusUtils {
 	final static   Logger logger                 = Logger.getLogger(JanusUtils.class.getSimpleName());
 	public static  String JANUS_CONFIG_FODLER    = "";
+	public static  boolean IS_JANUS_ONLINE           = false;
 	private static String JANUS_RECORDING_FODLER = "";
 	private static String JANUS_DEMO_FODLER      = "";
-
-	public static  boolean IS_JANUS_ONLINE           = false;
 	private static boolean CAN_EXECUTE_FILE_COMMANDS = Boolean.TRUE;
 
 	private static Installations installation;
@@ -99,9 +98,7 @@ public class JanusUtils {
 		if (installation == Installations.SNAP_INSTALLATION) {
 			executeBashCommand("sudo snap restart janus-gateway");
 			var result = XUtils.getLastExecuteBashCommandResponses().toString();
-			if (result.equals("Restarted.") || result.contains("Restarted.")) {
-				return true;
-			}
+			return result.equals("Restarted.") || result.contains("Restarted.");
 
 		}
 
