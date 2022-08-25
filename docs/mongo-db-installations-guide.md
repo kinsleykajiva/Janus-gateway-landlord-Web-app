@@ -25,7 +25,8 @@ sudo apt-get update
 ```
 
 ```bash
-wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb && sudo dpkg -i libssl1.1_1.1.1f-1ubuntu2_amd64.deb && sudo rm -f libssl1.1_1.1.1f-1ubuntu2_amd64.deb
+wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb && sudo dpkg -i libssl1.1_1.1.1f-1ubuntu2_amd64.deb && sudo rm -f libssl1.1_1.1.1f-1ubuntu2_amd64.deb && \
+echo "deb http://security.ubuntu.com/ubuntu impish-security main" | sudo tee /etc/apt/sources.list.d/impish-security.list && sudo apt-get update && sudo apt-get install libssl1.1
 
 ```
 
@@ -85,7 +86,7 @@ To set up MongoDB user example - https://www.guru99.com/mongodb-create-user.html
 for example to set up user `root` and password `rootuser` , remember this is run in mongo termianl , run `mongosh` then run :
 ```bash 
 use admin
-db.createUser({	user: "root",pwd: "rootuser",roles:[{role: "userAdminAnyDatabase" , db:"landlord"}]})
+db.createUser({	user: "root",pwd: "rootuser",roles:[{role: "userAdminAnyDatabase" , db:"admin"}]})
 	
 	
 

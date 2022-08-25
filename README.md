@@ -75,12 +75,12 @@ Tips or help is welcome .
 In the meantime , I have opted to deploy the app on the ubuntu server as follows:
 Install GraalVM :
 ```bash
-sudo apt install openjdk-17-jre-headless && \
-wget https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.2.0/graalvm-ce-java17-linux-amd64-22.2.0.tar.gz && & \
-tar -xf graalvm-ce-java17-linux-amd64-22.2.0.tar.gz && & \
-sudo mv graalvm-ce-java17-22.2.0 /usr/lib/jvm/ && & \
-cd /usr/lib/jvm && & \
-sudo ln -s graalvm-ce-java17-linux-amd64-22.2.0 graalvm && sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/graalvm-ce-java17-22.2.0/bin/java 2  && & \
+sudo apt install -y openjdk-17-jre-headless && \
+wget https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.2.0/graalvm-ce-java17-linux-amd64-22.2.0.tar.gz &&  \
+tar -xf graalvm-ce-java17-linux-amd64-22.2.0.tar.gz &&  \
+sudo mv graalvm-ce-java17-22.2.0 /usr/lib/jvm/ &&  \
+cd /usr/lib/jvm &&  \
+sudo ln -s graalvm-ce-java17-linux-amd64-22.2.0 graalvm && sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/graalvm-ce-java17-22.2.0/bin/java 2  &&  \
 sudo update-alternatives --config java
 ```
 To test run `java -version` , it shouw say something like this :
@@ -128,9 +128,11 @@ Yes Please replace the username and password with your own !
 To run the native image application as a service you can consider to use  ``nohup`` for example navigate to the release folder and run ``` nohup  ./Janus-gateway-landlord-Web-app & ``` .Remember to run as root or admin user .
 
 <hr>
+
 ## Docs
 
-Janus installation guide  - https://gist.github.com/kinsleykajiva/5ee2122ad9c549fc10a88c14c725023d or docs/
+- Janus installation guide  - https://github.com/kinsleykajiva/Janus-gateway-landlord-Web-app/blob/master/docs/janus-installation-guide.md 
+- MongoDb installation - https://github.com/kinsleykajiva/Janus-gateway-landlord-Web-app/blob/master/docs/mongo-db-installations-guide.md
 
 <hr>
 
