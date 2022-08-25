@@ -80,7 +80,7 @@
     },
     "api_secret": {
       "required": false,
-      "commented": false,
+      "commented": true,
       "comment": "String that all Janus requests must contain to be accepted/authorized by the Janus core. Useful if you're wrapping all Janus API requests in your servers (that is, not in the browser",
       "lineValue": "janusrocks"
     },
