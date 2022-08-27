@@ -86,7 +86,7 @@ To set up MongoDB user example - https://www.guru99.com/mongodb-create-user.html
 for example to set up user `root` and password `rootuser` , remember this is run in mongo termianl , run `mongosh` then run :
 ```bash 
 use admin
-db.createUser({	user: "root",pwd: "rootuser",roles:[{role: "userAdminAnyDatabase" , db:"admin"}]})
+db.createUser({	user: "root",pwd: "rootuser",roles:[{role: "userAdminAnyDatabase" , db:"landlord"}]})
 	
 	
 

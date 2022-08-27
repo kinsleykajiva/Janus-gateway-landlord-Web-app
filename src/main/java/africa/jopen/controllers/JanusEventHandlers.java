@@ -95,6 +95,24 @@ public class JanusEventHandlers {
 				);
 
 	}
+	@Get (uri = "/feeds/event-filter/{filterColum}/{value}",value = "/bob/{name}/params")
+	@Produces (MediaType.TEXT_PLAIN)
+	public HttpResponse getEventsWithFilters ( @QueryValue String filterColum,  @QueryValue String value  ) {
+		var db     = LazyMongoDB.getInstance();
+		var jArray = db.getEventsFilter("sip_events" , filterColum,value );
+
+
+		return HttpResponse.ok().contentType(MediaType.TEXT_JSON_TYPE)
+				.body(
+						new JSONObject()
+								.put("success", true)
+								.put("message", "Saved Events")
+								.put("data", new JSONObject()
+										.put("sip_events", jArray))
+								.toString()
+				);
+
+	}
 
 
 	@Post (uri = "/new")

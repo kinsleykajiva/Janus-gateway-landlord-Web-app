@@ -1,5 +1,7 @@
 package africa.jopen.database.mongodb;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 import com.mongodb.MongoException;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
@@ -7,13 +9,17 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.result.InsertOneResult;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.math.BigInteger;
 import java.sql.Timestamp;
+import java.util.function.UnaryOperator;
 import java.util.logging.Logger;
+
+import static com.mongodb.client.model.Filters.eq;
 
 public class LazyMongoDB {
 
@@ -26,6 +32,17 @@ public class LazyMongoDB {
 	private static LazyMongoDB   instance;
 	private        MongoDatabase database;
 	private MongoClient mongoClient1;
+	/**
+	 * change/transform from [2].event.data.event to 2_event_data_event*
+	 * * */
+	private  UnaryOperator<String> renameObjectKeyName = (json)-> {
+
+		var bracket = json.split("\\.")[0];
+		var str = bracket
+				.replaceAll("\\[", "")
+				.replaceAll("\\]","").concat("__");
+		return (json.replace(bracket,str).replaceAll("\\.","_"));
+	};
 
 	private LazyMongoDB () {
 		if (
@@ -56,20 +73,21 @@ public class LazyMongoDB {
 		return instance;
 	}
 
+
 	private Document processJ (Document document, JSONObject jsobject) {
 		var timeStamp = new Timestamp(System.currentTimeMillis());
 		for (String key : jsobject.keySet()) {
 			var value = jsobject.get(key);
 			if (value instanceof String) {
-				document.put(key, jsobject.getString(key));
+				document.put(renameObjectKeyName.apply(key), jsobject.getString(key));
 			} else if (value instanceof BigInteger) {
-				document.put(key, jsobject.getBigInteger(key));
+				document.put(renameObjectKeyName.apply(key), jsobject.getBigInteger(key));
 			} else if (value instanceof Long) {
-				document.put(key, jsobject.getLong(key));
+				document.put(renameObjectKeyName.apply(key), jsobject.getLong(key));
 			} else if (value instanceof Integer) {
-				document.put(key, jsobject.getInt(key));
+				document.put(renameObjectKeyName.apply(key), jsobject.getInt(key));
 			} else if (value instanceof Boolean) {
-				document.put(key, jsobject.getBoolean(key));
+				document.put(renameObjectKeyName.apply(key), jsobject.getBoolean(key));
 			}
 		}
 		document.append("_id", new ObjectId());
@@ -98,6 +116,33 @@ public class LazyMongoDB {
 
 		return jsonArray;
 	}
+
+
+	public JSONArray getEventsFilter (String tableEvent,String filterColum,String value) {
+		if (
+				DB_HOST == null || DB_HOST.isEmpty() ||
+				DB_PASSWORD == null || DB_PASSWORD.isEmpty() ||
+				DB_USERNAME == null || DB_USERNAME.isEmpty()
+		) {
+			return null;
+		}
+
+		JSONArray                 jsonArray           = new JSONArray();
+		Bson                      equalComparison     = eq(filterColum, value);
+		MongoCollection<Document> sipEventsCollection = database.getCollection(tableEvent);
+		var collection =  sipEventsCollection.find(equalComparison);
+		for (Document document : collection) {
+			JSONObject jsonObject = new JSONObject();
+			for (String key : document.keySet()) {
+				jsonObject.put(key, document.get(key));
+			}
+			jsonArray.put(jsonObject);
+		}
+
+		return jsonArray;
+	}
+
+
 
 	public void saveEvent (String tableEvent, String jsonStr) {
 		if (
