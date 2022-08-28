@@ -10,7 +10,6 @@ import africa.jopen.database.mongodb.LazyMongoDB;
 import africa.jopen.security.AuthenticationProviderUserPassword;
 import africa.jopen.utils.JanusUtils;
 import africa.jopen.utils.XUtils;
-import com.github.wnameless.json.flattener.JsonFlattener;
 import io.micronaut.runtime.Micronaut;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
@@ -21,9 +20,6 @@ import java.net.UnknownHostException;
 import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.TimeZone;
-import java.util.function.Function;
-import java.util.function.Supplier;
-import java.util.function.UnaryOperator;
 import java.util.logging.Logger;
 
 import static africa.jopen.utils.AdministratorChecker.IS_RUNNING_AS_ADMINISTRATOR;

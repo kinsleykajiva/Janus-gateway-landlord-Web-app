@@ -154,25 +154,57 @@
       <version>3.3.1</version>
     </dependency>
 
+
+
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>4.0.1</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-server</artifactId>
+      <version>9.4.19.v20190610</version>
+    </dependency>
+
+
+
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-servlet</artifactId>
+      <version>9.4.19.v20190610</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-servlets</artifactId>
+      <version>9.4.19.v20190610</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.jetty.websocket</groupId>
+      <artifactId>websocket-server</artifactId>
+      <version>9.4.19.v20190610</version>
+    </dependency>
+
     <dependency>
       <groupId>io.socket</groupId>
       <artifactId>socket.io-server</artifactId>
-      <version>4.0.1</version>
+      <version>3.0.2</version>
     </dependency>
 
 
     <dependency>
       <groupId>io.socket</groupId>
       <artifactId>engine.io-server</artifactId>
-      <version>6.2.1</version>
+      <version>5.0.0</version>
     </dependency>
 
     <dependency>
       <groupId>io.socket</groupId>
       <artifactId>engine.io-server-jetty</artifactId>
-      <version>6.2.1</version>
+      <version>5.0.0</version>
     </dependency>
-
   </dependencies>
   <reporting>
     <plugins>
