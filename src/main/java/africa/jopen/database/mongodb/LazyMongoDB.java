@@ -36,12 +36,15 @@ public class LazyMongoDB {
 	 * change/transform from [2].event.data.event to 2_event_data_event*
 	 * * */
 	private  UnaryOperator<String> renameObjectKeyName = (json)-> {
+		if(!json.contains("[") || !json.contains("]")) {
+			return json.replaceAll("\\.","___");
+		}
 
 		var bracket = json.split("\\.")[0];
 		var str = bracket
 				.replaceAll("\\[", "")
 				.replaceAll("\\]","").concat("__");
-		return (json.replace(bracket,str).replaceAll("\\.","_"));
+		return (json.replace(bracket,str).replaceAll("\\.","___"));
 	};
 
 	private LazyMongoDB () {
@@ -95,6 +98,9 @@ public class LazyMongoDB {
 		document.append("ts_", timeStamp.toString());
 		return document;
 	}
+
+
+
 
 	public JSONArray getEvents (String tableEvent) {
 		if (

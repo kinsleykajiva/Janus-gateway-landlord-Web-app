@@ -10,16 +10,22 @@ import africa.jopen.database.mongodb.LazyMongoDB;
 import africa.jopen.security.AuthenticationProviderUserPassword;
 import africa.jopen.utils.JanusUtils;
 import africa.jopen.utils.XUtils;
+import com.github.wnameless.json.flattener.JsonFlattener;
 import io.micronaut.runtime.Micronaut;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
+import org.bson.Document;
+import org.bson.types.ObjectId;
+import org.json.JSONObject;
 
 import java.io.File;
+import java.math.BigInteger;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.TimeZone;
+import java.util.function.UnaryOperator;
 import java.util.logging.Logger;
 
 import static africa.jopen.utils.AdministratorChecker.IS_RUNNING_AS_ADMINISTRATOR;
@@ -78,10 +84,6 @@ public class Application {
 
 
 	private static void homeKeeping () {
-
-		logger.info("Passed 1-> " + AuthenticationProviderUserPassword.INIT_USERNAME);
-		logger.info("Passed 2-> " + AuthenticationProviderUserPassword.INIT_PASSWORD);
-		logger.info("Passed 3-> " + LazyMongoDB.DB_HOST);
 
 		XUtils.setKnownIssuesSinceStartUp("app-version", "0.7");
 		XUtils.setKnownIssuesSinceStartUp("startup-time", new Timestamp(System.currentTimeMillis()).toString());
