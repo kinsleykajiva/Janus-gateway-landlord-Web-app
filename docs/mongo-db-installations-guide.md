@@ -50,6 +50,19 @@ wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubun
 echo "deb http://security.ubuntu.com/ubuntu impish-security main" | sudo aptitude -y install libssl-dev | sudo tee /etc/apt/sources.list.d/impish-security.list && sudo apt-get update && sudo apt-get install libssl1.1 
 
 ```
+or
+
+
+```bash
+echo "deb http://security.ubuntu.com/ubuntu impish-security main" | sudo tee /etc/apt/sources.list.d/impish-security.list && \
+
+sudo apt-get update  && \
+sudo apt-get install libssl1.1
+
+```
+
+
+
 
 ```bash
 sudo apt-get install -y mongodb-org
@@ -106,12 +119,12 @@ To set up MongoDB user example - https://www.guru99.com/mongodb-create-user.html
 
 for example to set up user `root` and password `rootuser` , remember this is run in mongo termianl , run `mongosh` then run :
 ```bash 
-use admin
-db.createUser({	user: "root",pwd: "rootuser",roles:[{role: "userAdminAnyDatabase" , db:"landlord"}]})
+use landlord
+db.createUser({	user: "root",pwd: "rootuser",roles:[{role: "userAdminAnyDatabase" , db:"admin"}]})
 	
 	
 
-	mongosh --port 27017 -u root -p 'rootuser' --authenticationDatabase 'landlord'
+mongosh --port 27017 -u root -p 'rootuser' --authenticationDatabase 'landlord'
 
 
 ```
@@ -124,3 +137,7 @@ To create table or collection in the selected database you need to run `db.creat
 from here the rest
 
 db.getUser("root")
+
+
+
+solutions - https://askubuntu.com/questions/842592/apt-get-fails-on-16-04-or-18-04-installing-mongodb

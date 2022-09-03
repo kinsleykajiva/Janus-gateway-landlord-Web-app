@@ -2,9 +2,9 @@
   "general": {
     "enabled": {
       "required": true,
-      "commented": false,
+      "commented": true,
       "comment": " By default the module is not enabled",
-      "lineValue": "0.0.0.0"
+      "lineValue": "false"
     },
     "events": {
       "required": true,

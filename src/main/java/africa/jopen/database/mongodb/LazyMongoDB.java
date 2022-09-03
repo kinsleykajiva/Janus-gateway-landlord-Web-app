@@ -150,7 +150,7 @@ public class LazyMongoDB {
 
 
 
-	public void saveEvent (String tableEvent, String jsonStr) {
+	public void saveEvent (String tableEvent, String jsonStr,String jsonBody) {
 		if (
 				DB_HOST == null || DB_HOST.isEmpty() ||
 				DB_PASSWORD == null || DB_PASSWORD.isEmpty() ||
@@ -161,6 +161,7 @@ public class LazyMongoDB {
 		MongoCollection<Document> sipEventsCollection = database.getCollection(tableEvent);
 		try {
 			var             newDoc = processJ(new Document(), new JSONObject(jsonStr));
+			newDoc.put("original",jsonBody);
 			InsertOneResult result = sipEventsCollection.insertOne(newDoc);
 			//logger.info("Added new document: " + result);
 		} catch (MongoException me) {

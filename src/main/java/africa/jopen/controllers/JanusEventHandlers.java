@@ -118,7 +118,6 @@ public class JanusEventHandlers {
 	@Post (uri = "/new")
 	@Produces (MediaType.TEXT_PLAIN)
 	public HttpResponse newEvents (HttpHeaders httpHeaders, @Body String jsonBody) {
-		logger.info("jsonBody- "+jsonBody);
 		var    db      = LazyMongoDB.getInstance();
 		String jsonStr = JsonFlattener.flatten(jsonBody);
 		if (EventBus.getDefault().hasSubscriberForEvent(MessageEvent.class)) {
@@ -126,9 +125,7 @@ public class JanusEventHandlers {
 			EventBus.getDefault().post(new MessageEvent(MessageEvent.MESSAGE_NEW_SIP_EVENT, jsonStr));
 		}
 		assert db != null;
-		db.saveEvent("sip_events", jsonStr);
-		//logger.info("jsonStr- "+jsonStr);
-		logger.info("saved::::- ");
+		db.saveEvent("sip_events", jsonStr,jsonBody/*this is the original json string*/);
 		return HttpResponse.ok().contentType(MediaType.TEXT_JSON_TYPE)
 				.body(
 						new JSONObject()

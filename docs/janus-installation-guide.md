@@ -4,6 +4,8 @@ This seeks to help those who have had a problem in installing based on the other
 By the way this will install the latest version of janus [Assuming branch is master] if you just do a clone to the master branch. Please do note there is need to pay attention to the tage version of the repository your pulling .
 .
 <br>
+
+<br>
 Common Areas to look out for errors that may stop you from install and review are :
 - libwebsockets [I have attached a possible solution in the last section of this file]
 <br>
@@ -78,14 +80,17 @@ sudo apt-get -y install g++ && \
 sudo apt-get -y install gengetopt && \
 sudo aptitude -y install libmicrohttpd-dev && \
 sudo aptitude -y install  libjansson-dev && \
+clear && echo "############################-->> libssl-dev Installation --############################"  && \
 sudo aptitude -y install 	libssl-dev || sudo apt-get -y install libssl-dev && \
 sudo apt  -y install libsrtp2-dev && clear &&\
 sudo aptitude -y install libsofia-sip-ua-dev && \
 sudo aptitude -y install libglib2.0-dev && clear && \
+clear && echo "############################-->> libopus-dev Installation --############################"  && \
 sudo aptitude -y install 	libopus-dev || sudo apt-get install -y libopus-dev && clear && \
 sudo aptitude -y install libogg-dev && clear && \
 sudo aptitude -y install libcurl4-openssl-dev && \
 sudo aptitude -y install liblua5.3-dev && \
+clear && echo "############################-->> libconfig-dev Installation --############################"  && \
 sudo aptitude -y install libconfig-dev  || sudo apt-get install -y libconfig-dev && \
 sudo aptitude -y install pkg-config  && clear && \
 sudo aptitude -y install libtool automake && \
@@ -120,6 +125,7 @@ FILE=/etc/supervisor/conf.d/janus.conf && sudo mkdir -p "$(dirname "$FILE")" && 
 sudo sh -c 'printf "[program:janus]\n command=/opt/janus/bin/janus\n user=root\n autostart=true\n autorestart=true\n stderr_logfile=/var/log/janus.err.log\n stdout_logfile=/var/log/janus.out.log\n\n" >/etc/supervisor/conf.d/janus.conf' && \
 sudo supervisorctl reread  && sudo supervisorctl update && \
 sudo supervisorctl reload && \
+cd ~ && sudo rm -rf janus-gateway/ rabbitmq-c/ libwebsockets/ paho.mqtt.c/ && \
 clear && echo "###################################################################################################"  && \
 echo "##################### Done.To test open http://localhost:8088/janus/info ##########################"  && \
 echo "###################################################################################################" 

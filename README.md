@@ -18,6 +18,10 @@ Motivation: As a developer I got tired of always opening the console to see logs
 - This so far has been built and tested on Ubuntu,please try to make changes to suite your OS.
 
 
+```bash
+git clone https://github.com/kinsleykajiva/Janus-gateway-landlord-Web-app.git
+```
+
 # Installation :
 You can pull the repository, make a build , navigate to target folder .
 - When you build its recommended  that you build a native build to leverage on performance and app size (so far the app is smaller than 100MB).
