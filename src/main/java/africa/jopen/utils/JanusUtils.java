@@ -161,7 +161,7 @@ public class JanusUtils {
 		}
 	}
 
-	//    sudo cp /home/variable-k/.janus-landlord/configs/janus.jcfg  /var/snap/janus-gateway/common/share/voicemail/janus.jcfg
+
 	public static void savePlugin (String jcfgFile) {
 		if (!CAN_EXECUTE_FILE_COMMANDS) {
 			logger.info("Files not found");
