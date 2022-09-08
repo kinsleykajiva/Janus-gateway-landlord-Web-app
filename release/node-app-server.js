@@ -3,6 +3,11 @@ const app = express();
 const helmet = require('helmet')
 const {Server} = require("socket.io");
 const sdpTransform = require('sdp-transform');
+const bodyParser = require('body-parser')
+
+app.use(express.json()) // for json
+app.use(express.urlencoded({ extended: true })) // for form data
+
 app.use(helmet())
 const cors=require("cors");
 app.options('*', cors());
@@ -50,6 +55,7 @@ app.get('/', (req, res) => {
 app.post('/parse-sdp/tojson', (req, res) => {
     try {
         const {sdp} = req.body;
+
         const resSdp = sdpTransform.parse(sdp);
 
         res.status(200)
