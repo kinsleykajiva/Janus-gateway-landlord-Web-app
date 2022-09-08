@@ -4,6 +4,7 @@ package africa.jopen.controllers;
 import africa.jopen.configs.eventhandlers.SampleEventHandler;
 import africa.jopen.database.mongodb.LazyMongoDB;
 import africa.jopen.events.MessageEvent;
+import africa.jopen.utils.HttpClientUtils;
 import africa.jopen.utils.JanusUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,12 +18,16 @@ import io.micronaut.security.rules.SecurityRule;
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.logging.Logger;
 
 @Secured (SecurityRule.IS_ANONYMOUS)
 @Controller ("/api/janus/events")
 public class JanusEventHandlers {
-
+	ExecutorService executorService1 = Executors.newSingleThreadExecutor();
 	private final SampleEventHandler sampleEventHandler = new SampleEventHandler();
 	Logger logger = Logger.getLogger(JanusEventHandlers.class.getSimpleName());
 
@@ -117,8 +122,23 @@ public class JanusEventHandlers {
 
 	@Post (uri = "/new")
 	@Produces (MediaType.TEXT_PLAIN)
-	public HttpResponse newEvents (HttpHeaders httpHeaders, @Body String jsonBody) {
+	public HttpResponse newEvents (HttpHeaders httpHeaders, @Body String jsonBody)  {
 		var    db      = LazyMongoDB.getInstance();
+		executorService1.submit(()->{
+			try {
+				Map<String,String> map = new HashMap<>();
+				map.put("events", jsonBody);
+				ObjectMapper objectMapper = new ObjectMapper();
+				String requestBody = objectMapper
+						.writerWithDefaultPrettyPrinter()
+						.writeValueAsString(map);
+
+				HttpClientUtils.simplePost("http://localhost:3100/janus/events", requestBody);
+			} catch (Exception e) {
+				logger.severe("Exception sending json body: " + e.getMessage());
+			}
+		});
+
 		String jsonStr = JsonFlattener.flatten(jsonBody);
 		if (EventBus.getDefault().hasSubscriberForEvent(MessageEvent.class)) {
 			logger.info("Sub found");

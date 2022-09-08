@@ -91,8 +91,8 @@ public class SampleEventHandler {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
 		try {
-			Root sip = mapper.readValue(Paths.get(CONFIG_FOLDER + File.separator + FileNameJson).toFile(), Root.class);
-			return sip;
+			return mapper.readValue(Paths.get(CONFIG_FOLDER + File.separator + FileNameJson).toFile(), Root.class);
+
 		} catch (IOException e) {
 			logger.severe(e.getMessage());
 			e.printStackTrace();
