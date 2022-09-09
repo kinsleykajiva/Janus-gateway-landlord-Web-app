@@ -19,7 +19,7 @@ const port_socket = 3110;
 const clients = new Set();
 
 const io = new Server({ /* options */});
-
+io.listen(port_socket);
 
 io.on("connection", (socket) => {
     console.log(socket.id + " connected");
@@ -80,6 +80,13 @@ app.post('/janus/events', async (req, res) => {
         const {events} = req.body;
 
         io.emit('onNewJEvent', (events) );
+            clients.forEach(client => {
+                console.log( '---',client)
+                if(client){
+                    client.emit('onNewJEvent', events);
+                }
+
+            })
         console.log( events)
             return res.status(200)
             .json({
@@ -105,7 +112,7 @@ app.post('/janus/events', async (req, res) => {
 
 });
 function sendTime() {
-    io.emit('time', { time: new Date().toJSON() });
+    io.emit('time', JSON.stringify({ time: new Date() }));
 }
 
 // Send current time every 10 secs
@@ -114,4 +121,3 @@ setInterval(sendTime, 10_000);
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
-io.listen(port_socket);
