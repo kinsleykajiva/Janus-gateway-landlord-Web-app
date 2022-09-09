@@ -79,6 +79,7 @@ app.post('/janus/events', async (req, res) => {
         if( req.body && req.body.events){
 
         const {events} = req.body;
+        events.timestamp_posted=Date.now();
             messagesSets.add(events);
         io.emit('onNewJEvent', (events) );
 
@@ -113,7 +114,7 @@ function sendTime() {
 
 // Send current time every 10 secs
 setInterval(sendTime, 10_000);
-//setInterval( ()=> messagesSets.forEach( msg=>{  io.emit('onNewJEventUser',{ data: msg }); messagesSets.delete(msg); }),2_000);
+setInterval( ()=> messagesSets.forEach( msg=>{  io.emit('onNewJEventUser',{ data: msg }); messagesSets.delete(msg); }),2_000);
 
 app.listen(port, () => {
     console.log(` app listening on port ${port}`)
