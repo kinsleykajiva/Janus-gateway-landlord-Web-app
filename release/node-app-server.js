@@ -75,7 +75,10 @@ app.post('/parse-sdp/tojson', (req, res) => {
 
 app.post('/janus/events', (req, res) => {
     try {
+        if( req.body && req.body.events){
+
         const {events} = req.body;
+        console.log(req.body)
 
         io.emit('onNewEvent', JSON.stringify(events) );
 
@@ -85,6 +88,16 @@ app.post('/janus/events', (req, res) => {
                 message: "event-emitted",
 
             });
+
+        }
+        res.status(200)
+            .json({
+                success: false,
+                message: "event-not-emitted",
+
+            });
+
+        console.log("none") ;
     } catch (error) {
         console.error(error)
         res.status(200).json({success: false, message: "Error: " + error.message})

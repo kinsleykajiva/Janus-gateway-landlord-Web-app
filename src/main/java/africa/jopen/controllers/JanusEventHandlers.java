@@ -132,7 +132,7 @@ public class JanusEventHandlers {
 				String requestBody = objectMapper
 						.writerWithDefaultPrettyPrinter()
 						.writeValueAsString(map);
-
+				logger.info("XRequest body: " + requestBody);
 				HttpClientUtils.simplePost("http://localhost:3100/janus/events", requestBody);
 			} catch (Exception e) {
 				logger.severe("Exception sending json body: " + e.getMessage());
