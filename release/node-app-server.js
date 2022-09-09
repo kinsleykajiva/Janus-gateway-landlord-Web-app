@@ -114,10 +114,9 @@ app.post('/janus/events', async (req, res) => {
 
 });
 function sendTime() {
-    io.emit('time', JSON.stringify({ time: new Date() }));
     messagesSets.forEach( msg=>{
-        console.log("--->",msg);
-        io.emit('time', JSON.stringify({ data: msg }));
+
+        io.emit('onNewJEventUser', JSON.stringify({ data: msg }));
         messagesSets.delete(msg);
 
     });
