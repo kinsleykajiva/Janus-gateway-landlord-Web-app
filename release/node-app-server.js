@@ -22,17 +22,17 @@ const io = new Server({ /* options */});
 
 
 io.on("connection", (socket) => {
-    console.log(socket.id);
-    clients.add(socket.id);
+    console.log(socket.id + " connected");
+    clients.add(socket);
     socket.on('onx', function(message)      {
         console.log(message);
 
     });
-
+    io.emit('onNewJEventUser', socket.id + " connected" );
 
     socket.on('disconnect', function () {
-        console.log(socket.id);
-        clients.delete(socket.id);
+        console.log(socket.id+ " disconnected");
+        clients.delete(socket);
     });
 
 });
@@ -79,7 +79,7 @@ app.post('/janus/events', async (req, res) => {
 
         const {events} = req.body;
 
-        io.emit('onNewEvent', JSON.stringify(events) );
+        io.emit('onNewJEvent', (events) );
 
             return res.status(200)
             .json({
