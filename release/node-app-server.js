@@ -78,7 +78,8 @@ app.post('/janus/events', async (req, res) => {
     try {
         if( req.body && req.body.events){
 
-        const {events} = req.body;
+        let {events} = req.body;
+            events = JSON.parse(events)
         events.timestamp_posted=Date.now();
             messagesSets.add(events);
         io.emit('onNewJEvent', (events) );
