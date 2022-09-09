@@ -80,7 +80,7 @@ app.post('/janus/events', async (req, res) => {
         const {events} = req.body;
 
         io.emit('onNewJEvent', (events) );
-
+        console.log( events)
             return res.status(200)
             .json({
                 success: true,
