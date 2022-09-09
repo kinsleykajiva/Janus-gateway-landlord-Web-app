@@ -18,7 +18,7 @@ const port = 3100;
 const port_socket = 3110;
 const clients = new Set();
 
-const io = new Server({ /* options */});
+global.io = new Server({ /* options */});
 io.listen(port_socket);
 
 io.on("connection", (socket) => {
@@ -80,6 +80,7 @@ app.post('/janus/events', async (req, res) => {
         const {events} = req.body;
 
         io.emit('onNewJEvent', (events) );
+            io.sockets.emit('onNewJEvent', (events) );
             clients.forEach(client => {
 
                 if(client){
