@@ -132,7 +132,6 @@ public class JanusEventHandlers {
 				String requestBody = objectMapper
 						.writerWithDefaultPrettyPrinter()
 						.writeValueAsString(map);
-				logger.info("XRequest body: " + requestBody);
 				HttpClientUtils.simplePost("http://localhost:3100/janus/events", requestBody);
 			} catch (Exception e) {
 				logger.severe("Exception sending json body: " + e.getMessage());
@@ -141,6 +140,7 @@ public class JanusEventHandlers {
 
 		String jsonStr = JsonFlattener.flatten(jsonBody);
 		if (EventBus.getDefault().hasSubscriberForEvent(MessageEvent.class)) {
+			// TODO Remove this section of code as websocket function will be moved to a separate server in this case so-far we are suing nodejs server on this same server instance
 			logger.info("Sub found");
 			EventBus.getDefault().post(new MessageEvent(MessageEvent.MESSAGE_NEW_SIP_EVENT, jsonStr));
 		}
