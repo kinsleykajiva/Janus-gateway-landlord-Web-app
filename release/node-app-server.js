@@ -117,7 +117,7 @@ function sendTime() {
     io.emit('time', JSON.stringify({ time: new Date() }));
     messagesSets.forEach( msg=>{
         console.log("--->",msg);
-        io.emit('onNewJEvent', JSON.stringify({ data: msg }));
+        io.emit('time', JSON.stringify({ data: msg }));
         messagesSets.delete(msg);
 
     });
