@@ -81,9 +81,9 @@ app.post('/janus/events', async (req, res) => {
 
         io.emit('onNewJEvent', (events) );
             clients.forEach(client => {
-                console.log( '---',client)
+
                 if(client){
-                    client.emit('onNewJEvent', events);
+                    client.emit('onNewJEvent', JSON.stringify( events));
                 }
 
             })
