@@ -37,28 +37,28 @@ io.on("connection", (socket) => {
 
 });
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
     try {
-        res.status(200)
+        return res.status(200)
             .json({
                 success: true,
                 message: "Index Health Response"
             });
     } catch (error) {
         console.error(error)
-        res.status(200).json({success: false, message: "Error: " + error.message})
+        return res.status(200).json({success: false, message: "Error: " + error.message})
     }
 
 });
 
 
-app.post('/parse-sdp/tojson', (req, res) => {
+app.post('/parse-sdp/tojson', async(req, res) => {
     try {
         const {sdp} = req.body;
 
         const resSdp = sdpTransform.parse(sdp);
 
-        res.status(200)
+        return res.status(200)
             .json({
                 success: true,
                 message: "passed sdp",
@@ -68,21 +68,20 @@ app.post('/parse-sdp/tojson', (req, res) => {
             });
     } catch (error) {
         console.error(error)
-        res.status(200).json({success: false, message: "Error: " + error.message})
+        return res.status(200).json({success: false, message: "Error: " + error.message})
     }
 
 });
 
-app.post('/janus/events', (req, res) => {
+app.post('/janus/events', async (req, res) => {
     try {
         if( req.body && req.body.events){
 
         const {events} = req.body;
-        console.log(req.body)
 
         io.emit('onNewEvent', JSON.stringify(events) );
 
-        res.status(200)
+            return res.status(200)
             .json({
                 success: true,
                 message: "event-emitted",
@@ -90,17 +89,18 @@ app.post('/janus/events', (req, res) => {
             });
 
         }
-        res.status(200)
+        console.log("none") ;
+        return res.status(200)
             .json({
                 success: false,
                 message: "event-not-emitted",
 
             });
 
-        console.log("none") ;
+
     } catch (error) {
         console.error(error)
-        res.status(200).json({success: false, message: "Error: " + error.message})
+        return res.status(200).json({success: false, message: "Error: " + error.message})
     }
 
 });
