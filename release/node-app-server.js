@@ -17,6 +17,7 @@ app.use(cors({
 const port = 3100;
 const port_socket = 3110;
 const clients = new Set();
+const messagesSets = new Set();
 
 global.io = new Server({ /* options */});
 io.listen(port_socket);
@@ -78,7 +79,7 @@ app.post('/janus/events', async (req, res) => {
         if( req.body && req.body.events){
 
         const {events} = req.body;
-
+            messagesSets.add(events);
         io.emit('onNewJEvent', (events) );
             io.sockets.emit('onNewJEvent', (events) );
             clients.forEach(client => {
@@ -114,6 +115,11 @@ app.post('/janus/events', async (req, res) => {
 });
 function sendTime() {
     io.emit('time', JSON.stringify({ time: new Date() }));
+    messagesSets.forEach( msg=>{
+        io.emit('onNewJEvent', JSON.stringify({ data: msg }));
+        messagesSets.delete(msg);
+
+    });
 }
 
 // Send current time every 10 secs
