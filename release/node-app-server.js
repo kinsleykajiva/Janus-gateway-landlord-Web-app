@@ -116,5 +116,5 @@ setInterval(sendTime, 10_000);
 setInterval( ()=> messagesSets.forEach( msg=>{  io.emit('onNewJEventUser',{ data: msg }); messagesSets.delete(msg); }),2_000);
 
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+    console.log(` app listening on port ${port}`)
 })
