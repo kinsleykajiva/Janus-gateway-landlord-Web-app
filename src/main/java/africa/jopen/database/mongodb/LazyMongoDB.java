@@ -124,7 +124,7 @@ public class LazyMongoDB {
 	}
 
 
-	public JSONArray getEventsFilter (String tableEvent,String filterColum,String value) {
+	public JSONArray getEventsFilter (String tableEvent, String filterColum, String value) {
 		if (
 				DB_HOST == null || DB_HOST.isEmpty() ||
 				DB_PASSWORD == null || DB_PASSWORD.isEmpty() ||
@@ -132,11 +132,11 @@ public class LazyMongoDB {
 		) {
 			return null;
 		}
-
+		boolean                   isOnlyNumbers       = value.chars().allMatch(Character::isDigit);
 		JSONArray                 jsonArray           = new JSONArray();
-		Bson                      equalComparison     = eq(filterColum, value);
+		Bson                      equalComparison     = eq(filterColum, isOnlyNumbers ? Integer.valueOf(value) : value);
 		MongoCollection<Document> sipEventsCollection = database.getCollection(tableEvent);
-		var collection =  sipEventsCollection.find(equalComparison);
+		var                       collection          = sipEventsCollection.find(equalComparison);
 		for (Document document : collection) {
 			JSONObject jsonObject = new JSONObject();
 			for (String key : document.keySet()) {
