@@ -3,13 +3,14 @@ package africa.jopen.database.mymariasqldb;
 import org.json.JSONObject;
 
 import java.math.BigInteger;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.BooleanSupplier;
 import java.util.logging.Logger;
-
-import static africa.jopen.utils.XUtils.renameObjectKeyName;
 
 public class LazyMyMariaDB {
 	
@@ -145,7 +146,7 @@ public class LazyMyMariaDB {
 		public String insertBaseMediaSQL(String base, String lsr, String lostlocal, String lostremote, String jitterlocal
 				, String jitterremote, String packetssent, String packetsrecv, String bytessent, String bytesrecv, String nackssent, String nackrecv) {
 			return "INSERT INTO stats (session,handle,medium ,timestamp ,   base, lsr, lostlocal, lostremote ,  jitterlocal, " +
-					"	 jitterremote , packetssent , packetsrecv , bytessent, bytesrecv ,  nackssent , nackrecv)  VALUES (" + sessionId + "," + handleId + ",'" + medium + "'," + timestamp + "," +
+					" jitterremote , packetssent , packetsrecv , bytessent, bytesrecv ,  nackssent , nackrecv)  VALUES (" + sessionId + "," + handleId + ",'" + medium + "'," + timestamp + "," +
 					"  '" + base + "' , '" + lsr + "' , '" + lostlocal + "' , '" + lostremote + "' , '" + jitterlocal + "' , '" + jitterremote + "' , '" + packetssent + "' , '" + packetsrecv + "' , '" + bytessent + "' , '" + bytesrecv + "' , '" + nackssent + "' , '" + nackrecv + "'  );";
 			
 			
