@@ -19,6 +19,7 @@ import java.sql.Timestamp;
 import java.util.function.UnaryOperator;
 import java.util.logging.Logger;
 
+import static africa.jopen.utils.XUtils.renameObjectKeyName;
 import static com.mongodb.client.model.Filters.eq;
 
 public class LazyMongoDB {
@@ -32,20 +33,7 @@ public class LazyMongoDB {
 	private static LazyMongoDB   instance;
 	private        MongoDatabase database;
 	private MongoClient mongoClient1;
-	/**
-	 * change/transform from [2].event.data.event to 2_event_data_event*
-	 * * */
-	private  UnaryOperator<String> renameObjectKeyName = (json)-> {
-		if(!json.contains("[") || !json.contains("]")) {
-			return json.replaceAll("\\.","___");
-		}
 
-		var bracket = json.split("\\.")[0];
-		var str = bracket
-				.replaceAll("\\[", "")
-				.replaceAll("\\]","").concat("__");
-		return (json.replace(bracket,str).replaceAll("\\.","___"));
-	};
 
 	private LazyMongoDB () {
 		if (

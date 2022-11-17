@@ -193,7 +193,22 @@
       <version>3.0.2</version>
     </dependency>
 
+      <dependency>
+          <groupId>org.mariadb.jdbc</groupId>
+          <artifactId>mariadb-java-client</artifactId>
+          <scope>runtime</scope>
+      </dependency>
 
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-rx-java3</artifactId>
+      <version>4.3.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.micronaut.sql</groupId>
+      <artifactId>micronaut-vertx-mysql-client</artifactId>
+    </dependency>
     <dependency>
       <groupId>io.socket</groupId>
       <artifactId>engine.io-server</artifactId>
@@ -315,6 +330,8 @@
             <arg>-Amicronaut.processing.group=africa.jopen</arg>
             <arg>-Amicronaut.processing.module=Janus-gateway-landlord-Web-app</arg>
           </compilerArgs>
+          <source>10</source>
+          <target>10</target>
         </configuration>
       </plugin>
 

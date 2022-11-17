@@ -14,6 +14,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DecimalFormatSymbols;
 import java.util.Arrays;
+import java.util.function.UnaryOperator;
 
 public class XUtils {
 	private static final Logger     logger                      = LoggerFactory.getLogger(XUtils.class);
@@ -254,7 +255,20 @@ public class XUtils {
 		}
 		return success;
 	}
+	/**
+	 * change/transform from [2].event.data.event to 2_event_data_event*
+	 * * */
+	public static UnaryOperator<String> renameObjectKeyName = (json)-> {
+		if(!json.contains("[") || !json.contains("]")) {
+			return json.replaceAll("\\.","___");
+		}
 
+		var bracket = json.split("\\.")[0];
+		var str = bracket
+				.replaceAll("\\[", "")
+				.replaceAll("\\]","").concat("__");
+		return (json.replace(bracket,str).replaceAll("\\.","___"));
+	};
 
 	public static boolean executeBashCommand (String command, WebSocketBroadcaster broadcaster) {
 

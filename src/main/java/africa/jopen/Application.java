@@ -7,6 +7,7 @@ import africa.jopen.configs.transports.Http;
 import africa.jopen.configs.transports.Websockets;
 import africa.jopen.configs.utils.JanusOverFilesWrites;
 import africa.jopen.database.mongodb.LazyMongoDB;
+import africa.jopen.database.mymariasqldb.LazyMyMariaDB;
 import africa.jopen.security.AuthenticationProviderUserPassword;
 import africa.jopen.utils.JanusUtils;
 import africa.jopen.utils.XUtils;
@@ -54,6 +55,8 @@ public class Application {
 					if (x.contains("basicWebAuthPassword") && x.split("=").length > 1) {
 						AuthenticationProviderUserPassword.INIT_PASSWORD = x.split("=")[1];
 					}
+
+
 					if (x.contains("mongoPORT") && x.split("=").length > 1) {
 						LazyMongoDB.DB_PORT = Integer.parseInt(x.split("=")[1]);
 					}
@@ -69,6 +72,23 @@ public class Application {
 					if (x.contains("mongoNAME") && x.split("=").length > 1) {
 						LazyMongoDB.DB_NAME = x.split("=")[1];
 					}
+
+					if (x.contains("mSQLport") && x.split("=").length > 1) {
+						LazyMyMariaDB.DB_PORT = Integer.parseInt(x.split("=")[1]);
+					}
+					if (x.contains("mSQLhost") && x.split("=").length > 1) {
+						LazyMyMariaDB.DB_HOST = x.split("=")[1];
+					}
+					if (x.contains("mSQLpassword") && x.split("=").length > 1) {
+						LazyMyMariaDB.DB_PASSWORD = x.split("=")[1];
+					}
+					if (x.contains("mSQLusername") && x.split("=").length > 1) {
+						LazyMyMariaDB.DB_USERNAME = x.split("=")[1];
+					}
+					if (x.contains("mSQLname") && x.split("=").length > 1) {
+						LazyMyMariaDB.DB_NAME = x.split("=")[1];
+					}
+// sudo ./mvnw mn:run -Dmn.appArgs="basicWebAuthUserName=no_money1n basicWebAuthPassword=ZiyaKhala@Bome#Mugabe! mSQLport=3306 mSQLhost=localhost mSQLpassword=Jrootuser mSQLusername=Jroot mSQLname=landlord janusInstall=1"
 					if (x.contains("janusInstall") && x.split("=").length > 1) {
 						JanusUtils.initUtils(Integer.parseInt(x.split("=")[1]));
 					}
@@ -114,6 +134,7 @@ public class Application {
 		XUtils.createSystemFolders();
 		JanusUtils.makeFoldersAccessible();
 		LazyMongoDB.getInstance();
+		LazyMyMariaDB.getInstance();
 
 		// we are testing if the file is empty , if so its becuase the file just got created by the server
 		if (new File(CONFIG_FOLDER + File.separator + Janus.FileName).length() == 0) {

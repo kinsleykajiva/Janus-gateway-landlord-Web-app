@@ -3,6 +3,7 @@ package africa.jopen.controllers;
 
 import africa.jopen.configs.eventhandlers.SampleEventHandler;
 import africa.jopen.database.mongodb.LazyMongoDB;
+import africa.jopen.database.mymariasqldb.LazyMyMariaDB;
 import africa.jopen.events.MessageEvent;
 import africa.jopen.utils.HttpClientUtils;
 import africa.jopen.utils.JanusUtils;
@@ -20,6 +21,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Logger;
@@ -124,7 +126,7 @@ public class JanusEventHandlers {
 	@Produces (MediaType.TEXT_PLAIN)
 	public HttpResponse newEvents (HttpHeaders httpHeaders, @Body String jsonBody)  {
 		var    db      = LazyMongoDB.getInstance();
-		executorService1.submit(()->{
+		/*executorService1.submit(()->{
 			try {
 				Map<String,String> map = new HashMap<>();
 				map.put("events", jsonBody);
@@ -136,7 +138,7 @@ public class JanusEventHandlers {
 			} catch (Exception e) {
 				logger.severe("Exception sending json body: " + e.getMessage());
 			}
-		});
+		});*/
 
 		String jsonStr = JsonFlattener.flatten(jsonBody);
 		if (EventBus.getDefault().hasSubscriberForEvent(MessageEvent.class)) {
@@ -145,6 +147,7 @@ public class JanusEventHandlers {
 			EventBus.getDefault().post(new MessageEvent(MessageEvent.MESSAGE_NEW_SIP_EVENT, jsonStr));
 		}
 		assert db != null;
+		Objects.requireNonNull(LazyMyMariaDB.getInstance()).saveEvent(jsonStr);
 		db.saveEvent("sip_events", jsonStr,jsonBody/*this is the original json string*/);
 		return HttpResponse.ok().contentType(MediaType.TEXT_JSON_TYPE)
 				.body(
