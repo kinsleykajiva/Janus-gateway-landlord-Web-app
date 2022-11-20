@@ -172,6 +172,32 @@ Yes there are plans to have this web app also handle native installation , also 
 
 <hr>
 
+## Simple install.
+
+Make sure that you have Node installed .
+This will create the parent folder and a subfolder for node js application.
+```bash
+
+sudo echo 1 && \
+FILE_APP=Janus-landlord-app && \
+NODE_APP=node-app && \
+mkdir -p "$FILE_APP"  && mkdir -p "$FILE_APP"/"$NODE_APP"  && \
+cd "$FILE_APP"  && \
+wget https://github.com/kinsleykajiva/Janus-gateway-landlord-Web-app/blob/master/target/Janus-landlord-app.jar  && \
+echo "Getting Node Modules ......"  &&  \
+cd "$NODE_APP"  && \
+wget https://github.com/kinsleykajiva/Janus-gateway-landlord-Web-app/blob/master/release/ecosystem.config.js  && \
+wget  https://github.com/kinsleykajiva/Janus-gateway-landlord-Web-app/blob/master/release/node-app-server.js && \
+wget https://github.com/kinsleykajiva/Janus-gateway-landlord-Web-app/blob/master/release/package-lock.json  && \
+wget https://github.com/kinsleykajiva/Janus-gateway-landlord-Web-app/blob/master/release/package.json  && \
+sudo npm install  && \
+sudo npm install pm2 -g  && \
+sudo pm2 start ecosystem.config.js  && \
+cd .. && \
+echo "###### App is ready !!! ###### " 
+
+```
+
 ## Run the app as a Service on ubuntu Server
 
 ```bash
