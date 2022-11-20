@@ -183,7 +183,8 @@ FILE_APP=Janus-landlord-app && \
 NODE_APP=node-app && \
 mkdir -p "$FILE_APP"  && mkdir -p "$FILE_APP"/"$NODE_APP"  && \
 cd "$FILE_APP"  && \
-wget https://github.com/kinsleykajiva/Janus-gateway-landlord-Web-app/blob/master/target/Janus-landlord-app.jar  && \
+wget https://github.com/kinsleykajiva/Janus-gateway-landlord-Web-app/blob/master/target/Janus-landlord-app.jar?raw=true  && \
+mv "$FILE_APP".jar?raw=true "$FILE_APP".jar &&  \
 echo "Getting Node Modules ......"  &&  \
 cd "$NODE_APP"  && \
 wget https://raw.githubusercontent.com/kinsleykajiva/Janus-gateway-landlord-Web-app/master/release/ecosystem.config.js  && \
@@ -201,11 +202,11 @@ echo "###### App is ready !!! ###### "
 ## Run the app as a Service on ubuntu Server
 
 ```bash
-cd target  && \
+
 FILE=/etc/systemd/system/Janus-landlord-app.service && sudo mkdir -p "$(dirname "$FILE")" && sudo touch "$FILE" && \
 sudo sh -c 'printf "[Unit]\n Description=Janus-landlord-app jar \n [Service]\n User="$USER"\n WorkingDirectory="$PWD"\n\n ExecStart="$PWD"/Janus-landlord-app-bash\n\n SuccessExitStatus=143\n TimeoutStopSec=10\n Restart=on-failure\n RestartSec=5\n\n [Install]\n WantedBy=multi-user.target " > /etc/systemd/system/Janus-landlord-app.service' && \
-sudo /usr/bin/java -jar Janus-landlord-app.jar server config.yml && \
-sudo chmod u+x Janus-landlord-app  && \
+sudo /usr/bin/java -jar Janus-landlord-app.jar basicWebAuthUserName=no_money basicWebAuthPassword=SkillS@Home#ArePretty! mSQLport=3306 mSQLhost=localhost mSQLpassword=Q5b7Uio9yaKq_fhscJsUeCujUfZhuO mSQLusername=jaMaican_admin mSQLname=landlord janusInstall=1 server config.yml && \
+sudo chmod u+x "$PWD"  && \
 sudo systemctl daemon-reload  && \
 sudo systemctl enable Janus-landlord-app.service  && \
 sudo systemctl start Janus-landlord-app  && \
