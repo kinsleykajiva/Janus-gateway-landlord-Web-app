@@ -7,6 +7,7 @@
   <version>0.8</version>
   <packaging>${packaging}</packaging>
 
+
   <parent>
     <groupId>io.micronaut</groupId>
     <artifactId>micronaut-parent</artifactId>
@@ -241,46 +242,18 @@
   </reporting>
 
   <build>
+    <finalName>Janus-landlord-app</finalName>
     <plugins>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <version>3.3.0</version>
-        <configuration>
-          <descriptorRefs>
-            <descriptorRef>jar-with-dependencies</descriptorRef>
-          </descriptorRefs>
-        </configuration>
-        <executions>
-          <execution>
-            <id>assemble-all</id>
-            <phase>package</phase>
-            <goals>
-              <goal>single</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-site-plugin</artifactId>
-        <version>3.7.1</version>
-      </plugin>
       <plugin>
         <groupId>io.micronaut.build</groupId>
         <artifactId>micronaut-maven-plugin</artifactId>
       </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>3.0.0</version>
-      </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
+
           <!-- Uncomment to enable incremental compilation -->
           <!-- <useIncrementalCompilation>false</useIncrementalCompilation> -->
 
@@ -330,37 +303,9 @@
             <arg>-Amicronaut.processing.group=africa.jopen</arg>
             <arg>-Amicronaut.processing.module=Janus-gateway-landlord-Web-app</arg>
           </compilerArgs>
-          <source>10</source>
-          <target>10</target>
+
         </configuration>
       </plugin>
-
-
-
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <goals>
-              <goal>java</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <executable>java</executable>
-          <arguments>
-            <argument>-Dhttp.proxyHost=myproxy.example.com</argument>
-            <argument>-Dhttp.proxyPort=8080</argument>
-            <argument>-classpath</argument>
-            <classpath />
-            <argument>africa.jopen.Application</argument>
-          </arguments>
-        </configuration>
-      </plugin>
-
-
-
     </plugins>
   </build>
 

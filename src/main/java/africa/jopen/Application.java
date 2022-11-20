@@ -46,6 +46,7 @@ public class Application {
 		if (!Arrays.toString(args).contains("janusInstall=")) {
 			JanusUtils.initUtils(0);
 		}
+		
 
 		Arrays.stream(args)
 				.forEach(x -> {

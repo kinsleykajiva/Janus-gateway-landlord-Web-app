@@ -3,6 +3,7 @@ Thumbs.db
 .gradle
 build/
 target/
+!target/Janus-landlord-app.jar
 out/
 .idea
 *.iml

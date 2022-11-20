@@ -171,6 +171,26 @@ Yes there are plans to have this web app also handle native installation , also 
 
 
 <hr>
+
+## Run the app as a Service on ubuntu Server
+
+```bash
+cd target  && \
+FILE=/etc/systemd/system/Janus-landlord-app.service && sudo mkdir -p "$(dirname "$FILE")" && sudo touch "$FILE" && \
+sudo sh -c 'printf "[Unit]\n Description=Janus-landlord-app jar \n [Service]\n User="$USER"\n WorkingDirectory="$PWD"\n\n ExecStart="$PWD"/Janus-landlord-app-bash\n\n SuccessExitStatus=143\n TimeoutStopSec=10\n Restart=on-failure\n RestartSec=5\n\n [Install]\n WantedBy=multi-user.target " > /etc/systemd/system/Janus-landlord-app.service' && \
+sudo /usr/bin/java -jar Janus-landlord-app.jar server config.yml && \
+sudo chmod u+x Janus-landlord-app  && \
+sudo systemctl daemon-reload  && \
+sudo systemctl enable Janus-landlord-app.service  && \
+sudo systemctl start Janus-landlord-app  && \
+sudo journalctl -f -n 1000 -u Janus-landlord-app  && \
+sudo systemctl status Janus-landlord-app 
+
+
+
+
+```
+<hr>
  
 ## To Do
 - to handle native direct janus installations other than using/depending on snap to handle the instance .

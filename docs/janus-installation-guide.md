@@ -69,6 +69,7 @@ Here is another option to run all the above commands in a single line  . This ma
 
 ```bash 
 sudo apt-get update && \
+sudo apt-get -y install aptitude && \
 clear && echo "############################--Start work--############################"  && \
 sudo snap install cmake --classic && \
 sudo apt-get update && \
@@ -113,7 +114,7 @@ git clone https://github.com/alanxz/rabbitmq-c  && cd rabbitmq-c  && git submodu
 clear && echo ">> Step:INSTALLING doxygen graphviz "  && \
 sudo aptitude -y install doxygen graphviz && \
 clear && echo ">> Step:INSTALLING janus-gateway FROM GITHUB "  && \
-git clone -b v1.0.4 https://github.com/meetecho/janus-gateway.git && cd janus-gateway && sudo add-apt-repository ppa:git-core/ppa -y &&\
+git clone -b v1.1.0 https://github.com/meetecho/janus-gateway.git && cd janus-gateway && sudo add-apt-repository ppa:git-core/ppa -y &&\
 sudo git config --global --add safe.directory /home/ubuntu/janus-gateway  && \
 sudo sh autogen.sh && \
 sudo mkdir -p /opt/janus && sudo mkdir -p /opt/janus/bin && sudo ./configure --prefix=/opt/janus && sudo  make && sudo  make install && \

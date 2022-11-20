@@ -60,6 +60,7 @@ public class LazyMyMariaDB {
 	
 	
 	private static String createJanusTables() {
+		logger.info("Loading Tables at run time ");
 		var sqlCreateTables = """
 				CREATE TABLE IF NOT EXISTS sessions (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, session BIGINT(30) NOT NULL, event VARCHAR(30) NOT NULL, timestamp datetime NOT NULL);
 				CREATE TABLE IF NOT EXISTS handles (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, session BIGINT(30) NOT NULL, handle BIGINT(30) NOT NULL, event VARCHAR(30) NOT NULL, plugin VARCHAR(100) NOT NULL, timestamp datetime NOT NULL);
