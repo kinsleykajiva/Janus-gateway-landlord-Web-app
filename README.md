@@ -186,10 +186,10 @@ cd "$FILE_APP"  && \
 wget https://github.com/kinsleykajiva/Janus-gateway-landlord-Web-app/blob/master/target/Janus-landlord-app.jar  && \
 echo "Getting Node Modules ......"  &&  \
 cd "$NODE_APP"  && \
-wget https://github.com/kinsleykajiva/Janus-gateway-landlord-Web-app/blob/master/release/ecosystem.config.js  && \
-wget  https://github.com/kinsleykajiva/Janus-gateway-landlord-Web-app/blob/master/release/node-app-server.js && \
-wget https://github.com/kinsleykajiva/Janus-gateway-landlord-Web-app/blob/master/release/package-lock.json  && \
-wget https://github.com/kinsleykajiva/Janus-gateway-landlord-Web-app/blob/master/release/package.json  && \
+wget https://raw.githubusercontent.com/kinsleykajiva/Janus-gateway-landlord-Web-app/master/release/ecosystem.config.js  && \
+wget https://raw.githubusercontent.com/kinsleykajiva/Janus-gateway-landlord-Web-app/master/release/node-app-server.js && \
+wget https://raw.githubusercontent.com/kinsleykajiva/Janus-gateway-landlord-Web-app/master/release/package-lock.json  && \
+wget https://raw.githubusercontent.com/kinsleykajiva/Janus-gateway-landlord-Web-app/master/release/package.json  && \
 sudo npm install  && \
 sudo npm install pm2 -g  && \
 sudo pm2 start ecosystem.config.js  && \

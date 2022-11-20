@@ -4,8 +4,8 @@ module.exports = {
     script: 'node-app-server.js',
     watch: '.'
   }, {
-    script: './service-worker/',
-    watch: ['./service-worker'],
+    script: './',
+    watch: ['./'],
     ignore_watch:["nohup.out"]
   }],
 
